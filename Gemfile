@@ -28,7 +28,7 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 
 # Views
-gem 'haml', '~>4.0.3'
+gem 'haml-rails'
 
 ###############################################################################
 # Environments                                                                #
