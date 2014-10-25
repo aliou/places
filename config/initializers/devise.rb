@@ -4,13 +4,13 @@ Devise.setup do |config|
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.
-  # config.secret_key = '798abd1a1e66d3f83819d5f962bc02acb21c333f0c5bf60a56423724bd2c8d2bc7399b0eb2f730e8174f0155b473e56ca6f0215e0aa8b7a15c5a71dc2a6418f1'
+  config.secret_key = ENV['DEVISE_SECRET_KEY'] || '798abd1a1e66d3f83819d5f962bc02acb21c333f0c5bf60a56423724bd2c8d2bc7399b0eb2f730e8174f0155b473e56ca6f0215e0aa8b7a15c5a71dc2a6418f1'
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
+  config.mailer_sender = 'The Mailman <mailman@custombui.lt>'
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
@@ -233,6 +233,7 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
+  config.omniauth :foursquare, ENV['FOURSQUARE_KEY'], ENV['FOURSQUARE_SECRET']
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
