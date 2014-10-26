@@ -33,7 +33,7 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
-  # Default URL options for devise mailers.
+  # Default URL options for mailers.
   config.action_mailer.default_url_options = { host: 'places.dev' }
   config.action_mailer.asset_host = 'http://places.dev'
 end

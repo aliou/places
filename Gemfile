@@ -60,6 +60,5 @@ end
 ###############################################################################
 
 # Authentification
-gem 'devise'
 gem 'omniauth'
 gem 'omniauth-foursquare'
