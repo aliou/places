@@ -4,6 +4,7 @@
 
 .container {
   @include outer-container;
+  margin-top: 15px;
 
   .col-4 {
     @include span-columns(4);
