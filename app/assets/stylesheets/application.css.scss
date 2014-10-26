@@ -32,7 +32,9 @@
 button {
   &.foursquare {
     background-color: $foursquare-blue;
-    color: white;
+    &:hover {
+      background-color: $foursquare-navy;
+    }
   }
 }
 
