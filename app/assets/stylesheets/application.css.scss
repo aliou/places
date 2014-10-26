@@ -26,6 +26,10 @@
   .push-3 {
     @include shift(3);
   }
+
+  .push-down {
+    margin-top: 15px;
+  }
 }
 
 // 2. Buttons and colors.
