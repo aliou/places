@@ -39,10 +39,6 @@ group :test, :development do
   gem 'rspec-rails', '~> 3.0.0'
 end
 
-group :development, :production do
-  gem 'rails_12factor'
-end
-
 group :test do
   gem 'webmock', '~> 1.9.3'
   gem 'vcr', '~> 2.9.3'
@@ -53,6 +49,10 @@ group :development do
   gem 'spring'
   gem 'better_errors'
   gem 'binding_of_caller'
+end
+
+group :production do
+  gem 'rails_12factor'
 end
 
 ###############################################################################
