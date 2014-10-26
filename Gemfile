@@ -42,6 +42,7 @@ end
 group :test do
   gem 'webmock', '~> 1.9.3'
   gem 'vcr', '~> 2.9.3'
+  gem 'faker', '~> 1.4.3'
 end
 
 group :development do
