@@ -2,6 +2,11 @@
 @import "base/base";
 @import "neat";
 
+///////////////////////////////////////////////////////////////////////////////
+// Sensible defaults.                                                        //
+///////////////////////////////////////////////////////////////////////////////
+
+// 1. Grid.
 .container {
   @include outer-container;
   margin-top: 15px;
@@ -20,6 +25,14 @@
 
   .push-3 {
     @include shift(3);
+  }
+}
+
+// 2. Buttons and colors.
+button {
+  &.foursquare {
+    background-color: $foursquare-blue;
+    color: white;
   }
 }
 
