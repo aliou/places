@@ -63,3 +63,6 @@ end
 # Authentification
 gem 'omniauth'
 gem 'omniauth-foursquare'
+
+# 4sq
+gem 'foursquare2'
