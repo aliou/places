@@ -3,6 +3,9 @@ class User < ActiveRecord::Base
   validates :provider    , presence: true
   validates :oauth_token , presence: true
 
+  validates :uid, inclusion: { in: [ ENV['FOURSQUARE_USER_IDS'] ] ,
+                               message: 'Unauthorized user.' }
+
   # Create a user from its omniauth authentification details.
   #
   # auth - The omniauth authentification details.
