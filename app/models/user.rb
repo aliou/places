@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
       user.oauth_token  = auth['credentials']['token']
 
       if auth['info']
-        user.name       = auth['info']['name'] || ""
+        user.name       = auth['info']['name'] || ''
       end
     end
   end

@@ -27,7 +27,6 @@ class SessionsController < ApplicationController
   #
   # Returns: A Hash with the Foursquare authentification details.
   def auth_hash
-    raise auth
     request.env['omniauth.auth']
   end
 end
