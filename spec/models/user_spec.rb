@@ -6,8 +6,7 @@ RSpec.describe User, :type => :model do
         'provider'    => 'foursquare',
         'uid'         => '0',
         'name'        => Faker::Name.name,
-        'credentials' => { 'token'  => Faker::Internet.password,
-                           'secret' => Faker::Internet.password }
+        'credentials' => { 'token'  => Faker::Internet.password }
       }
     }
 

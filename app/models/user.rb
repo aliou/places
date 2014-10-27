@@ -2,7 +2,6 @@ class User < ActiveRecord::Base
   validates :uid         , presence: true
   validates :provider    , presence: true
   validates :oauth_token , presence: true
-  validates :oauth_secret, presence: true
 
   # Create a user from its omniauth authentification details.
   #
@@ -14,7 +13,6 @@ class User < ActiveRecord::Base
       user.provider     = auth['provider']
       user.uid          = auth['uid']
       user.oauth_token  = auth['credentials']['token']
-      user.oauth_secret = auth['credentials']['secret']
 
       if auth['info']
         user.name       = auth['info']['name'] || ""
