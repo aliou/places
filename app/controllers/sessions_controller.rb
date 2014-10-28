@@ -3,8 +3,12 @@ class SessionsController < ApplicationController
   skip_before_filter :authenticate!
 
   def create
-    user = User.where(provider: auth_hash['provider'], uid: auth_hash['uid'].to_s).first
-    user = User.create_with_omniauth(auth_hash) if user.nil?
+    user = User.find_or_create_with_omniauth(auth_hash)
+
+    unless user and user.persisted? and user.valid?
+      failure
+      return
+    end
 
     reset_session
     session[:user_id] = user.id
@@ -17,8 +21,7 @@ class SessionsController < ApplicationController
   end
 
   def failure
-    redirect_to root_url,
-      notice: "An error occured: #{params[:message].humanize}."
+    redirect_to root_url, notice: "An error occured. Please try again."
   end
 
   private
