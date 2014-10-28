@@ -9,8 +9,10 @@
   </head>
   <body>
     <div class='container'>
-      <%= render 'header' %>
-      <%= yield %>
+      <div id='content' class='col-6 push-3'>
+        <%= render 'header' %>
+        <%= yield %>
+      </div>
     </div>
 
     <%= javascript_include_tag 'application' %>
