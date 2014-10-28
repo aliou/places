@@ -4,7 +4,7 @@ RSpec.describe User, :type => :model do
   describe 'validations' do
     let (:omniauth_data) { {
         'provider'    => 'foursquare',
-        'uid'         => '0',
+        'uid'         => ENV['FOURSQUARE_USER_ID'],
         'name'        => Faker::Name.name,
         'credentials' => { 'token'  => Faker::Internet.password }
       }
