@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
 
     reset_session
     session[:user_id] = user.id
-    redirect_to root_url, notice: 'You have been signed in.'
+    redirect_to root_url, flash: { success: 'You have been signed in.' }
   end
 
   def destroy
@@ -21,7 +21,7 @@ class SessionsController < ApplicationController
   end
 
   def failure
-    redirect_to root_url, notice: "An error occured. Please try again."
+    redirect_to root_url, flash: { error: "An error occured. Please try again." }
   end
 
   private

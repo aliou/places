@@ -1,0 +1,14 @@
+- flash.each do |name, message|
+  - if message.is_a?(String)
+    %div{ class: "alert alert-#{name} alert-dismissible" }
+      %a{ href: 'javascript:void(0)', class: 'alert-link', data: { behavior: 'dismiss' } }
+        %span
+          &times;
+      = message
+
+- if flash.any?
+  - content_for :scripts do
+    :javascript
+      $('[data-behavior=dismiss]').click(function() {
+        $(this).parent().fadeOut('slow')
+      });
