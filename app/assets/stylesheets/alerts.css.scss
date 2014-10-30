@@ -1,0 +1,36 @@
+@mixin alert-variant($background, $border, $text-color) {
+  background-color: $background;
+  border-color: $border;
+  color: $text-color;
+
+  hr {
+    border-top-color: darken($border, 5%);
+  }
+
+  .alert-link {
+    color: darken($text-color, 10%);
+  }
+}
+
+.alert {
+  margin-bottom: $base-spacing / 2;
+  padding: $base-spacing / 2;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+.alert-success {
+  @include alert-variant(#dff0d8, #d6e9c6, #3c763d);
+}
+
+.alert-notice {
+  @include alert-variant(#d9edf7, #bce8f1, #31708f);
+}
+
+.alert-warning {
+  @include alert-variant(#fcf8e3, #faebcc, #8a6d3b);
+}
+
+.alert-error {
+  @include alert-variant(#f2dede, #ebccd1, #a94442);
+}
