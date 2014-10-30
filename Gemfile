@@ -66,3 +66,6 @@ gem 'omniauth-foursquare'
 
 # 4sq
 gem 'foursquare2'
+
+# Locations
+gem 'geokit-rails', '~> 2.0.1'
