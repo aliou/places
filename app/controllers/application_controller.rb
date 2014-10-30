@@ -8,8 +8,12 @@ class ApplicationController < ActionController::Base
 
   private
 
+  # TODO: Redirect to previous page.
   def authenticate!
-    redirect_to root_path unless session[:user_id].present?
+    unless session[:user_id].present?
+      redirect_to root_path,
+        flash: { error: 'You must be connected to do that.' }
+    end
   end
 
   # Private: Find the current authenticated User.
