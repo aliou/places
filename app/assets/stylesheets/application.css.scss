@@ -6,7 +6,6 @@
 // Sensible defaults.                                                        //
 ///////////////////////////////////////////////////////////////////////////////
 
-// 1. Grid.
 .container {
   @include outer-container;
   margin-top: 15px;
@@ -32,7 +31,6 @@
   }
 }
 
-// 2. Buttons and colors.
 button {
   &.foursquare {
     background-color: $foursquare-blue;
