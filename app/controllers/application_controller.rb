@@ -8,7 +8,10 @@ class ApplicationController < ActionController::Base
 
   private
 
+  # Private: Make sure the user is connected.
   # TODO: Redirect to previous page.
+  #
+  # Returns nothing.
   def authenticate!
     unless session[:user_id].present?
       redirect_to root_path,

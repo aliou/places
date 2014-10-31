@@ -1,22 +1,29 @@
 class PlacesController < ApplicationController
 
+  # GET /places
+  # TODO: Return everything as JSON.
   # TODO: Order by closest aroud you.
   def index
     @places = current_user.places
   end
 
+
+  # GET /places/new
   def new
     @places = current_user.places.new
   end
 
+  # GET /places/:id/edit
   def edit
     @place = Place.find params[:id]
   end
 
+  # GET /places/:id
   def show
     @place = Place.find params[:id]
   end
 
+  # POST /places
   def create
     @place = current_user.places.new params[:place]
 
@@ -30,6 +37,8 @@ class PlacesController < ApplicationController
     end
   end
 
+  # PUT   /places/:id
+  # PATCH /places/:id
   def update
     @place = Place.find params[:id]
     respond_to do |format|
@@ -42,6 +51,7 @@ class PlacesController < ApplicationController
     end
   end
 
+  # DELETE /places/:id
   def destroy
     @place = Place.find params[:id]
     @place.destroy

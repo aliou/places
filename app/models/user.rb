@@ -32,7 +32,6 @@ class User < ActiveRecord::Base
   end
 
   # Create a user from its omniauth authentification details.
-  #
   # auth - The omniauth authentification details.
   #
   # Returns the User.
