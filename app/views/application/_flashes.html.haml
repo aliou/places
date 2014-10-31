@@ -5,10 +5,3 @@
         %span
           &times;
       = message
-
-- if flash.any?
-  - content_for :scripts do
-    :javascript
-      $('[data-behavior=dismiss]').click(function() {
-        $(this).parent().fadeOut('slow')
-      });
