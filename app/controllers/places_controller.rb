@@ -2,11 +2,11 @@ class PlacesController < ApplicationController
 
   # TODO: Order by closest aroud you.
   def index
-    @places = Place.all
+    @places = @current_user.places
   end
 
   def new
-    @places = Place.new
+    @places = @current_user.places.new
   end
 
   def edit
@@ -18,7 +18,7 @@ class PlacesController < ApplicationController
   end
 
   def create
-    @place = Place.new params[:place]
+    @place = @current_user.places.new params[:place]
 
     respond_to do |format|
       if @place.save
