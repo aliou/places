@@ -1,10 +1,24 @@
 class User < ActiveRecord::Base
+
+  ##############################################################################
+  # Associations                                                               #
+  ##############################################################################
+
+  has_many :places
+
+  ##############################################################################
+  # Validations                                                                #
+  ##############################################################################
+
   validates :uid         , presence: true
   validates :provider    , presence: true
   validates :oauth_token , presence: true
+  validates :uid,          inclusion: { in: [ ENV['FOURSQUARE_USER_ID'] ],
+                                        message: 'Unauthorized user.' }
 
-  validates :uid, inclusion: { in: [ ENV['FOURSQUARE_USER_ID'] ] ,
-                               message: 'Unauthorized user.' }
+  ##############################################################################
+  # Class Methods                                                              #
+  ##############################################################################
 
   # Find or create a new User depending on omniauth data.
   #
