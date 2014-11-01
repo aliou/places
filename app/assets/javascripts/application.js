@@ -1,8 +1,8 @@
 // Bower packages.
-//= require jquery/dist/jquery
-//= require underscore/underscore
-//= require backbone/backbone
-//= require marionette/lib/core/backbone.marionette
+//= require jquery
+//= require underscore
+//= require backbone
+//= require marionette
 //
 // Behaviors
 //= require_tree ./behaviors
