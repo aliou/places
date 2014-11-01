@@ -36,4 +36,7 @@ Rails.application.configure do
   # Default URL options for mailers.
   config.action_mailer.default_url_options = { host: 'places.dev' }
   config.action_mailer.asset_host = 'http://places.dev'
+
+  # Enable lograge for better logs.
+  config.lograge.enabled = true
 end

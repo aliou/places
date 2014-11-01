@@ -84,6 +84,10 @@ GEM
     json (1.8.1)
     jwt (1.0.0)
     kgio (2.9.2)
+    lograge (0.3.0)
+      actionpack (>= 3)
+      activesupport (>= 3)
+      railties (>= 3)
     mail (2.6.1)
       mime-types (>= 1.16, < 3)
     method_source (0.8.2)
@@ -208,6 +212,7 @@ DEPENDENCIES
   foursquare2
   geokit-rails (~> 2.0.1)
   haml-rails
+  lograge
   neat (~> 1.5.1)
   omniauth
   omniauth-foursquare
