@@ -25,7 +25,6 @@ gem 'neat', '~> 1.5.1'
 
 # JS
 gem 'coffee-rails', '~> 4.0.0'
-gem 'jquery-rails'
 
 # Views
 gem 'haml-rails'
