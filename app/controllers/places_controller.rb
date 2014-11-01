@@ -7,7 +7,6 @@ class PlacesController < ApplicationController
     @places = current_user.places
   end
 
-
   # GET /places/new
   def new
     @places = current_user.places.new
@@ -59,5 +58,13 @@ class PlacesController < ApplicationController
       format.html { redirect_to places_path,
                     notice: 'Place successfuly deleted.' }
     end
+  end
+
+  # GET /places/import
+  # Import places from 4sq.
+  # This should be done in a worker/asynchronously.
+  def import
+    current_user.import_places
+    redirect_to places_path, notice: 'Places successfully imported.'
   end
 end

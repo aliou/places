@@ -46,4 +46,23 @@ class User < ActiveRecord::Base
       end
     end
   end
+
+  ##############################################################################
+  # Instance Methods                                                           #
+  ##############################################################################
+
+  # Public: Import places from 4SQ.
+  #
+  # Returns an array of Places.
+  def import_places
+    client = Foursquare2::Client.new oauth_token: self.oauth_token,
+                                     api_version: '20140806'
+    todo_list = client.list("#{self.uid}/todos", limit: 200)
+    todos = todo_list['listItems']['items'].map do |item|
+      Place.find_or_create_from_foursquare_venue(item, self)
+    end
+
+    todos
+  end
+
 end
