@@ -9,9 +9,10 @@ class Place < ActiveRecord::Base
   # Validations                                                                #
   ##############################################################################
 
-  validates :name, presence: true
-  validates :lat , presence: true
-  validates :lng , presence: true
+  validates :name,                presence: true
+  validates :lat ,                presence: true
+  validates :lng ,                presence: true
+  validates :foursquare_venue_id, presence: true
 
   ##############################################################################
   # Macros                                                                     #
