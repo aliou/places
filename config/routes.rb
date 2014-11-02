@@ -8,5 +8,10 @@ Rails.application.routes.draw do
   # User actions.
   get '/signout',                 to: 'sessions#destroy', as: :signout
 
-  resources :places
+  resources :places do
+    collection do
+      get :import
+    end
+  end
+
 end
