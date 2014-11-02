@@ -21,17 +21,22 @@ class User < ActiveRecord::Base
   ##############################################################################
 
   # Find or create a new User depending on omniauth data.
+  # TODO: Delay the place import.
   #
   # Returns the User.
   def self.find_or_create_with_omniauth(auth)
     if user = User.where(uid: auth['uid']).first
       user
     else
-      self.create_with_omniauth(auth)
+      user = User.create_with_omniauth(auth)
+      user.import_places
     end
+
+    user
   end
 
   # Create a user from its omniauth authentification details.
+  #
   # auth - The omniauth authentification details.
   #
   # Returns the User.
