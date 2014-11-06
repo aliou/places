@@ -1,7 +1,8 @@
 - flash.each do |name, message|
   - if message.is_a?(String)
     %div{ class: "alert alert-#{name} alert-dismissible" }
-      %a{ href: 'javascript:void(0)', class: 'alert-link', data: { flash: { behavior: 'dismiss' } } }
+      %a{ href: 'javascript:void(0)', class: 'alert-link',
+          data: { flash: { behavior: 'dismiss' } } }
         %span
           &times;
       = message

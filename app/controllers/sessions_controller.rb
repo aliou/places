@@ -19,12 +19,13 @@ class SessionsController < ApplicationController
   # GET /signout
   def destroy
     reset_session
-    redirect_to root_path, notice: 'You have been signed out.'
+    redirect_to root_path, flash: { success: 'You have been signed out.' }
   end
 
   # GET /auth/failure
   def failure
-    redirect_to root_path, flash: { error: "An error occured. Please try again." }
+    redirect_to root_path, flash:
+      { error: "An error occured. Please try again." }
   end
 
   private
