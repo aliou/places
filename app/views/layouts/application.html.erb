@@ -6,6 +6,7 @@
     </title>
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= csrf_meta_tags %>
+    <%= yield :head %>
   </head>
   <body>
     <div class='container'>
@@ -15,6 +16,7 @@
       </div>
     </div>
 
+    <%= javascript_include_tag '//api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.js' %>
     <%= javascript_include_tag 'application' %>
     <%= yield :scripts %>
   </body>
