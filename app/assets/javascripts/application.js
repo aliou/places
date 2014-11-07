@@ -8,4 +8,4 @@
 //= require_tree ./behaviors
 //
 // Backbone
-//= require backbone/places/manifest
+//= require backbone/map/manifest
