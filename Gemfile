@@ -28,6 +28,7 @@ gem 'neat', '~> 1.5.1'
 
 # JS
 gem 'coffee-rails', '~> 4.0.0'
+gem 'active_model_serializers', '~> 0.9.0'
 
 # Views
 gem 'haml-rails'
