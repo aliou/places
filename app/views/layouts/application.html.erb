@@ -10,10 +10,8 @@
   </head>
   <body>
     <div class='container'>
-      <div id='content' class='col-6 push-3'>
-        <%= render 'header' %>
-        <%= yield %>
-      </div>
+      <%= render 'header' %>
+      <%= yield %>
     </div>
 
     <%= javascript_include_tag '//api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.js' %>
