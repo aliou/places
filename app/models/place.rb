@@ -55,6 +55,7 @@ class Place < ActiveRecord::Base
       place.lng                 = venue['venue']['location']['lng']
       place.foursquare_venue_id = venue['id']
       place.user_id             = user.id
+      place.metadata            = venue
     end
   end
 end
