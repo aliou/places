@@ -37,9 +37,8 @@ class Place < ActiveRecord::Base
   #
   # Returns the found or created Place.
   def self.find_or_create_from_foursquare_venue(venue, user = current_user)
-    if place = Place.where(foursquare_venue_id: venue['id']).first
-      place
-    else
+    place = Place.where(foursquare_venue_id: venue['id']).first
+    if place.nil?
       place = Place.create_from_foursquare_venue(venue, user)
     end
 
