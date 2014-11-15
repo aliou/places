@@ -50,11 +50,15 @@ class Place < ActiveRecord::Base
   # Returns the created Place.
   def self.create_from_foursquare_venue(venue, user = current_user)
     create do |place|
+      place.user_id             = user.id
+      place.foursquare_venue_id = venue['id']
+
       place.name                = venue['venue']['name']
       place.lat                 = venue['venue']['location']['lat']
       place.lng                 = venue['venue']['location']['lng']
-      place.foursquare_venue_id = venue['id']
-      place.user_id             = user.id
+
+      place.category            = venue_primary_category(venue)
+
       place.metadata            = venue
     end
   end
