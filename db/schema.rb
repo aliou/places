@@ -11,11 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141113122406) do
+ActiveRecord::Schema.define(version: 20141122212342) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "hstore"
+
+  create_table "categories", force: true do |t|
+    t.string   "name"
+    t.string   "icon_url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "places", force: true do |t|
     t.string   "name"
@@ -27,10 +34,11 @@ ActiveRecord::Schema.define(version: 20141113122406) do
     t.integer  "user_id"
     t.string   "foursquare_venue_id"
     t.string   "address"
-    t.string   "category"
     t.hstore   "metadata"
+    t.integer  "category_id"
   end
 
+  add_index "places", ["category_id"], name: "index_places_on_category_id", using: :btree
   add_index "places", ["user_id"], name: "index_places_on_user_id", using: :btree
 
   create_table "users", force: true do |t|

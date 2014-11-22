@@ -12,12 +12,13 @@
 #  user_id             :integer
 #  foursquare_venue_id :string(255)
 #  address             :string(255)
-#  category            :string(255)
 #  metadata            :hstore
+#  category_id         :integer
 #
 # Indexes
 #
-#  index_places_on_user_id  (user_id)
+#  index_places_on_category_id  (category_id)
+#  index_places_on_user_id      (user_id)
 #
 
 class Place < ActiveRecord::Base
@@ -33,6 +34,7 @@ class Place < ActiveRecord::Base
   ##############################################################################
 
   belongs_to :user
+  belongs_to :category
 
   ##############################################################################
   # Validations                                                                #
