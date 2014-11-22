@@ -1,5 +1,5 @@
 class Place < ActiveRecord::Base
-  include PlacesHelper
+  extend PlacesHelper
 
   ##############################################################################
   #                                                                            #
