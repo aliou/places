@@ -1,3 +1,25 @@
+# == Schema Information
+#
+# Table name: places
+#
+#  id                  :integer          not null, primary key
+#  name                :string(255)
+#  lat                 :float
+#  lng                 :float
+#  notes               :text
+#  created_at          :datetime
+#  updated_at          :datetime
+#  user_id             :integer
+#  foursquare_venue_id :string(255)
+#  address             :string(255)
+#  category            :string(255)
+#  metadata            :hstore
+#
+# Indexes
+#
+#  index_places_on_user_id  (user_id)
+#
+
 class Place < ActiveRecord::Base
   extend PlacesHelper
 

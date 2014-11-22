@@ -53,6 +53,7 @@ group :development do
   gem 'spring'
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'annotate', '~> 2.6.5'
 end
 
 group :production do
