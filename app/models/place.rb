@@ -1,4 +1,6 @@
 class Place < ActiveRecord::Base
+  include PlacesHelper
+
   ##############################################################################
   #                                                                            #
   ##############################################################################
@@ -59,7 +61,7 @@ class Place < ActiveRecord::Base
 
       place.category            = venue_primary_category(venue)
 
-      place.metadata            = venue
+      place.foursquare_data     = venue.to_json
     end
   end
 end
