@@ -12,3 +12,20 @@
     map = L.mapbox.map('map', 'examples.map-i86nkdio').setView([48.85, 2.35], 13)
     map.attributionControl
        .addAttribution('<a href="https://foursquare.com/">Places data from Foursquare</a>')
+
+    layer = L.mapbox.featureLayer().addTo(map)
+
+    raw_data = #{ @models.to_json }
+    raw_data.forEach (place) ->
+      L.mapbox.featureLayer({
+        type:       'Feature',
+        geometry:   {
+          type:        'Point',
+          coordinates: [ place.lng, place.lat ]
+        },
+        properties: {
+          title:           place.name,
+          description:     place.address,
+          'marker-size':   'large',
+        }
+      }).addTo(map)
