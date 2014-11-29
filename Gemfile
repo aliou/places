@@ -22,12 +22,12 @@ gem 'lograge'
 
 # CSS
 gem 'sass-rails', '~> 4.0.3'
-gem 'uglifier', '>= 1.3.0'
-gem 'bourbon', '~> 3.2.3'
-gem 'neat', '~> 1.5.1'
+gem 'uglifier',   '>= 1.3.0'
+gem 'bourbon',    '~> 3.2.3'
+gem 'neat',       '~> 1.5.1'
 
 # JS
-gem 'coffee-rails', '~> 4.0.0'
+gem 'coffee-rails',             '~> 4.0.0'
 gem 'active_model_serializers', '~> 0.9.0'
 
 # Views
@@ -44,8 +44,8 @@ end
 
 group :test do
   gem 'webmock', '~> 1.9.3'
-  gem 'vcr', '~> 2.9.3'
-  gem 'faker', '~> 1.4.3'
+  gem 'vcr',     '~> 2.9.3'
+  gem 'faker',   '~> 1.4.3'
 end
 
 group :development do
@@ -54,6 +54,7 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'annotate', '~> 2.6.5'
+  gem 'byebug',   '~> 3.5.1'
 end
 
 group :production do
