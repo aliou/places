@@ -7,6 +7,6 @@
 - content_for :scripts do
   = javascript_include_tag '//api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.js'
 
-  :javascript
-    L.mapbox.accessToken = "#{ENV['MAPBOX_ACCESS_TOKEN']}";
-    var map = L.mapbox.map('map', 'examples.map-i86nkdio').setView([48.85, 2.35], 13);
+  :coffeescript
+    L.mapbox.accessToken = "#{ENV['MAPBOX_ACCESS_TOKEN']}"
+    map = L.mapbox.map('map', 'examples.map-i86nkdio').setView([48.85, 2.35], 13)
