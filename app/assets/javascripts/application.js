@@ -8,4 +8,4 @@
 //= require_tree ./behaviors
 //
 // Backbone
-//= require backbone/places
+// require backbone/places
