@@ -10,3 +10,5 @@
   :coffeescript
     L.mapbox.accessToken = "#{ENV['MAPBOX_ACCESS_TOKEN']}"
     map = L.mapbox.map('map', 'examples.map-i86nkdio').setView([48.85, 2.35], 13)
+    map.attributionControl
+       .addAttribution('<a href="https://foursquare.com/">Places data from Foursquare</a>')
