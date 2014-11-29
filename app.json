@@ -1,0 +1,30 @@
+{
+  "name": "Places",
+  "version": "0.0.3"
+  "scripts": {
+    "postdeploy": "bundle exec rake db:schema:load"
+  },
+  "addons": [ "scheduler:standard", "heroku-postgresql" ],
+  "env": {
+    "FOURSQUARE_KEY": {
+      "description": "Your Foursquare API key.",
+      "required": true
+    },
+    "FOURSQUARE_SECRET": {
+      "description": "Your Foursquare API secret.",
+      "required": true
+    },
+    "FOURSQUARE_USER_ID": {
+      "description": "The Foursquare user ID you wish to restrict the app to.",
+      "required": true
+    },
+    "FOURSQUARE_API_VERSION": {
+      "description": "The Foursquare API version.",
+      "required": true
+    },
+    "MAPBOX_ACCESS_TOKEN": {
+      "description": "Your Mapbox Access token.",
+      "required": true
+    }
+  }
+}
