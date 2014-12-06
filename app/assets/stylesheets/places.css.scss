@@ -7,5 +7,23 @@
 
   #map {
     height: 600px;
+
+    .controls {
+
+      #find-me {
+        position: absolute;
+        bottom: 27px;
+        right: 10px;
+        z-index: 1000;
+
+        width: 26px;
+        height: 26px;
+        line-height: 26px;
+        text-align: center;
+        background: $base-accent-color;
+        color: $base-font-color;
+        border-radius: 4px;
+      }
+    }
   }
 }

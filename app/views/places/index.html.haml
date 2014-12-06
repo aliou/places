@@ -3,6 +3,9 @@
 
 #map-wrapper
   #map
+    .controls
+      %a{ href: '#', id: 'find-me' }
+        %span.icon-location
 
 - content_for :scripts do
   = javascript_include_tag '//api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.js'
@@ -13,7 +16,25 @@
     map.attributionControl
        .addAttribution('<a href="https://foursquare.com/">Places data from Foursquare</a>')
 
-    layer = L.mapbox.featureLayer().addTo(map)
+    map.on 'locationfound', (event) ->
+
+      map.setView([event.latitude, event.longitude], 13)
+
+      L.mapbox.featureLayer({
+        type:       'Feature',
+        geometry:   {
+          type:        'Point',
+          coordinates: [event.longitude, event.latitude]
+        },
+        properties: {
+          'marker-symbol': 'star'
+          'marker-color': '#BE9A6B',
+        }
+      }).addTo(map)
+
+    $('#find-me').click (event) ->
+      event.preventDefault()
+      map.locate() if navigator.geolocation
 
     raw_data = #{ @models.to_json }
     raw_data.forEach (place) ->
