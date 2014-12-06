@@ -38,9 +38,8 @@ class User < ActiveRecord::Base
   #
   # Returns the User.
   def self.find_or_create_with_omniauth(auth)
-    if user = User.where(uid: auth['uid']).first
-      user
-    else
+    user = User.where(uid: auth['uid']).first
+    if user.nil?
       user = User.create_with_omniauth(auth)
       user.import_places
     end
