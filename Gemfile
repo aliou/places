@@ -40,7 +40,8 @@ gem 'haml-rails'
 
 group :test, :development do
   gem 'dotenv-rails'
-  gem 'rspec-rails', '~> 3.0.0'
+  gem 'rspec-rails'
+  gem 'rspec'
 end
 
 group :test do
