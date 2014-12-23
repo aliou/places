@@ -1,12 +1,16 @@
 require 'rails_helper'
 
-RSpec.describe HomeController, :type => :controller do
+RSpec.describe HomeController do
 
-  describe "GET index" do
-    it "returns http success" do
-      get :index
-      expect(response).to be_success
+  describe 'GET index' do
+
+    context 'user is not connected' do
+      it 'goes to the index' do
+        get :index
+
+        expect(response).to be_success
+      end
     end
-  end
 
+  end
 end
