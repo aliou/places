@@ -12,5 +12,15 @@ RSpec.describe HomeController do
       end
     end
 
+    context 'user is logged in' do
+      let(:current_user) { FactoryGirl.create(:user) }
+
+      it 'redirects' do
+        get :index, nil, { user_id: current_user.id }
+
+        expect(response).to be_redirect
+      end
+    end
+
   end
 end
