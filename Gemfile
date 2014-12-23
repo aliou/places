@@ -43,6 +43,7 @@ group :test, :development do
   gem 'rspec-rails'
   gem 'rspec'
   gem 'factory_girl_rails'
+  gem 'byebug',   '~> 3.5.1'
 end
 
 group :test do
@@ -57,7 +58,6 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'annotate', '~> 2.6.5'
-  gem 'byebug',   '~> 3.5.1'
 end
 
 group :production do
