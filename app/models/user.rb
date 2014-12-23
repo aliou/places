@@ -53,7 +53,7 @@ class User < ActiveRecord::Base
   #
   # Returns the User.
   def self.create_with_omniauth(auth)
-    create do |user|
+    create! do |user|
       user.provider     = auth['provider']
       user.uid          = auth['uid']
       user.oauth_token  = auth['credentials']['token']
