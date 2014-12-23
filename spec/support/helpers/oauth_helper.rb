@@ -3,7 +3,11 @@ module OauthHelper
     OmniAuth.config.add_mock(
       :foursquare,
       auth: {
-        uid: options[:uid] || ENV['FOURSQUARE_USER_ID']
-      })
+        uid: options[:uid]
+      },
+      credentials: {
+        token: options[:token]
+      }
+    )
   end
 end
