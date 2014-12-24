@@ -40,8 +40,13 @@ class User < ActiveRecord::Base
   def self.find_or_create_with_omniauth(auth)
     user = User.where(uid: auth['uid']).first
     if user.nil?
-      user = User.create_with_omniauth(auth)
-      user.import_places
+      begin
+        user = User.create_with_omniauth(auth)
+      rescue ActiveRecord::RecordInvalid
+        user = nil
+      else
+        user.import_places
+      end
     end
 
     user
