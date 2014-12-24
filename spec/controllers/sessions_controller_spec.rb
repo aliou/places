@@ -7,11 +7,18 @@ RSpec.describe SessionsController do
       before do
         request.env['omniauth.auth'] = stub_oauth(
           uid:   Faker::Number.number(6),
-          token: Faker::Internet.password)
+          token: Faker::Internet.password
+        )
       end
 
       it "doesn't save the user" do
         expect { get :create, provider: 'foursquare' }.to_not change { User.count }
+      end
+
+      it 'redirects to the auth failure path' do
+        get :create, provider: 'foursquare'
+
+        expect(response).to redirect_to(auth_failure_path)
       end
     end
   end
