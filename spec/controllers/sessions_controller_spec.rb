@@ -21,6 +21,38 @@ RSpec.describe SessionsController do
         expect(response).to redirect_to(auth_failure_path)
       end
     end
+
+    context 'with the right omniauth credentials' do
+
+      before do
+        request.env['omniauth.auth'] = stub_oauth(
+          uid:   ENV['FOURSQUARE_USER_ID'],
+          token: ENV['FOURSQUARE_USER_TOKEN']
+        )
+      end
+
+      around do |example|
+        VCR.use_cassette('foursquare_oauth_authentification') do
+          example.run
+        end
+      end
+
+      it 'creates a new user' do
+        expect { get :create, provider: 'foursquare' }.to change { User.count }
+      end
+
+      it 'saves the user id in the session' do
+        get :create, provider: 'foursquare'
+
+        expect(session[:user_id]).to_not be_nil
+      end
+
+      it 'redirects to the Places index path' do
+        get :create, provider: 'foursquare'
+
+        expect(response).to redirect_to(places_path)
+      end
+    end
   end
 
   describe 'GET /signout' do
