@@ -21,6 +21,7 @@ OmniAuth.config.test_mode = true
 
 RSpec.configure do |config|
   config.include OauthHelper
+  config.include FoursquareAPIHelper
 
   config.use_transactional_fixtures = true
 
