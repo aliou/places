@@ -40,13 +40,14 @@ gem 'haml-rails'
 
 group :test, :development do
   gem 'dotenv-rails'
-  gem 'rspec-rails'
-  gem 'rspec'
-  gem 'factory_girl_rails'
   gem 'byebug',   '~> 3.5.1'
 end
 
 group :test do
+  gem 'rspec'
+  gem 'fivemat'
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
   gem 'webmock', '~> 1.9.3'
   gem 'vcr',     '~> 2.9.3'
   gem 'faker',   '~> 1.4.3'
