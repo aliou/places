@@ -11,7 +11,7 @@ RSpec.describe SessionsController do
       end
 
       it "doesn't save the user" do
-        expect { get :create, provider: 'foursquare' }.to raise_error
+        expect { get :create, provider: 'foursquare' }.to_not change { User.count }
       end
     end
   end
