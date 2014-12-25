@@ -5,7 +5,7 @@ ruby '2.1.3'
 # Default Stuff                                                               #
 ###############################################################################
 
-gem 'rails', '4.1.6'
+gem 'rails', '4.2'
 
 # Database.
 gem 'pg'
@@ -21,15 +21,15 @@ gem 'lograge'
 ###############################################################################
 
 # CSS
-gem 'sass-rails', '~> 4.0.3'
-gem 'uglifier',   '>= 1.3.0'
-gem 'bourbon',    '~> 3.2.3'
-gem 'neat',       '~> 1.5.1'
+gem 'sass-rails'
+gem 'uglifier'
+gem 'bourbon'
+gem 'neat'
 
 # JS
-gem 'coffee-rails',             '~> 4.0.0'
-gem 'active_model_serializers', '~> 0.9.0'
-gem 'js-routes',                '~> 0.9.9'
+gem 'coffee-rails'
+gem 'active_model_serializers'
+gem 'js-routes'
 
 # Views
 gem 'haml-rails'
@@ -40,7 +40,7 @@ gem 'haml-rails'
 
 group :test, :development do
   gem 'dotenv-rails'
-  gem 'byebug',   '~> 3.5.1'
+  gem 'byebug'
 end
 
 group :test do
@@ -48,9 +48,9 @@ group :test do
   gem 'fivemat'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
-  gem 'webmock', '~> 1.9.3'
-  gem 'vcr',     '~> 2.9.3'
-  gem 'faker',   '~> 1.4.3'
+  gem 'webmock'
+  gem 'vcr'
+  gem 'faker'
 end
 
 group :development do
@@ -59,7 +59,7 @@ group :development do
   gem "spring-commands-rspec"
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'annotate', '~> 2.6.5'
+  gem 'annotate'
 end
 
 group :production do
