@@ -58,11 +58,13 @@ RSpec.describe SessionsController do
   describe 'GET /signout' do
     it 'resets the session' do
       get :destroy
+
       expect(session[:user_id]).to be_nil
     end
 
     it 'redirects to the root path' do
       get :destroy
+
       expect(response).to redirect_to(root_path)
     end
   end
