@@ -45,7 +45,7 @@ class User < ActiveRecord::Base
       rescue ActiveRecord::RecordInvalid
         user = nil
       else
-        user.import_places
+        PlaceImportJob.perform_later(user)
       end
     end
 
