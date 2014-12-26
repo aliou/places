@@ -54,12 +54,14 @@ group :test do
   gem 'webmock'
   gem 'vcr'
   gem 'faker'
+
+  gem 'codeclimate-test-reporter', require: nil
 end
 
 group :development do
   gem 'pry-rails'
   gem 'spring'
-  gem "spring-commands-rspec"
+  gem 'spring-commands-rspec'
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'annotate'

@@ -1,3 +1,6 @@
+require 'codeclimate-test-reporter'
+CodeClimate::TestReporter.start
+
 RSpec.configure do |config|
 
   if config.files_to_run.one?
