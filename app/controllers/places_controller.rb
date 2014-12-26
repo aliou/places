@@ -63,10 +63,10 @@ class PlacesController < ApplicationController
   end
 
   # GET /places/import
-  # Import places from 4sq.
-  # This should be done in a worker/asynchronously.
+  # TODO: Add a button in the view.
+  # TODO: Only redirect if request format is html.
   def import
-    current_user.import_places
+    PlaceImportJob.perform_later(current_user)
     redirect_to places_path, notice: 'Places successfully imported.'
   end
 end
