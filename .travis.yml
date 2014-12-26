@@ -3,6 +3,7 @@ rvm: 2.1.3
 
 before_script:
   - psql -c 'create database places_test;' -U postgres
+  - cp .sample.env .env
 
 addons:
   code_climate:
