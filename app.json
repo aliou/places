@@ -1,6 +1,6 @@
 {
   "name": "Places",
-  "version": "0.0.3"
+  "version": "0.0.3",
   "scripts": {
     "postdeploy": "bundle exec rake db:schema:load"
   },
