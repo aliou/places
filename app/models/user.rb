@@ -31,21 +31,28 @@ class User < ActiveRecord::Base
     message: 'Unauthorized user.' }
 
   ##############################################################################
+  # Callbacks                                                                  #
+  ##############################################################################
+
+  after_create :initial_places_import
+
+  ##############################################################################
   # Class Methods                                                              #
   ##############################################################################
 
   # Find or create a new User depending on omniauth data.
   #
+  # auth - The omniauth authentification details.
+  #
   # Returns the User.
   def self.find_or_create_with_omniauth(auth)
     user = User.where(uid: auth['uid']).first
+
     if user.nil?
       begin
         user = User.create_with_omniauth(auth)
       rescue ActiveRecord::RecordInvalid
         user = nil
-      else
-        PlaceImportJob.perform_later(user)
       end
     end
 
@@ -88,5 +95,11 @@ class User < ActiveRecord::Base
     end
 
     todos
+  end
+
+  private
+
+  def initial_places_import
+    PlaceImportJob.perform_later(self)
   end
 end
