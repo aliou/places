@@ -36,7 +36,7 @@ class User::PlaceImporter < ActiveRecord::Base
   #
   # Returns nothing.
   def set_default_last_imported_at
-    if self.last_imported_at.nil?
+    if last_imported_at.nil?
       self.last_imported_at = Date.yesterday
     end
   end
