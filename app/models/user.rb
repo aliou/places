@@ -46,7 +46,7 @@ class User < ActiveRecord::Base
   #
   # Returns the User.
   def self.from_omniauth(auth)
-    User.where(uid: auth['uid']).first || User.create_with_omniauth(auth)
+    User.where(uid: auth['uid']).first || User.create_from_omniauth(auth)
   end
 
   # Create a user from its omniauth authentification details.
@@ -55,19 +55,17 @@ class User < ActiveRecord::Base
   #
   # Returns the User.
   def self.create_from_omniauth(auth)
-    begin
-      create! do |user|
-        user.provider     = auth['provider']
-        user.uid          = auth['uid']
-        user.oauth_token  = auth['credentials']['token']
+    create! do |user|
+      user.provider     = auth['provider']
+      user.uid          = auth['uid']
+      user.oauth_token  = auth['credentials']['token']
 
-        if auth['info']
-          user.name       = auth['info']['name'] || ''
-        end
+      if auth['info']
+        user.name       = auth['info']['name'] || ''
       end
-    rescue ActiveRecord::RecordInvalid
-      return nil
     end
+  rescue ActiveRecord::RecordInvalid
+    return nil
   end
 
   ##############################################################################

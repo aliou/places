@@ -8,15 +8,11 @@ RSpec.describe User do
   it { should validate_presence_of :oauth_token }
   it { should validate_presence_of :uid }
   it { should validate_uniqueness_of :uid }
-  it { should validate_inclusion_of(:uid).
-       in_array([ENV['FOURSQUARE_USER_ID']]) }
+  it { should validate_inclusion_of(:uid).in_array([ENV['FOURSQUARE_USER_ID']]) }
 
   describe '.from_omniauth' do
     context "the user doesn't exist" do
-      let(:auth) { stub_oauth(
-        uid:   ENV['FOURSQUARE_USER_ID'],
-        token: Faker::Internet.password
-      )}
+      let(:auth) { stub_auth(uid: ENV['FOURSQUARE_USER_ID']) }
 
       before do
         clear_enqueued_jobs
@@ -36,10 +32,7 @@ RSpec.describe User do
     end
 
     context 'the user exists' do
-      let!(:auth) { stub_oauth(
-        uid:   ENV['FOURSQUARE_USER_ID'],
-        token: Faker::Internet.password
-      )}
+      let!(:auth) { stub_auth(uid: ENV['FOURSQUARE_USER_ID']) }
       let!(:existing_user) { User.from_omniauth(auth) }
 
       it 'returns the existing user' do
@@ -56,10 +49,7 @@ RSpec.describe User do
 
   describe '.create_from_omniauth' do
     context 'with an unauthorized uid' do
-      let(:auth) { stub_oauth(
-        uid:   Faker::Number.number(6),
-        token: Faker::Internet.password
-      )}
+      let(:auth) { stub_auth(uid: Faker::Number.number(6)) }
 
       it 'returns nil' do
         user = User.create_from_omniauth(auth)
@@ -69,10 +59,7 @@ RSpec.describe User do
     end
 
     context 'with an already existing uid' do
-      let(:auth) { stub_oauth(
-        uid:   ENV['FOURSQUARE_USER_ID'],
-        token: Faker::Internet.password
-      )}
+      let(:auth) { stub_auth(uid: ENV['FOURSQUARE_USER_ID']) }
 
       before do
         User.create_from_omniauth(auth)
@@ -87,10 +74,7 @@ RSpec.describe User do
     end
 
     context 'with an authorized uid' do
-      let(:auth) { stub_oauth(
-        uid:   ENV['FOURSQUARE_USER_ID'],
-        token: Faker::Internet.password
-      )}
+      let(:auth) { stub_auth(uid: ENV['FOURSQUARE_USER_ID']) }
 
       it 'creates a new user' do
         expect { User.create_from_omniauth(auth) }.
@@ -98,5 +82,9 @@ RSpec.describe User do
       end
 
     end
+  end
+
+  def stub_auth(options)
+    stub_oauth(uid: options[:uid], token: Faker::Internet.password)
   end
 end
