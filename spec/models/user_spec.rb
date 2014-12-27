@@ -8,7 +8,7 @@ RSpec.describe User do
   it { should validate_presence_of :oauth_token }
   it { should validate_presence_of :uid }
   it { should validate_uniqueness_of :uid }
-  it { should validate_inclusion_of(:uid).in_array([ENV['FOURSQUARE_USER_ID']]) }
+  it { should validate_inclusion_of(:uid).in_array(authorized_uids) }
 
   describe '.from_omniauth' do
     context "the user doesn't exist" do
@@ -86,5 +86,9 @@ RSpec.describe User do
 
   def stub_auth(options)
     stub_oauth(uid: options[:uid], token: Faker::Internet.password)
+  end
+
+  def authorized_uids
+    ENV.fetch('FOURSQUARE_USER_ID').split(',')
   end
 end

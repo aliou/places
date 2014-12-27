@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
   validates :oauth_token, presence: true
 
   validates :uid, presence: true, uniqueness: true, inclusion: {
-    in:      [ENV['FOURSQUARE_USER_ID']],
+    in:      ENV.fetch('FOURSQUARE_USER_ID').split(','),
     message: 'Unauthorized user.' }
 
   ##############################################################################
