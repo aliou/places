@@ -19,4 +19,25 @@ class User::PlaceImporter < ActiveRecord::Base
   ##############################################################################
 
   belongs_to :user
+
+  ##############################################################################
+  # Callbacks                                                                  #
+  ##############################################################################
+
+  before_create :set_default_last_imported_at
+
+  ##############################################################################
+  # Instance Methods                                                           #
+  ##############################################################################
+
+  private
+
+  # Private: Set the default last_imported_at value to the previous day.
+  #
+  # Returns nothing.
+  def set_default_last_imported_at
+    if self.last_imported_at.nil?
+      self.last_imported_at = Date.yesterday
+    end
+  end
 end
