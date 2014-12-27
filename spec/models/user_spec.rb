@@ -11,9 +11,8 @@ RSpec.describe User do
   it { should validate_inclusion_of(:uid).
        in_array([ENV['FOURSQUARE_USER_ID']]) }
 
-  describe '#find_or_create_with_omniauth' do
+  describe '.from_omniauth' do
     context "the user doesn't exist" do
-
       let(:auth) { stub_oauth(
         uid:   ENV['FOURSQUARE_USER_ID'],
         token: Faker::Internet.password
@@ -24,15 +23,33 @@ RSpec.describe User do
       end
 
       it 'creates a new user' do
-        user = User.find_or_create_with_omniauth(auth)
+        user = User.from_omniauth(auth)
 
         expect(user).to be_valid
       end
 
       it "imports the user's places in a job" do
-        user = User.find_or_create_with_omniauth(auth)
+        user = User.from_omniauth(auth)
 
         expect(ActiveJob::Base.queue_adapter.enqueued_jobs).to_not be_empty
+      end
+    end
+
+    context 'the user exists' do
+      let!(:auth) { stub_oauth(
+        uid:   ENV['FOURSQUARE_USER_ID'],
+        token: Faker::Internet.password
+      )}
+      let!(:existing_user) { User.from_omniauth(auth) }
+
+      it 'returns the existing user' do
+        user = User.from_omniauth(auth)
+
+        expect(user).to eq(existing_user)
+      end
+
+      it "doesn't create a new user" do
+        expect { User.from_omniauth(auth) }.to_not change { User.count }
       end
     end
   end

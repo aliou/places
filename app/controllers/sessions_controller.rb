@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
 
   # GET /auth/:provider/callback
   def create
-    user = User.find_or_create_with_omniauth(auth_hash)
+    user = User.from_omniauth(auth_hash)
 
     unless user and user.persisted? and user.valid?
       redirect_to auth_failure_path
