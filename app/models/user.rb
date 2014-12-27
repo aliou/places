@@ -23,11 +23,12 @@ class User < ActiveRecord::Base
   # Validations                                                                #
   ##############################################################################
 
-  validates :uid         , presence: true
-  validates :provider    , presence: true
-  validates :oauth_token , presence: true
-  validates :uid,          inclusion: { in: [ENV['FOURSQUARE_USER_ID']],
-                                        message: 'Unauthorized user.' }
+  validates :provider,    presence: true
+  validates :oauth_token, presence: true
+
+  validates :uid, presence: true, uniqueness: true, inclusion: {
+    in:      [ENV['FOURSQUARE_USER_ID']],
+    message: 'Unauthorized user.' }
 
   ##############################################################################
   # Class Methods                                                              #

@@ -4,9 +4,10 @@ RSpec.describe User do
   include ActiveJob::TestHelper
 
   it { should have_many(:places) }
-  it { should validate_presence_of :uid }
   it { should validate_presence_of :provider }
   it { should validate_presence_of :oauth_token }
+  it { should validate_presence_of :uid }
+  it { should validate_uniqueness_of :uid }
   it { should validate_inclusion_of(:uid).
        in_array([ENV['FOURSQUARE_USER_ID']]) }
 
