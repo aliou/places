@@ -11,30 +11,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141122215806) do
+ActiveRecord::Schema.define(version: 20141227171916) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "hstore"
 
-  create_table "categories", force: true do |t|
-    t.string   "name"
-    t.string   "icon_url"
+  create_table "categories", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.string   "icon_url",   limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
     t.hstore   "metadata"
   end
 
-  create_table "places", force: true do |t|
-    t.string   "name"
+  create_table "places", force: :cascade do |t|
+    t.string   "name",                limit: 255
     t.float    "lat"
     t.float    "lng"
     t.text     "notes"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
-    t.string   "foursquare_venue_id"
-    t.string   "address"
+    t.string   "foursquare_venue_id", limit: 255
+    t.string   "address",             limit: 255
     t.hstore   "metadata"
     t.integer  "category_id"
   end
@@ -42,11 +42,20 @@ ActiveRecord::Schema.define(version: 20141122215806) do
   add_index "places", ["category_id"], name: "index_places_on_category_id", using: :btree
   add_index "places", ["user_id"], name: "index_places_on_user_id", using: :btree
 
-  create_table "users", force: true do |t|
-    t.string   "name"
-    t.string   "uid"
-    t.string   "provider"
-    t.string   "oauth_token"
+  create_table "user_place_importers", force: :cascade do |t|
+    t.datetime "last_imported_at"
+    t.integer  "user_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "user_place_importers", ["user_id"], name: "index_user_place_importers_on_user_id", using: :btree
+
+  create_table "users", force: :cascade do |t|
+    t.string   "name",        limit: 255
+    t.string   "uid",         limit: 255
+    t.string   "provider",    limit: 255
+    t.string   "oauth_token", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
