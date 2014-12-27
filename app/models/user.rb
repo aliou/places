@@ -99,6 +99,9 @@ class User < ActiveRecord::Base
 
   private
 
+  # Private: Run a job to import the places from Foursquare
+  #
+  # Returns: Nothing.
   def initial_places_import
     PlaceImportJob.perform_later(self)
   end
