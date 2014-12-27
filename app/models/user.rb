@@ -54,7 +54,7 @@ class User < ActiveRecord::Base
   # auth - The omniauth authentification details.
   #
   # Returns the User.
-  def self.create_with_omniauth(auth)
+  def self.create_from_omniauth(auth)
     begin
       create! do |user|
         user.provider     = auth['provider']

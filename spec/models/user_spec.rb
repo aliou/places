@@ -53,4 +53,50 @@ RSpec.describe User do
       end
     end
   end
+
+  describe '.create_from_omniauth' do
+    context 'with an unauthorized uid' do
+      let(:auth) { stub_oauth(
+        uid:   Faker::Number.number(6),
+        token: Faker::Internet.password
+      )}
+
+      it 'returns nil' do
+        user = User.create_from_omniauth(auth)
+
+        expect(user).to be_nil
+      end
+    end
+
+    context 'with an already existing uid' do
+      let(:auth) { stub_oauth(
+        uid:   ENV['FOURSQUARE_USER_ID'],
+        token: Faker::Internet.password
+      )}
+
+      before do
+        User.create_from_omniauth(auth)
+      end
+
+      it 'returns nil' do
+        user = User.create_from_omniauth(auth)
+
+        expect(user).to be_nil
+      end
+
+    end
+
+    context 'with an authorized uid' do
+      let(:auth) { stub_oauth(
+        uid:   ENV['FOURSQUARE_USER_ID'],
+        token: Faker::Internet.password
+      )}
+
+      it 'creates a new user' do
+        expect { User.create_from_omniauth(auth) }.
+          to change { User.count }.by(1)
+      end
+
+    end
+  end
 end
