@@ -34,7 +34,6 @@ class User < ActiveRecord::Base
   ##############################################################################
 
   # Find or create a new User depending on omniauth data.
-  # TODO: Delay the place import.
   #
   # Returns the User.
   def self.find_or_create_with_omniauth(auth)
@@ -88,5 +87,4 @@ class User < ActiveRecord::Base
 
     todos
   end
-
 end
