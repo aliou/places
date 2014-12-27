@@ -54,6 +54,7 @@ group :test do
   gem 'webmock'
   gem 'vcr'
   gem 'faker'
+  gem 'shoulda-matchers', require: false
 
   gem 'codeclimate-test-reporter', require: nil
 end
