@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
   validates :uid         , presence: true
   validates :provider    , presence: true
   validates :oauth_token , presence: true
-  validates :uid,          inclusion: { in: [ ENV['FOURSQUARE_USER_ID'] ],
+  validates :uid,          inclusion: { in: [ENV['FOURSQUARE_USER_ID']],
                                         message: 'Unauthorized user.' }
 
   ##############################################################################
@@ -75,6 +75,7 @@ class User < ActiveRecord::Base
   # Public: Import places from 4SQ.
   # TODO: Only import the new Places since last import.
   # TODO: Check pagination (limit of 200 per page).
+  # TODO: Only return the new imported places.
   #
   # Returns an array of Places.
   def import_places(limit = 200)
