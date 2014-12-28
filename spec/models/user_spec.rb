@@ -84,6 +84,22 @@ RSpec.describe User do
     end
   end
 
+  describe '#import_places' do
+    subject { FactoryGirl.create(:user) }
+
+    context 'initial import' do
+      around do |example|
+        VCR.use_cassette('place_importer.first_import') do
+          example.run
+        end
+      end
+
+      it 'imports all of the user places' do
+        expect { subject.import_places }.to change { Place.count }.by(144)
+      end
+    end
+  end
+
   def stub_auth(options)
     stub_oauth(uid: options[:uid], token: Faker::Internet.password)
   end

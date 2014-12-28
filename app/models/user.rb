@@ -74,20 +74,12 @@ class User < ActiveRecord::Base
   ##############################################################################
 
   # Public: Import places from 4SQ.
-  # TODO: Only import the new Places since last import.
-  # TODO: Check pagination (limit of 200 per page).
-  # TODO: Only return the new imported places.
   #
   # Returns an array of Places.
-  def import_places(limit = 200)
-    client = Foursquare2::Client.new oauth_token: self.oauth_token,
-                                     api_version: '20140806'
-    todo_list = client.list("#{self.uid}/todos", limit: limit)
-    todos = todo_list['listItems']['items'].map do |item|
-      Place.find_or_create_from_foursquare_venue(item, self)
-    end
+  def import_places
+    create_place_importer if place_importer.nil?
 
-    todos
+    place_importer.run
   end
 
   private
