@@ -25,7 +25,7 @@ RSpec.describe User do
       end
 
       it "imports the user's places in a job" do
-        user = User.from_omniauth(auth)
+        User.from_omniauth(auth)
 
         expect(ActiveJob::Base.queue_adapter.enqueued_jobs).to_not be_empty
       end
