@@ -64,7 +64,7 @@ class User::PlaceImporter < ActiveRecord::Base
     end
 
     self.last_imported_at = Time.now
-    self.save
+    save
 
     places
   end
@@ -73,7 +73,8 @@ class User::PlaceImporter < ActiveRecord::Base
   #
   # Returns an Array of places
   def import(options)
-    list = foursquare_client.list(foursquare_list, options)['listItems']['items']
+    list = foursquare_client.
+      list(foursquare_list, options)['listItems']['items']
 
     list.map do |item|
       Place.from_foursquare(item, user)

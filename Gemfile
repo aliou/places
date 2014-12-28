@@ -55,7 +55,6 @@ group :test do
   gem 'vcr'
   gem 'faker'
   gem 'shoulda-matchers', require: false
-  gem 'climate_control'
 
   gem 'codeclimate-test-reporter', require: nil
 end
