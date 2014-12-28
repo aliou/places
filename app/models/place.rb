@@ -62,20 +62,16 @@ class Place < ActiveRecord::Base
   # Public: Finds or creates a new Place from a Foursquare venue.
   #
   # Returns the found or created Place.
-  def self.find_or_create_from_foursquare_venue(venue, user = current_user)
-    place = Place.where(foursquare_venue_id: venue['id']).first
-    if place.nil?
-      place = Place.create_from_foursquare_venue(venue, user)
-    end
-
-    place
+  def self.from_foursquare(venue, user = current_user)
+    Place.where(foursquare_venue_id: venue['id']).first ||
+      Place.create_from_foursquare(venue, user)
   end
 
   # Public: Creates a new Place from a Foursquare venue.
   #
   # Returns the created Place.
-  def self.create_from_foursquare_venue(venue, user = current_user)
-    create do |place|
+  def self.create_from_foursquare(venue, user = current_user)
+    create! do |place|
       place.user_id             = user.id
       place.foursquare_venue_id = venue['id']
 
@@ -87,5 +83,7 @@ class Place < ActiveRecord::Base
 
       place.foursquare_data     = venue.to_json
     end
+  rescue ActiveRecord::RecordInvalid
+    return nil
   end
 end
