@@ -28,14 +28,18 @@ class User::PlaceImporter < ActiveRecord::Base
   #
   # Returns a Boolean.
   def first_import?
-    self.last_imported_at.nil?
+    last_imported_at.nil?
   end
 
+  private
+
+  # Private: Get or create the foursquare client.
   #
-  # Returns nothing.
-  def set_default_last_imported_at
-    if last_imported_at.nil?
-      self.last_imported_at = Date.yesterday
-    end
+  # Returns a Foursquare2::Client.
+  def foursquare_client
+    @client ||= Foursquare2::Client.new(
+      oauth_token: user.oauth_token,
+      api_version: '20140806'
+    )
   end
 end
