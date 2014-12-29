@@ -5,6 +5,8 @@ RSpec.configure do |config|
 
   if config.files_to_run.one?
     config.default_formatter = 'doc'
+  else
+    config.profile_examples = 3
   end
 
   config.order = :random
