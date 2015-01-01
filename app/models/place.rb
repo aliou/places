@@ -61,7 +61,7 @@ class Place < ActiveRecord::Base
 
   # Public: Finds or creates a new Place from a Foursquare venue.
   #
-  # Returns the found or created Place.
+  # Returns a Place or nil.
   def self.from_foursquare(venue, user = current_user)
     Place.where(foursquare_venue_id: venue['id']).first ||
       Place.create_from_foursquare(venue, user)
@@ -69,7 +69,7 @@ class Place < ActiveRecord::Base
 
   # Public: Creates a new Place from a Foursquare venue.
   #
-  # Returns the created Place.
+  # Returns a Place or nil.
   def self.create_from_foursquare(venue, user = current_user)
     create! do |place|
       place.user_id             = user.id

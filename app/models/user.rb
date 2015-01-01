@@ -45,7 +45,7 @@ class User < ActiveRecord::Base
   #
   # auth - The omniauth authentification details.
   #
-  # Returns the User.
+  # Returns a User or nil.
   def self.from_omniauth(auth)
     User.where(uid: auth['uid']).first || User.create_from_omniauth(auth)
   end
@@ -54,7 +54,7 @@ class User < ActiveRecord::Base
   #
   # auth - The omniauth authentification details.
   #
-  # Returns the User.
+  # Returns a User or nil.
   def self.create_from_omniauth(auth)
     create! do |user|
       user.provider     = auth['provider']
