@@ -63,10 +63,11 @@ class PlacesController < ApplicationController
   end
 
   # GET /places/import
-  # TODO: Add a button in the view.
-  # TODO: Only redirect if request format is html.
   def import
     PlaceImportJob.perform_later(current_user)
-    redirect_to places_path, notice: 'Places successfully imported.'
+    respond_to do |format|
+      format.html { redirect_to places_path,
+                                notice: 'Places successfully imported.' }
+    end
   end
 end
