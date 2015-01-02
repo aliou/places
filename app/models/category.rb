@@ -28,7 +28,7 @@ class Category < ActiveRecord::Base
   # Validations                                                                #
   ##############################################################################
 
-  validates :name,     presence: true
+  validates :name, presence: true
 
   ##############################################################################
   # Callbacks                                                                  #
@@ -40,13 +40,25 @@ class Category < ActiveRecord::Base
   # Class Methods                                                              #
   ##############################################################################
 
-  def self.find_or_create_from_foursquare_category(cat)
-    category = Category.where(name: cat['name']).first
-    if category.nil?
-      category = Category.create(name: cat['name'], foursquare_data: cat.to_json)
-    end
+  # Public: Finds or creates a new Category from a Foursquare category.
+  #
+  # category - The Foursquare category.
+  #
+  # Returns a Category or nil.
+  def self.from_foursquare(category)
+    Category.where(name: category['name']).first ||
+      Category.create_from_foursquare(category)
+  end
 
-    category
+  # Public: Creates a new Category from a Foursquare category.
+  #
+  # category - The Foursquare category.
+  #
+  # Returns a Category or nil.
+  def self.create_from_foursquare(category)
+    Category.create!(name: category['name'], foursquare_data: category.to_json)
+  rescue ActiveRecord::RecordInvalid
+    return nil
   end
 
   private

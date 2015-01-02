@@ -37,7 +37,6 @@ RSpec.describe Place, type: :model do
       end
 
       it "doesn't create a new place" do
-
         expect { Place.from_foursquare(foursquare_venue, user) }.
           to_not change { Place.count }
       end
