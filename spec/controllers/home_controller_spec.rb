@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe HomeController do
+  it { should route(:get, '/').to(action: :index) }
 
   describe 'GET index' do
 
@@ -16,7 +17,7 @@ RSpec.describe HomeController do
       let(:current_user) { FactoryGirl.create(:user) }
 
       it 'redirects' do
-        get :index, nil, { user_id: current_user.id }
+        get :index, nil, user_id: current_user.id
 
         expect(response).to be_redirect
       end
