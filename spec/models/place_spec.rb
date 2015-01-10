@@ -9,7 +9,7 @@ RSpec.describe Place, type: :model do
   it { should validate_presence_of :foursquare_venue_id }
   it { should validate_uniqueness_of(:foursquare_venue_id).scoped_to(:user_id) }
 
-  let(:user)             { FactoryGirl.create(:user) }
+  let(:user)             { build_stubbed(:user) }
   let(:foursquare_venue) { stub_foursquare_venue }
 
   describe '.from_foursquare' do

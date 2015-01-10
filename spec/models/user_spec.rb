@@ -85,7 +85,7 @@ RSpec.describe User do
   end
 
   describe '#import_places' do
-    subject { FactoryGirl.create(:user) }
+    subject { build_stubbed(:user) }
 
     context 'initial import' do
       around do |example|
