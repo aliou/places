@@ -86,18 +86,18 @@ RSpec.describe PlacesController do
       let(:place_params) { { place: FactoryGirl.build(:place).attributes } }
 
       it 'creates a new place' do
-        expect { get :create, place_params, { user_id: current_user.id } }.
+        expect { post :create, place_params, { user_id: current_user.id } }.
           to change { Place.count }.by(1)
       end
 
       it 'associates the new place with the current user' do
-        get :create, place_params, { user_id: current_user.id }
+        post :create, place_params, { user_id: current_user.id }
 
         expect(assigns(:place).user).to eq(current_user)
       end
 
       it 'redirect to the new place path' do
-        get :create, place_params, { user_id: current_user.id }
+        post :create, place_params, { user_id: current_user.id }
         place = assigns(:place)
 
         expect(response).to redirect_to(place_path(place))
