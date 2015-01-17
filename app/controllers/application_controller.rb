@@ -9,7 +9,6 @@ class ApplicationController < ActionController::Base
   private
 
   # Private: Make sure the user is connected.
-  # TODO: Redirect to previous page.
   #
   # Returns nothing.
   def authenticate!

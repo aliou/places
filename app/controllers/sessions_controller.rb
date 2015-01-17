@@ -3,6 +3,7 @@ class SessionsController < ApplicationController
   skip_before_filter :authenticate!
 
   # GET /auth/:provider/callback
+  # TODO: Redirect to te previous page, to the `places_path` otherwise.
   def create
     user = User.from_omniauth(auth_hash)
 
