@@ -161,6 +161,24 @@ RSpec.describe PlacesController do
       end
     end
   end
+
+  describe 'DELETE .destroy' do
+    let!(:current_user) { FactoryGirl.create(:user_with_places) }
+    let!(:place) { current_user.places.sample }
+
+    it 'destroys the place' do
+      expect {
+        delete :destroy, { id: place.id }, { user_id: current_user.id }
+      }.to change { Place.count }.by(-1)
+      expect(Place.where(id: place.id)).to be_empty
+    end
+
+    it 'redirects to the places path' do
+      delete :destroy, { id: place.id }, { user_id: current_user.id }
+
+      expect(response).to redirect_to(places_path)
+    end
+  end
 end
 
 def updated_place_params(place)
