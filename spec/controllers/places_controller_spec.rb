@@ -179,6 +179,22 @@ RSpec.describe PlacesController do
       expect(response).to redirect_to(places_path)
     end
   end
+
+  describe 'GET .import' do
+    let(:current_user) { FactoryGirl.create(:user) }
+
+    it 'Creates a job' do
+      get :import, nil, { user_id: current_user.id }
+
+      expect(ActiveJob::Base.queue_adapter.enqueued_jobs).to_not be_empty
+    end
+
+    it 'redirects to the places path' do
+      get :import, nil, { user_id: current_user.id }
+
+      expect(response).to redirect_to(places_path)
+    end
+  end
 end
 
 def updated_place_params(place)
