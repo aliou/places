@@ -1,8 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe PlaceImportJob do
-  include ActiveJob::TestHelper
-
   let(:auth) { stub_auth }
 
   it "imports the user's place after user creation" do

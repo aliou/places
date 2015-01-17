@@ -1,8 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe User do
-  include ActiveJob::TestHelper
-
   it { should have_many :places }
   it { should validate_presence_of :provider }
   it { should validate_presence_of :oauth_token }
