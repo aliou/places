@@ -26,7 +26,7 @@ class PlacesController < ApplicationController
 
   # POST /places
   def create
-    @place = current_user.places.new params[:place]
+    @place = current_user.places.new place_params
 
     respond_to do |format|
       if @place.save
@@ -43,7 +43,7 @@ class PlacesController < ApplicationController
   def update
     @place = Place.find params[:id]
     respond_to do |format|
-      if @place.update_attributes params[:place]
+      if @place.update_attributes place_params
         format.html { redirect_to place_path(@place),
                       flash: { success: 'Place successfuly created.' } }
       else
@@ -69,5 +69,14 @@ class PlacesController < ApplicationController
       format.html { redirect_to places_path,
                                 notice: 'Places successfully imported.' }
     end
+  end
+
+  private
+
+  # Private: Permitted parameters for Place creation and update.
+  #
+  # Returns a Hash with the permitted parameters.
+  def place_params
+    params.require(:place).permit(:name, :lat, :lng, :foursquare_venue_id)
   end
 end
