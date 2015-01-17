@@ -5,20 +5,20 @@ RSpec.describe HomeController do
 
   describe 'GET index' do
     context 'user is not connected' do
-      it 'goes to the index' do
+      it 'renders the index template' do
         get :index
 
-        expect(response).to be_success
+        expect(response).to render_template('index')
       end
     end
 
     context 'user is logged in' do
       let(:current_user) { FactoryGirl.create(:user) }
 
-      it 'redirects' do
+      it 'redirects to the places path' do
         get :index, nil, user_id: current_user.id
 
-        expect(response).to be_redirect
+        expect(response).to redirect_to(places_path)
       end
     end
   end
