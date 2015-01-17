@@ -63,6 +63,7 @@ class PlacesController < ApplicationController
   end
 
   # GET /places/import
+  # TODO: Response when the request is from async.
   def import
     PlaceImportJob.perform_later(current_user)
     respond_to do |format|
