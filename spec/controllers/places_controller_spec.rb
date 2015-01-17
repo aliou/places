@@ -28,4 +28,20 @@ RSpec.describe PlacesController do
     end
   end
 
+  describe 'GET .new' do
+    let(:current_user) { FactoryGirl.create(:user_with_places) }
+
+    # it 'builds a new place' do
+    #   place = current_user.places.new
+    #   get :new, nil, user_id: current_user.id
+    #
+    #   expect(assigns(:place)).to eq(place)
+    # end
+
+    it 'renders the new template' do
+      get :new, nil, user_id: current_user.id
+
+      expect(response).to render_template('new')
+    end
+  end
 end
