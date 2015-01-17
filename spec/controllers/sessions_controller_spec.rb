@@ -8,7 +8,6 @@ RSpec.describe SessionsController do
 
   describe 'GET /auth/foursquare/callback' do
     context 'with the wrong omniauth credentials' do
-
       before do
         request.env['omniauth.auth'] = stub_oauth(
           uid:   Faker::Number.number(6),
@@ -17,7 +16,8 @@ RSpec.describe SessionsController do
       end
 
       it "doesn't save the user" do
-        expect { get :create, provider: 'foursquare' }.to_not change { User.count }
+        expect { get :create, provider: 'foursquare' }.
+          to_not change { User.count }
       end
 
       it 'redirects to the auth failure path' do
@@ -28,7 +28,6 @@ RSpec.describe SessionsController do
     end
 
     context 'with the right omniauth credentials' do
-
       before do
         request.env['omniauth.auth'] = stub_oauth(
           uid:   ENV['FOURSQUARE_USER_ID'],
@@ -43,7 +42,8 @@ RSpec.describe SessionsController do
       end
 
       it 'creates a new user' do
-        expect { get :create, provider: 'foursquare' }.to change { User.count }
+        expect { get :create, provider: 'foursquare' }.
+          to change { User.count }
       end
 
       it 'saves the user id in the session' do
