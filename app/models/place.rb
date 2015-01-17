@@ -41,8 +41,8 @@ class Place < ActiveRecord::Base
   ##############################################################################
 
   validates :name,                presence: true
-  validates :lat ,                presence: true
-  validates :lng ,                presence: true
+  validates :lat,                 presence: true
+  validates :lng,                 presence: true
   validates :foursquare_venue_id, presence: true
 
   validates :foursquare_venue_id, uniqueness: { scope: :user_id }
