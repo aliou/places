@@ -78,4 +78,45 @@ RSpec.describe PlacesController do
       expect(response).to render_template('show')
     end
   end
+
+  describe 'POST .create' do
+    let(:current_user) { FactoryGirl.create(:user) }
+
+    context 'with valid attributes' do
+      let(:place_params) { { place: FactoryGirl.build(:place).attributes } }
+
+      it 'creates a new place' do
+        expect { get :create, place_params, { user_id: current_user.id } }.
+          to change { Place.count }.by(1)
+      end
+
+      it 'associates the new place with the current user' do
+        get :create, place_params, { user_id: current_user.id }
+
+        expect(assigns(:place).user).to eq(current_user)
+      end
+
+      it 'redirect to the new place path' do
+        get :create, place_params, { user_id: current_user.id }
+        place = assigns(:place)
+
+        expect(response).to redirect_to(place_path(place))
+      end
+    end
+
+    context 'without valid attributes' do
+      let(:place_params) { { place: { name: Faker::Name.name } } }
+
+      it "doesn't create a new place" do
+        expect { get :create, place_params, { user_id: current_user.id } }.
+          to_not change { Place.count }
+      end
+
+      it 'renders the edit template' do
+        get :create, place_params, { user_id: current_user.id }
+
+        expect(response).to render_template('edit')
+      end
+    end
+  end
 end
