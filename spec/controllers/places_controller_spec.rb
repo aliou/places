@@ -118,4 +118,52 @@ RSpec.describe PlacesController do
       end
     end
   end
+
+  describe 'PUT .update' do
+    let(:current_user) { FactoryGirl.create(:user) }
+    let(:place) { FactoryGirl.create(:place, user_id: current_user.id) }
+
+    context 'with valid params' do
+
+      it 'updates the place' do
+        old_name = place.name
+        put :update, updated_place_params(place), { user_id: current_user.id }
+
+        expect(place.reload.name).to eq(old_name + ' updated')
+      end
+
+      it 'redirect to the updated place path' do
+        put :update, updated_place_params(place), { user_id: current_user.id }
+
+        expect(response).to redirect_to(place_path(place))
+      end
+    end
+
+    context 'without valid params' do
+      let(:place_params) { updated_place_params(place) }
+
+      before do
+        place_params[:place][:name] = ''
+      end
+
+      it "doesn't update the place" do
+        old_name = place.name
+        put :update, place_params, { user_id: current_user.id }
+
+        expect(place.reload).to eq(place)
+        expect(place.name).to   eq(old_name)
+      end
+
+      it 'renders the edit template' do
+        put :update, place_params, { user_id: current_user.id }
+
+        expect(response).to render_template('edit')
+      end
+    end
+  end
+end
+
+def updated_place_params(place)
+  { id:    place.id,
+    place: place.attributes.merge(name: place.name + ' updated') }
 end
