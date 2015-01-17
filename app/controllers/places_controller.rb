@@ -2,7 +2,7 @@ class PlacesController < ApplicationController
 
   # GET /places
   # TODO: Return everything as JSON.
-  # TODO: Order by closest aroud you.
+  # TODO: Order by closest around you.
   def index
     @places = current_user.places
     @models = ActiveModel::ArraySerializer.new(@places,
@@ -45,7 +45,7 @@ class PlacesController < ApplicationController
     respond_to do |format|
       if @place.update_attributes place_params
         format.html { redirect_to place_path(@place),
-                      flash: { success: 'Place successfuly created.' } }
+                      flash: { success: 'Place successfuly updated.' } }
       else
         format.html { render action: :edit }
       end
