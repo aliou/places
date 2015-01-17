@@ -31,12 +31,11 @@ RSpec.describe PlacesController do
   describe 'GET .new' do
     let(:current_user) { FactoryGirl.create(:user_with_places) }
 
-    # it 'builds a new place' do
-    #   place = current_user.places.new
-    #   get :new, nil, user_id: current_user.id
-    #
-    #   expect(assigns(:place)).to eq(place)
-    # end
+    it 'builds a new place' do
+      get :new, nil, user_id: current_user.id
+
+      expect(assigns(:place)).to be_a_new(Place)
+    end
 
     it 'renders the new template' do
       get :new, nil, user_id: current_user.id
