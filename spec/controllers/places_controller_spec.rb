@@ -44,4 +44,21 @@ RSpec.describe PlacesController do
       expect(response).to render_template('new')
     end
   end
+
+  describe 'GET .edit' do
+    let(:current_user) { FactoryGirl.create(:user_with_places) }
+    let(:place) { current_user.places.sample }
+
+    it 'finds the place to edit' do
+      get :edit, { id: place.id }, { user_id: current_user.id }
+
+      expect(assigns(:place)).to eq(place)
+    end
+
+    it 'renders the edit template' do
+      get :edit, { id: place.id }, { user_id: current_user.id }
+
+      expect(response).to render_template('edit')
+    end
+  end
 end
