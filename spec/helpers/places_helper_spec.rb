@@ -5,9 +5,9 @@ RSpec.describe PlacesHelper do
     let(:venue) { stub_foursquare_venue }
 
     context "the category doesn't exist" do
-
       it 'creates the primary category for the venue' do
-        expect{ venue_primary_category(venue) }.to change { Category.count }.by(1)
+        expect{ venue_primary_category(venue) }.
+          to change { Category.count }.by(1)
       end
     end
 
@@ -15,7 +15,8 @@ RSpec.describe PlacesHelper do
       let!(:existing_category) { venue_primary_category(venue) }
 
       it "doesn't create a new category" do
-        expect{ venue_primary_category(venue) }.to_not change { Category.count }
+        expect{ venue_primary_category(venue) }.
+          to_not change { Category.count }
       end
 
       it 'returns the existing category' do
