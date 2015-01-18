@@ -36,4 +36,26 @@ RSpec.describe Category do
       end
     end
   end
+
+  describe '.create_from_foursquare' do
+    context 'without a name' do
+      before do
+        foursquare_category.delete("name")
+      end
+
+      it 'returns nil' do
+        category = Category.create_from_foursquare(foursquare_category)
+
+        expect(category).to be_nil
+      end
+    end
+
+    context 'with a name' do
+      it 'returns a new Category' do
+        category = Category.create_from_foursquare(foursquare_category)
+
+        expect(category).to be_valid
+      end
+    end
+  end
 end
