@@ -30,5 +30,8 @@ module Places
     # Add the font folder to asset pipeline.
     config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
     config.assets.precompile << /\.(?:svg|eot|woff|ttf)\z/
+
+    # Settings
+    FOURSQUARE_API_VERSION = '20140806'
   end
 end

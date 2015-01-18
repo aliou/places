@@ -87,7 +87,7 @@ class User::PlaceImporter < ActiveRecord::Base
   def foursquare_client
     @client ||= Foursquare2::Client.new(
       oauth_token: user.oauth_token,
-      api_version: '20140806'
+      api_version: Places::Application::FOURSQUARE_API_VERSION
     )
   end
 
