@@ -61,6 +61,14 @@ RSpec.describe SessionsController do
   end
 
   describe 'GET /signout' do
+    it 'redirects to the root path' do
+      get :failure
+
+      expect(response).to redirect_to(root_path)
+    end
+  end
+
+  describe 'GET /signout' do
     let(:user_id) { Faker::Number.number(4) }
 
     it 'resets the session' do
