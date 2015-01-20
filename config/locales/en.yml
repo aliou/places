@@ -1,3 +1,29 @@
 en:
+  application:
+    authenticate:
+      error: You must be connected to do that.
+  session:
+    create:
+      flash:
+        success: You have been signed in.
+    destroy:
+      flash:
+        success: You have been signed out.
+    failure:
+      flash:
+        error: An error occured. Please try again.
   home:
     tagline: Plan your escape.
+  place:
+    create:
+      flash:
+        success: Place successfully created.
+    update:
+      flash:
+        success: Place successfully updated.
+    destroy:
+      flash:
+        notice: Place successfully deleted.
+    import:
+      flash:
+        notice: Place successfully imported.

@@ -31,7 +31,7 @@ class PlacesController < ApplicationController
     respond_to do |format|
       if @place.save
         format.html { redirect_to place_path(@place),
-                      flash: { success: 'Place successfuly created.' } }
+                      flash: { success: I18n.t('place.create.flash.success') } }
       else
         format.html { render action: :edit }
       end
@@ -45,7 +45,7 @@ class PlacesController < ApplicationController
     respond_to do |format|
       if @place.update_attributes place_params
         format.html { redirect_to place_path(@place),
-                      flash: { success: 'Place successfuly updated.' } }
+                      flash: { success: I18n.t('place.update.flash.success') } }
       else
         format.html { render action: :edit }
       end
@@ -58,7 +58,7 @@ class PlacesController < ApplicationController
     @place.destroy
     respond_to do |format|
       format.html { redirect_to places_path,
-                    notice: 'Place successfuly deleted.' }
+                    notice: I18n.t('place.destroy.flash.notice') }
     end
   end
 
@@ -68,7 +68,7 @@ class PlacesController < ApplicationController
     PlaceImportJob.perform_later(current_user)
     respond_to do |format|
       format.html { redirect_to places_path,
-                                notice: 'Places successfully imported.' }
+                                notice: I18n.t('place.import.flash.notice') }
     end
   end
 

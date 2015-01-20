@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   def authenticate!
     unless session[:user_id].present?
       redirect_to root_path,
-        flash: { error: 'You must be connected to do that.' }
+        flash: { error: I18n.t('application.authenticate.error') }
     end
   end
 

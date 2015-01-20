@@ -14,19 +14,21 @@ class SessionsController < ApplicationController
 
     reset_session
     session[:user_id] = user.id
-    redirect_to places_path, flash: { success: 'You have been signed in.' }
+    redirect_to places_path, flash:
+      { success: I18n.t('session.create.flash.success') }
   end
 
   # GET /signout
   def destroy
     reset_session
-    redirect_to root_path, flash: { success: 'You have been signed out.' }
+    redirect_to root_path, flash:
+      { success: I18n.t('session.destroy.flash.success') }
   end
 
   # GET /auth/failure
   def failure
     redirect_to root_path, flash:
-      { error: "An error occured. Please try again." }
+      { error: I18n.t('session.failure.flash.error') }
   end
 
   private
