@@ -97,6 +97,8 @@ GEM
       faraday (~> 0.8)
       faraday_middleware (>= 0.8)
       hashie (>= 1.0, < 3.0.0)
+    friendly_id (5.1.0)
+      activerecord (>= 4.0.0)
     geokit (1.9.0)
       multi_json (>= 1.3.2)
     geokit-rails (2.0.1)
@@ -284,6 +286,7 @@ DEPENDENCIES
   faker
   fivemat
   foursquare2
+  friendly_id
   geokit-rails (~> 2.0.1)
   haml-rails
   js-routes

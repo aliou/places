@@ -14,14 +14,17 @@
 #  address             :string(255)
 #  metadata            :hstore
 #  category_id         :integer
+#  slug                :string
 #
 # Indexes
 #
 #  index_places_on_category_id  (category_id)
+#  index_places_on_slug         (slug) UNIQUE
 #  index_places_on_user_id      (user_id)
 #
 
 class Place < ActiveRecord::Base
+  extend FriendlyId
   extend PlacesHelper
 
   ##############################################################################
@@ -54,6 +57,8 @@ class Place < ActiveRecord::Base
   acts_as_mappable :default_units => :kms,
                  :lat_column_name => :lat,
                  :lng_column_name => :lng
+
+  friendly_id :name, use: [:slugged, :finders]
 
   ##############################################################################
   # Class Methods                                                              #
