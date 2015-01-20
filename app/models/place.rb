@@ -52,6 +52,12 @@ class Place < ActiveRecord::Base
   validates :foursquare_venue_id, uniqueness: { scope: :user_id }
 
   ##############################################################################
+  # Callbacks                                                                  #
+  ##############################################################################
+
+  after_create :set_foursquare_venue_url
+
+  ##############################################################################
   # Macros                                                                     #
   ##############################################################################
 
@@ -96,5 +102,23 @@ class Place < ActiveRecord::Base
     end
   rescue ActiveRecord::RecordInvalid
     return nil
+  end
+
+  private
+
+  # Private: Set the Foursquare URL
+  # TODO: Do this in a Job.
+  # TODO: Call after_create.
+  # TODO: DRY the client creation (already exists in User::PlaceImporter)
+  #
+  # Returns nothing
+  def set_foursquare_venue_url
+    client = Foursquare2::Client.new(
+      oauth_token: self.user.oauth_token,
+      api_version: Places::Application::FOURSQUARE_API_VERSION
+    )
+
+    self.foursquare_venue_url = client.venue(self.foursquare_venue_id)['shortUrl']
+    self.save
   end
 end

@@ -71,4 +71,22 @@ RSpec.describe Place, type: :model do
     end
   end
 
+  describe 'callbacks' do
+    describe '#set_foursquare_url' do
+      let(:foursquare_venue_url) { foursquare_venue['shortUrl'] }
+
+      around do |example|
+        VCR.use_cassette('place.foursquare_url') do
+          example.run
+        end
+      end
+
+      it 'sets the Foursquare URL' do
+        place = Place.from_foursquare(foursquare_venue, user)
+
+        expect(place.foursquare_venue_url).to eq(foursquare_venue_url)
+      end
+    end
+  end
+
 end
