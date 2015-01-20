@@ -2,19 +2,20 @@
 #
 # Table name: places
 #
-#  id                  :integer          not null, primary key
-#  name                :string(255)
-#  lat                 :float
-#  lng                 :float
-#  notes               :text
-#  created_at          :datetime
-#  updated_at          :datetime
-#  user_id             :integer
-#  foursquare_venue_id :string(255)
-#  address             :string(255)
-#  metadata            :hstore
-#  category_id         :integer
-#  slug                :string
+#  id                   :integer          not null, primary key
+#  name                 :string(255)
+#  lat                  :float
+#  lng                  :float
+#  notes                :text
+#  created_at           :datetime
+#  updated_at           :datetime
+#  user_id              :integer
+#  foursquare_venue_id  :string(255)
+#  address              :string(255)
+#  metadata             :hstore
+#  category_id          :integer
+#  slug                 :string
+#  foursquare_venue_url :string
 #
 # Indexes
 #

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150120114339) do
+ActiveRecord::Schema.define(version: 20150120130016) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,18 +39,19 @@ ActiveRecord::Schema.define(version: 20150120114339) do
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 
   create_table "places", force: :cascade do |t|
-    t.string   "name",                limit: 255
+    t.string   "name",                 limit: 255
     t.float    "lat"
     t.float    "lng"
     t.text     "notes"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
-    t.string   "foursquare_venue_id", limit: 255
-    t.string   "address",             limit: 255
+    t.string   "foursquare_venue_id",  limit: 255
+    t.string   "address",              limit: 255
     t.hstore   "metadata"
     t.integer  "category_id"
     t.string   "slug"
+    t.string   "foursquare_venue_url"
   end
 
   add_index "places", ["category_id"], name: "index_places_on_category_id", using: :btree
