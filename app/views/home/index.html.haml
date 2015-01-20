@@ -1,7 +1,7 @@
 #content.col-6.push-3
   #home.animated.fadeInDown
     %h5 Places
-    %h1#tagline= @tagline
+    %h1#tagline= I18n.t('home.tagline')
 
     = link_to '/auth/foursquare' do
       %button.foursquare.push-down
