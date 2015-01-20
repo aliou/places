@@ -109,18 +109,9 @@ class Place < ActiveRecord::Base
   private
 
   # Private: Set the Foursquare URL
-  # TODO: Do this in a Job.
-  # TODO: Call after_create.
-  # TODO: DRY the client creation (already exists in User::PlaceImporter)
   #
   # Returns nothing
   def set_foursquare_venue_url
-    client = Foursquare2::Client.new(
-      oauth_token: user.oauth_token,
-      api_version: Places::Application::FOURSQUARE_API_VERSION
-    )
-
-    self.foursquare_venue_url = client.venue(foursquare_venue_id)['shortUrl']
-    save
+    PlaceCreationJob.perform_later(self)
   end
 end
