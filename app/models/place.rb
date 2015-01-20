@@ -84,7 +84,7 @@ class Place < ActiveRecord::Base
   # Returns a Place or nil.
   def self.create_from_foursquare(venue, user = current_user)
     create! do |place|
-      place.user_id                = user.id
+      place.user                   = user
 
       if venue['id'].starts_with?('v')
         place.foursquare_venue_id  = venue['id'][1..-1]
