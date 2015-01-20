@@ -114,11 +114,11 @@ class Place < ActiveRecord::Base
   # Returns nothing
   def set_foursquare_venue_url
     client = Foursquare2::Client.new(
-      oauth_token: self.user.oauth_token,
+      oauth_token: user.oauth_token,
       api_version: Places::Application::FOURSQUARE_API_VERSION
     )
 
-    self.foursquare_venue_url = client.venue(self.foursquare_venue_id)['shortUrl']
-    self.save
+    self.foursquare_venue_url = client.venue(foursquare_venue_id)['shortUrl']
+    save
   end
 end
