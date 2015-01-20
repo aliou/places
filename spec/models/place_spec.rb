@@ -75,16 +75,10 @@ RSpec.describe Place, type: :model do
     describe '#set_foursquare_url' do
       let(:foursquare_venue_url) { foursquare_venue['shortUrl'] }
 
-      around do |example|
-        VCR.use_cassette('place.foursquare_url') do
-          example.run
-        end
-      end
-
-      it 'sets the Foursquare URL' do
+      it 'creates a job after the place creation' do
         place = Place.from_foursquare(foursquare_venue, user)
 
-        expect(place.foursquare_venue_url).to eq(foursquare_venue_url)
+        expect(ActiveJob::Base.queue_adapter.enqueued_jobs).to_not be_empty
       end
     end
   end
