@@ -63,6 +63,12 @@ RSpec.describe Place, type: :model do
 
       expect(place).to be_valid
     end
+
+    it 'strips the prefix from the foursquare venue id' do
+      place = Place.create_from_foursquare(foursquare_venue, user)
+
+      expect(place.foursquare_venue_id).to_not start_with('v')
+    end
   end
 
 end
