@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe PlaceImportJob do
+RSpec.describe PlaceCreationJob do
 
   around do |example|
     VCR.use_cassette('place.foursquare_url') do
