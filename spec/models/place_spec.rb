@@ -76,7 +76,7 @@ RSpec.describe Place, type: :model do
       let(:foursquare_venue_url) { foursquare_venue['shortUrl'] }
 
       it 'creates a job after the place creation' do
-        place = Place.from_foursquare(foursquare_venue, user)
+        Place.from_foursquare(foursquare_venue, user)
 
         expect(ActiveJob::Base.queue_adapter.enqueued_jobs).to_not be_empty
       end
