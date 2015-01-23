@@ -1,5 +1,5 @@
 class PlaceSerializer < ActiveModel::Serializer
-  attributes :id, :name, :lat, :lng, :address, :category
+  attributes :id, :slug, :name, :lat, :lng, :address, :category
 
   def category
     {
