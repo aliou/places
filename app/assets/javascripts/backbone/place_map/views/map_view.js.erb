@@ -15,12 +15,14 @@ PlaceMap.module('Views', function(Module, App, Backbone, Marionette, $, _) {
       this.collection = options.collection;
       L.mapbox.accessToken = "<%= ENV['MAPBOX_ACCESS_TOKEN'] %>";
 
+      _.bindAll(this, 'locateUser', 'setUserLocation', 'showCollection');
+    },
+
+    onRender: function() {
       this.map = L.mapbox.map('map', 'examples.map-i86nkdio')
                          .setView([48.85, 2.35], 13)
 
       this.map.attributionControl.addAttribution('<a href="https://foursquare.com/">Places data from Foursquare</a>')
-
-      _.bindAll(this, 'locateUser', 'setUserLocation', 'showCollection');
       this.showCollection();
     },
 
