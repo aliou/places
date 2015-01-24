@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+# Exit if any subcommand fails
+set -e
+
+# Set up gems
+bundle install
+
+# Set up frontend libs
+bower install
+
+# Set up database
+bundle exec rake db:setup
+
+# Set up development environment config
+if [ ! -f .env ]; then
+  cp .sample.env .env
+fi
