@@ -1,0 +1,19 @@
+{
+  "name": "places",
+  "version": "0.0.3",
+  "authors": [
+    "Aliou Diallo <code@aliou.me>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "backbone": "~1.1.2",
+    "marionette": "~2.2.2"
+  }
+}
