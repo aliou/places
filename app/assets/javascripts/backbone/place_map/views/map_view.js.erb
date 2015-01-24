@@ -28,18 +28,7 @@ PlaceMap.module('Views', function(Module, App, Backbone, Marionette, $, _) {
 
     showCollection: function() {
       this.collection.forEach(function(place) {
-        L.mapbox.featureLayer({
-          type:       'Feature',
-          geometry:   {
-            type:        'Point',
-            coordinates: [ place.get('lng'), place.get('lat') ]
-          },
-          properties: {
-            title:           place.get('name'),
-            description:     place.get('address'),
-            'marker-size':   'large',
-          }
-        }).addTo(this.map);
+        place.toFeatureLayer().addTo(this.map);
       }, this)
     },
 
