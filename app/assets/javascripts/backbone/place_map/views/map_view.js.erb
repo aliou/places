@@ -1,9 +1,14 @@
 PlaceMap.module('Views', function(Module, App, Backbone, Marionette, $, _) {
   Module.MapView = Backbone.Marionette.ItemView.extend({
 
+    el: '#map',
+    template: false,
+    ui: {
+      'locateMe': '#find-me',
+    },
     events: {
-      'click #find-me': 'locateUser',
-      'locationfound':  'setUserLocation'
+      'click @ui.locateMe': 'locateUser',
+      'locationfound':      'setUserLocation'
     },
 
     initialize: function(options) {
