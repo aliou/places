@@ -4,5 +4,6 @@ FactoryGirl.define do
     lat                 { Faker::Address.latitude }
     lng                 { Faker::Address.longitude }
     foursquare_venue_id { Faker::Internet.password }
+    category            { FactoryGirl.create(:category) }
   end
 end
