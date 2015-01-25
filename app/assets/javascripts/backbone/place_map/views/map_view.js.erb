@@ -3,12 +3,13 @@ PlaceMap.module('Views', function(Module, App, Backbone, Marionette, $, _) {
 
     el: '#map',
     template: false,
+
     ui: {
       'locateMe': '#find-me',
     },
+
     events: {
       'click @ui.locateMe': 'locateUser',
-      'locationfound':      'setUserLocation'
     },
 
     initialize: function(options) {
@@ -23,6 +24,8 @@ PlaceMap.module('Views', function(Module, App, Backbone, Marionette, $, _) {
                          .setView([48.85, 2.35], 13)
 
       this.map.attributionControl.addAttribution('<a href="https://foursquare.com/">Places data from Foursquare</a>')
+
+      // TODO: Async fetch the collection and then show it.
       this.showCollection();
     },
 
