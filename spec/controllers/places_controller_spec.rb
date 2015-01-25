@@ -11,6 +11,14 @@ RSpec.describe PlacesController do
   it { should route(:delete, '/places/1')     .to(action: :destroy, id: 1) }
   it { should route(:get,    '/places/import').to(action: :import) }
 
+  context 'not authenticated' do
+    it 'redirect to the root_path' do
+      get :index
+
+      expect(response).to redirect_to(root_path)
+    end
+  end
+
   describe 'GET .index' do
     let(:current_user) { FactoryGirl.create(:user_with_places) }
 
