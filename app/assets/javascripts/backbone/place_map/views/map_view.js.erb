@@ -25,11 +25,10 @@ PlaceMap.module('Views', function(Module, App, Backbone, Marionette, $, _) {
 
       this.map.attributionControl.addAttribution('<a href="https://foursquare.com/">Places data from Foursquare</a>')
 
-      // TODO: Async fetch the collection and then show it.
-      this.showCollection();
+      this.collection.fetch({ success: this.showCollection });
     },
 
-    showCollection: function() {
+    showCollection: function(collection, response, options) {
       this.collection.forEach(function(place) {
         place.toFeatureLayer().addTo(this.map);
       }, this)

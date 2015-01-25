@@ -5,7 +5,7 @@ PlaceMap.addRegions({
 });
 
 PlaceMap.addInitializer(function(options) {
-  var collection = new PlaceMap.Models.PlacesCollection(options.models, {});
+  var collection = new PlaceMap.Models.PlacesCollection();
   var view = new PlaceMap.Views.MapView({ collection: collection });
 
   PlaceMap.container.show(view);
