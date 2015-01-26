@@ -7,8 +7,10 @@ class PlacesController < ApplicationController
     @places = current_user.places
 
     respond_to do |format|
-      format.html { }
-      format.json { render json: @places, root: false, each_serializer: PlaceSerializer }
+      format.html
+      format.json do
+        render json: @places, root: false, each_serializer: PlaceSerializer
+      end
     end
   end
 

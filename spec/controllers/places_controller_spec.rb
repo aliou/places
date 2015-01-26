@@ -39,7 +39,7 @@ RSpec.describe PlacesController do
       it 'seriazes the places' do
         places = ActiveModel::ArraySerializer.
           new(current_user.places, each_serializer: PlaceSerializer).to_json
-        get :index, { format: :json }, { user_id: current_user.id }
+        get :index, { format: :json }, user_id: current_user.id
 
         expect(response.body).to eq(places)
       end
