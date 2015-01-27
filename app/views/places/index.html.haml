@@ -1,52 +1,13 @@
-- content_for :head do
-  = stylesheet_link_tag '//api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.css'
+= render 'mapbox'
 
 #map-wrapper
   #map
     .controls
-      %a{ href: '#', id: 'find-me' }
+      %a{ href: 'javascript:void(0)', id: 'find-me' }
         %span.icon-location
 
 - content_for :scripts do
-  = javascript_include_tag '//api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.js'
-
-  :coffeescript
-    L.mapbox.accessToken = "#{ENV['MAPBOX_ACCESS_TOKEN']}"
-    map = L.mapbox.map('map', 'examples.map-i86nkdio').setView([48.85, 2.35], 13)
-    map.attributionControl
-       .addAttribution('<a href="https://foursquare.com/">Places data from Foursquare</a>')
-
-    map.on 'locationfound', (event) ->
-
-      map.setView([event.latitude, event.longitude], 13)
-
-      L.mapbox.featureLayer({
-        type:       'Feature',
-        geometry:   {
-          type:        'Point',
-          coordinates: [event.longitude, event.latitude]
-        },
-        properties: {
-          'marker-symbol': 'star'
-          'marker-color': '#BE9A6B',
-        }
-      }).addTo(map)
-
-    $('#find-me').click (event) ->
-      event.preventDefault()
-      map.locate() if navigator.geolocation
-
-    raw_data = #{ @models.to_json }
-    raw_data.forEach (place) ->
-      L.mapbox.featureLayer({
-        type:       'Feature',
-        geometry:   {
-          type:        'Point',
-          coordinates: [ place.lng, place.lat ]
-        },
-        properties: {
-          title:           place.name,
-          description:     place.address,
-          'marker-size':   'large',
-        }
-      }).addTo(map)
+  :javascript
+      $(document).ready(function() {
+        PlaceMap.start()
+      });

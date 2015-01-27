@@ -1,11 +1,12 @@
-// Bower packages.
+// Libs
 //= require jquery
 //= require underscore
 //= require backbone
+//= require backbone.wreqr
 //= require marionette
 //
 // Behaviors
 //= require_tree ./behaviors
 //
-// Backbone
-// require backbone/places
+// Backbone apps
+//= require backbone/place_map/manifest

@@ -1,0 +1,60 @@
+PlaceMap.module('Views', function(Module, App, Backbone, Marionette, $, _) {
+  Module.MapView = Backbone.Marionette.ItemView.extend({
+
+    el: '#map',
+    template: false,
+
+    ui: {
+      'locateMe': '#find-me',
+    },
+
+    events: {
+      'click @ui.locateMe': 'locateUser',
+    },
+
+    initialize: function(options) {
+      this.collection = options.collection;
+      L.mapbox.accessToken = "<%= ENV['MAPBOX_ACCESS_TOKEN'] %>";
+
+      _.bindAll(this, 'locateUser', 'setUserLocation', 'showCollection');
+    },
+
+    onRender: function() {
+      this.map = L.mapbox.map('map', 'examples.map-i86nkdio')
+                         .setView([48.85, 2.35], 13)
+
+      this.map.attributionControl.addAttribution('<a href="https://foursquare.com/">Places data from Foursquare</a>')
+
+      this.collection.fetch({ success: this.showCollection });
+    },
+
+    showCollection: function(collection, response, options) {
+      this.collection.forEach(function(place) {
+        place.toFeatureLayer().addTo(this.map);
+      }, this)
+    },
+
+    locateUser: function() {
+      if (navigator.geolocation) {
+        this.map.locate()
+      }
+    },
+
+    setUserLocation: function(event) {
+      this.map.setView([event.latitude, event.longitude], 13)
+
+      L.mapbox.featureLayer({
+        type:       'Feature',
+        geometry:   {
+          type:        'Point',
+          coordinates: [event.longitude, event.latitude]
+        },
+        properties: {
+          'marker-color': '#BE9A6B',
+          'marker-symbol': 'star',
+        }
+      }).addTo(this.map)
+    },
+
+  });
+});

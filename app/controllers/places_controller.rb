@@ -5,8 +5,13 @@ class PlacesController < ApplicationController
   # TODO: Order by closest around you.
   def index
     @places = current_user.places
-    @models = ActiveModel::ArraySerializer.new(@places,
-                                               each_serializer: PlaceSerializer)
+
+    respond_to do |format|
+      format.html
+      format.json do
+        render json: @places, root: false, each_serializer: PlaceSerializer
+      end
+    end
   end
 
   # GET /places/new
