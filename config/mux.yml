@@ -1,0 +1,12 @@
+name: places
+root: ~/src/github/aliou/places/
+
+pre: launch postgres
+tmux_options: -2
+
+windows:
+  - shell: clear
+  - editor: vim
+  - console: ./bin/rails console
+  - logs: tail -f log/development.log
+  - test: ./bin/rspec spec/
