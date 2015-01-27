@@ -3,7 +3,11 @@ class PlacesController < ApplicationController
   # GET /places
   # TODO: Order by closest around you.
   def index
-    @places = current_user.places
+    if params[:origin]
+      @places = current_user.places.within(10, origin: params[:origin])
+    else
+      @places = current_user.places
+    end
 
     respond_to do |format|
       format.html
