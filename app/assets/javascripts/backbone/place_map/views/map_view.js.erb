@@ -14,6 +14,8 @@ PlaceMap.module('Views', function(Module, App, Backbone, Marionette, $, _) {
 
     initialize: function(options) {
       this.collection = options.collection;
+      this.config = { center: [48.85, 2.35], zoom: 13 };
+
       L.mapbox.accessToken = "<%= ENV['MAPBOX_PUBLIC_TOKEN'] %>";
 
       _.bindAll(this, 'locateUser', 'setUserLocation', 'showCollection');
@@ -21,7 +23,7 @@ PlaceMap.module('Views', function(Module, App, Backbone, Marionette, $, _) {
 
     onRender: function() {
       this.map = L.mapbox.map('map', 'examples.map-i86nkdio')
-                         .setView([48.85, 2.35], 13)
+                         .setView(this.config.center, this.config.zoom)
 
       this.map.attributionControl.addAttribution('<a href="https://foursquare.com/">Places data from Foursquare</a>')
 
