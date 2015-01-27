@@ -84,7 +84,7 @@ gem 'foursquare2'
 
 # Locations
 gem 'geokit'
-gem 'geokit-rails'
+gem 'geokit-rails', github: 'geokit/geokit-rails'
 
 # Pretty URLs
 gem 'friendly_id'
