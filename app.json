@@ -25,6 +25,10 @@
     "MAPBOX_PUBLIC_TOKEN": {
       "description": "Your Mapbox Public token.",
       "required": true
+    },
+    "MAPBOX_SECRET_TOKEN": {
+      "description": "Your Mapbox Secret token.",
+      "required": true
     }
   }
 }
