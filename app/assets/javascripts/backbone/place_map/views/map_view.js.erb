@@ -14,7 +14,7 @@ PlaceMap.module('Views', function(Module, App, Backbone, Marionette, $, _) {
 
     initialize: function(options) {
       this.collection = options.collection;
-      L.mapbox.accessToken = "<%= ENV['MAPBOX_ACCESS_TOKEN'] %>";
+      L.mapbox.accessToken = "<%= ENV['MAPBOX_PUBLIC_TOKEN'] %>";
 
       _.bindAll(this, 'locateUser', 'setUserLocation', 'showCollection');
     },
