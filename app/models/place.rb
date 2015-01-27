@@ -73,6 +73,9 @@ class Place < ActiveRecord::Base
 
   # Public: Finds or creates a new Place from a Foursquare venue.
   #
+  # venue - The Foursquare Venue to find or create as a Place.
+  # user  - The user to attribute the Place to.
+  #
   # Returns a Place or nil.
   def self.from_foursquare(venue, user = current_user)
     venue_id = venue['id'].starts_with?('v') ? venue['id'][1..-1] : venue['id']
@@ -82,6 +85,9 @@ class Place < ActiveRecord::Base
   end
 
   # Public: Creates a new Place from a Foursquare venue.
+  #
+  # venue - The Foursquare Venue to find or create as a Place.
+  # user  - The user to attribute the Place to.
   #
   # Returns a Place or nil.
   def self.create_from_foursquare(venue, user = current_user)
