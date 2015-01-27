@@ -1,7 +1,6 @@
 class PlacesController < ApplicationController
 
   # GET /places
-  # TODO: Return everything as JSON.
   # TODO: Order by closest around you.
   def index
     @places = current_user.places
