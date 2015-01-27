@@ -83,7 +83,8 @@ gem 'omniauth-foursquare'
 gem 'foursquare2'
 
 # Locations
-gem 'geokit-rails', '~> 2.0.1'
+gem 'geokit'
+gem 'geokit-rails'
 
 # Pretty URLs
 gem 'friendly_id'
