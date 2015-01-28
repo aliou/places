@@ -6,7 +6,7 @@ class PlaceSerializer < ActiveModel::Serializer
   # Returns a Hash.
   def category
     {
-      id:       object.category.id
+      id:       object.category.id,
       name:     object.category.name,
       icon_url: object.category.icon_url
     }
