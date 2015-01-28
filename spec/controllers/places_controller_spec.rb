@@ -22,13 +22,6 @@ RSpec.describe PlacesController do
   describe 'GET .index' do
     let(:current_user) { FactoryGirl.create(:user_with_places) }
 
-    it 'assigns the places' do
-      places = current_user.places
-      get :index, nil, user_id: current_user.id
-
-      expect(assigns(:places)).to eq(places)
-    end
-
     it 'renders the index template' do
       get :index, nil, user_id: current_user.id
 
