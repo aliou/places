@@ -1,0 +1,14 @@
+{
+  "app/assets/javascripts/backbone/place_map/application/map.js": {
+    "command": "japplication"
+  },
+  "app/assets/javascripts/backbone/place_map/models/*.js": {
+    "command": "jmodel"
+  },
+  "app/assets/javascripts/backbone/place_map/models/*_collection.js": {
+    "command": "jcollection"
+  },
+  "app/assets/javascripts/backbone/place_map/views/*.js": {
+    "command": "jview"
+  }
+}
