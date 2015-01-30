@@ -13,6 +13,13 @@ RSpec.describe ApplicationController do
 
         expect(response).to redirect_to(root_path)
       end
+
+      it 'shows an error flash message' do
+        get :index
+
+        expect(flash[:error]).to be_present
+        expect(flash[:error]).to eq(I18n.t('application.authenticate.error'))
+      end
     end
   end
 end

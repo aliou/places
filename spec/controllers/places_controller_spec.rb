@@ -119,6 +119,13 @@ RSpec.describe PlacesController do
 
         expect(response).to redirect_to(place_path(place))
       end
+
+      it 'shows a successful flash message' do
+        post :create, place_params, { user_id: current_user.id }
+
+        expect(flash[:success]).to be_present
+        expect(flash[:success]).to eq(I18n.t('place.create.flash.success'))
+      end
     end
 
     context 'without valid attributes' do
@@ -154,6 +161,13 @@ RSpec.describe PlacesController do
         put :update, updated_place_params(place), { user_id: current_user.id }
 
         expect(response).to redirect_to(place_path(place))
+      end
+
+      it 'shows a successful flash message' do
+        put :update, updated_place_params(place), { user_id: current_user.id }
+
+        expect(flash[:success]).to be_present
+        expect(flash[:success]).to eq(I18n.t('place.update.flash.success'))
       end
     end
 
@@ -196,6 +210,13 @@ RSpec.describe PlacesController do
 
       expect(response).to redirect_to(places_path)
     end
+
+    it 'shows a notice flash message' do
+      delete :destroy, { id: place.id }, { user_id: current_user.id }
+
+      expect(flash[:notice]).to be_present
+      expect(flash[:notice]).to eq(I18n.t('place.destroy.flash.notice'))
+    end
   end
 
   describe 'GET .import' do
@@ -211,6 +232,13 @@ RSpec.describe PlacesController do
       get :import, nil, { user_id: current_user.id }
 
       expect(response).to redirect_to(places_path)
+    end
+
+    it 'shows a notice flash message' do
+      get :import, nil, { user_id: current_user.id }
+
+      expect(flash[:notice]).to be_present
+      expect(flash[:notice]).to eq(I18n.t('place.import.flash.notice'))
     end
   end
 end
