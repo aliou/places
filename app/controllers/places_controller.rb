@@ -1,15 +1,13 @@
 class PlacesController < ApplicationController
 
   # GET /places
-  # TODO: Return everything as JSON.
   # TODO: Order by closest around you.
   def index
-    @places = current_user.places
-
     respond_to do |format|
       format.html
       format.json do
-        render json: @places, root: false, each_serializer: PlaceSerializer
+        render json: filtered_places,
+          root: false, each_serializer: PlaceSerializer
       end
     end
   end
@@ -84,5 +82,13 @@ class PlacesController < ApplicationController
   # Returns a Hash with the permitted parameters.
   def place_params
     params.require(:place).permit(:name, :lat, :lng, :foursquare_venue_id)
+  end
+
+  def filtered_places
+    if params[:origin]
+      current_user.places.within(10, origin: params[:origin])
+    else
+      current_user.places
+    end
   end
 end

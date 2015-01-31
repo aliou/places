@@ -14,18 +14,23 @@ PlaceMap.module('Views', function(Module, App, Backbone, Marionette, $, _) {
 
     initialize: function(options) {
       this.collection = options.collection;
-      L.mapbox.accessToken = "<%= ENV['MAPBOX_ACCESS_TOKEN'] %>";
+      this.config = { center: [48.85, 2.35], zoom: 13 };
+
+      L.mapbox.accessToken = "<%= ENV['MAPBOX_PUBLIC_TOKEN'] %>";
 
       _.bindAll(this, 'locateUser', 'setUserLocation', 'showCollection');
     },
 
     onRender: function() {
       this.map = L.mapbox.map('map', 'examples.map-i86nkdio')
-                         .setView([48.8530, 2.3498], 13)
+                         .setView(this.config.center, this.config.zoom)
 
       this.map.attributionControl.addAttribution('<a href="https://foursquare.com/">Places data from Foursquare</a>')
 
-      this.collection.fetch({ success: this.showCollection });
+      this.collection.fetch({
+        data:    $.param({ origin: this.config.center, zoom: this.config.zoom }),
+        success: this.showCollection
+      });
     },
 
     showCollection: function(collection, response, options) {

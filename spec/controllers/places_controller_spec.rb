@@ -22,13 +22,6 @@ RSpec.describe PlacesController do
   describe 'GET .index' do
     let(:current_user) { FactoryGirl.create(:user_with_places) }
 
-    it 'assigns the places' do
-      places = current_user.places
-      get :index, nil, user_id: current_user.id
-
-      expect(assigns(:places)).to eq(places)
-    end
-
     it 'renders the index template' do
       get :index, nil, user_id: current_user.id
 
@@ -42,6 +35,28 @@ RSpec.describe PlacesController do
         get :index, { format: :json }, user_id: current_user.id
 
         expect(response.body).to eq(places)
+      end
+    end
+
+    context 'with an origin point' do
+      let(:origin) { [48.8530, 2.3498] }
+
+      before do
+        @places = []
+        @places << FactoryGirl.create(:place, user: current_user,
+                                              lat: 48.8530, lng: 2.3498)
+        @places << FactoryGirl.create(:place, user: current_user,
+                                              lat: 48.8530, lng: 2.3498)
+        @places << FactoryGirl.create(:place, user: current_user,
+                                              lat: 48.8530, lng: 2.3498)
+      end
+
+      # TODO: This could be way better.
+      xit 'assigns the places within 10 kms of the origin point' do
+        get :index, { format: :json, origin: origin }, user_id: current_user.id
+
+        response_ids = response_body.map { |p| p["id"] }
+        expect(response_ids).to match_array(@places.map(&:id))
       end
     end
   end
@@ -192,6 +207,11 @@ RSpec.describe PlacesController do
         expect(response).to render_template('edit')
       end
     end
+
+    def updated_place_params(place)
+      { id:    place.id,
+        place: place.attributes.merge(name: place.name + ' updated') }
+    end
   end
 
   describe 'DELETE .destroy' do
@@ -243,7 +263,6 @@ RSpec.describe PlacesController do
   end
 end
 
-def updated_place_params(place)
-  { id:    place.id,
-    place: place.attributes.merge(name: place.name + ' updated') }
+def response_body
+  JSON.parse(response.body)
 end
