@@ -27,6 +27,9 @@ PlaceMap.module('Views', function(Module, App, Backbone, Marionette, $, _) {
 
       this.map.attributionControl.addAttribution('<a href="https://foursquare.com/">Places data from Foursquare</a>')
 
+      // Setting events on the leaflet map object.
+      this.map.on('locationfound', this.setUserLocation);
+
       this.collection.fetch({
         data:    $.param({ origin: this.config.center, zoom: this.config.zoom }),
         success: this.showCollection
