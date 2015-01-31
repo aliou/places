@@ -25,8 +25,6 @@ PlaceMap.module('Views', function(Module, App, Backbone, Marionette, $, _) {
       this.map = L.mapbox.map('map', 'examples.map-i86nkdio')
                          .setView(this.config.center, this.config.zoom)
 
-      this.map.attributionControl.addAttribution('<a href="https://foursquare.com/">Places data from Foursquare</a>')
-
       // Set events on the leaflet map object.
       this.map.on('locationfound', this.setUserLocation);
       this.map.on('locationerror', this.updateCollection);
