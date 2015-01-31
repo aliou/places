@@ -85,6 +85,7 @@ class PlacesController < ApplicationController
   end
 
   # Private: Filter the places by their distance to the origin, if given.
+  # TODO: Find relation between Map zoom and Place distance.
   #
   # Returns an Array of Places.
   def filtered_places
