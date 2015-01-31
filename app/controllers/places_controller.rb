@@ -84,6 +84,9 @@ class PlacesController < ApplicationController
     params.require(:place).permit(:name, :lat, :lng, :foursquare_venue_id)
   end
 
+  # Private: Filter the places by their distance to the origin, if given.
+  #
+  # Returns an Array of Places.
   def filtered_places
     if params[:origin]
       current_user.places.within(10, origin: params[:origin])

@@ -52,7 +52,7 @@ RSpec.describe PlacesController do
       end
 
       # TODO: This could be way better.
-      xit 'assigns the places within 10 kms of the origin point' do
+      it 'assigns the places within 10 kms of the origin point' do
         get :index, { format: :json, origin: origin }, user_id: current_user.id
 
         response_ids = response_body.map { |p| p["id"] }
