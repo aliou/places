@@ -29,6 +29,8 @@ PlaceMap.module('Views', function(Module, App, Backbone, Marionette, $, _) {
 
       // Set events on the leaflet map object.
       this.map.on('locationfound', this.setUserLocation);
+      this.map.on('locationerror', this.updateCollection);
+      this.map.on('moveend', this.updateCollection);
 
       // Initial collection fetch on the user location.
       this.locateUser()
