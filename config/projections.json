@@ -8,7 +8,7 @@
   "app/assets/javascripts/backbone/place_map/models/*_collection.js": {
     "command": "jcollection"
   },
-  "app/assets/javascripts/backbone/place_map/views/*.js": {
+  "app/assets/javascripts/backbone/place_map/views/*": {
     "command": "jview"
   }
 }

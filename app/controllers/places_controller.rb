@@ -1,7 +1,7 @@
 class PlacesController < ApplicationController
+  include MapboxHelper
 
   # GET /places
-  # TODO: Order by closest around you.
   def index
     respond_to do |format|
       format.html
@@ -84,12 +84,15 @@ class PlacesController < ApplicationController
     params.require(:place).permit(:name, :lat, :lng, :foursquare_venue_id)
   end
 
-  # Private: Filter the places by their distance to the origin, if given.
+  # Private: Filter the places by their distance to the origin and the map zoom,
+  # if given.
   #
   # Returns an Array of Places.
   def filtered_places
-    if params[:origin]
-      current_user.places.within(10, origin: params[:origin])
+    if params[:origin] and params[:zoom]
+      radius = zoom_to_radius(params[:zoom].to_f, params[:origin][0].to_f)
+
+      current_user.places.within(radius, origin: params[:origin])
     else
       current_user.places
     end

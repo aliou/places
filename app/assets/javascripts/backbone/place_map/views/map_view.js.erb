@@ -18,14 +18,30 @@ PlaceMap.module('Views', function(Module, App, Backbone, Marionette, $, _) {
 
       L.mapbox.accessToken = "<%= ENV['MAPBOX_PUBLIC_TOKEN'] %>";
 
-      _.bindAll(this, 'locateUser', 'setUserLocation', 'showCollection');
+      _.bindAll(this, 'locateUser', 'setUserLocation',
+                'showCollection', 'updateCollection');
     },
 
     onRender: function() {
       this.map = L.mapbox.map('map', 'examples.map-i86nkdio')
                          .setView(this.config.center, this.config.zoom)
 
-      this.map.attributionControl.addAttribution('<a href="https://foursquare.com/">Places data from Foursquare</a>')
+      // Set events on the leaflet map object.
+      this.map.on('locationfound', this.setUserLocation);
+      this.map.on('locationerror', this.updateCollection);
+      this.map.on('moveend',       this.updateCollection);
+
+      // Initial collection fetch on the user location.
+      this.locateUser()
+    },
+
+    updateCollection: function(event) {
+      if (event) {
+        this.config = {
+          center: [this.map.getCenter().lat, this.map.getCenter().lng],
+          zoom:   this.map.getZoom()
+        };
+      }
 
       this.collection.fetch({
         data:    $.param({ origin: this.config.center, zoom: this.config.zoom }),
@@ -59,6 +75,7 @@ PlaceMap.module('Views', function(Module, App, Backbone, Marionette, $, _) {
           'marker-symbol': 'star',
         }
       }).addTo(this.map)
+      this.updateCollection(event);
     },
 
   });

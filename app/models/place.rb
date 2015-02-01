@@ -90,18 +90,20 @@ class Place < ActiveRecord::Base
   #
   # Returns a Place or nil.
   def self.create_from_foursquare(venue, user = current_user)
+    venue_data = venue['venue']
     create! do |place|
-      place.user                = user
+      place.user = user
 
       place.foursquare_venue_id = stripped_venue_id(venue['id'])
 
-      place.name                = venue['venue']['name']
-      place.lat                 = venue['venue']['location']['lat']
-      place.lng                 = venue['venue']['location']['lng']
+      place.name    = venue_data['name']
+      place.lat     = venue_data['location']['lat']
+      place.lng     = venue_data['location']['lng']
+      place.address = venue_data['location']['formattedAddress'].join(', ')
 
-      place.category            = venue_primary_category(venue)
+      place.category = venue_primary_category(venue)
 
-      place.foursquare_data     = venue.to_json
+      place.foursquare_data = venue.to_json
     end
   rescue ActiveRecord::RecordInvalid
     return nil
