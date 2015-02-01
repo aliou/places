@@ -2,6 +2,9 @@
   "app/assets/javascripts/backbone/place_map/application/map.js": {
     "command": "japplication"
   },
+  "app/assets/javascripts/backbone/place_map/router/map_router.js": {
+    "command": "jrouter"
+  },
   "app/assets/javascripts/backbone/place_map/models/*.js": {
     "command": "jmodel"
   },

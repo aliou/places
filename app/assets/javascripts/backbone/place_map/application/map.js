@@ -5,6 +5,8 @@ PlaceMap.addRegions({
 });
 
 PlaceMap.addInitializer(function(options) {
+  var router = new PlaceMap.Router();
+
   var view = new PlaceMap.Views.MapView({
     collection: new PlaceMap.Models.PlacesCollection()
   });

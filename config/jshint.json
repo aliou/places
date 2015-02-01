@@ -24,7 +24,8 @@
 
     "angular",
     "inject",
-    "module"
+    "module",
+    "Backbone"
   ],
   "quotmark": true,
   "trailing": true,
