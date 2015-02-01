@@ -13,5 +13,5 @@ PlaceMap.addInitializer(function(options) {
 });
 
 PlaceMap.on('start', function(options) {
-  Backbone.history.start();
+  Backbone.history.start({ pushState: true });
 });
