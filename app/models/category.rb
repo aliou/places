@@ -8,9 +8,15 @@
 #  created_at :datetime
 #  updated_at :datetime
 #  metadata   :hstore
+#  slug       :string
+#
+# Indexes
+#
+#  index_categories_on_slug  (slug) UNIQUE
 #
 
 class Category < ActiveRecord::Base
+  extend FriendlyId
 
   ICON_TYPE = 'bg_64'
 
@@ -22,6 +28,7 @@ class Category < ActiveRecord::Base
   ##############################################################################
   # Associations                                                               #
   ##############################################################################
+
   has_many :places
 
   ##############################################################################
@@ -35,6 +42,12 @@ class Category < ActiveRecord::Base
   ##############################################################################
 
   before_create :set_icon_url
+
+  ##############################################################################
+  # Macros                                                                     #
+  ##############################################################################
+
+  friendly_id :name, use: [:slugged, :finders]
 
   ##############################################################################
   # Class Methods                                                              #
