@@ -92,9 +92,10 @@ class PlacesController < ApplicationController
     if params[:origin] and params[:zoom]
       radius = zoom_to_radius(params[:zoom].to_f, params[:origin][0].to_f)
 
-      current_user.places.within(radius, origin: params[:origin])
+      current_user.places.includes(:category)
+        .within(radius, origin: params[:origin])
     else
-      current_user.places
+      current_user.places.includes(:category)
     end
   end
 end
