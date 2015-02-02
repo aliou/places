@@ -40,7 +40,6 @@ RSpec.describe Place, type: :model do
         expect { Place.from_foursquare(foursquare_venue, user) }.
           to_not change { Place.count }
       end
-
     end
   end
 
@@ -68,6 +67,46 @@ RSpec.describe Place, type: :model do
       place = Place.create_from_foursquare(foursquare_venue, user)
 
       expect(place.foursquare_venue_id).to_not start_with('v')
+    end
+  end
+
+  describe '#places_around' do
+    let(:user) { FactoryGirl.create(:user) }
+    subject    { FactoryGirl.build_stubbed(:place) }
+
+    it "is empty when there's no Place around" do
+      expect(subject.places_around).to be_empty
+    end
+
+    context 'with different zoom levels' do
+      subject { FactoryGirl.create(:place, :notre_dame) }
+
+      let(:hotel_de_ville) { FactoryGirl.create(:place, :hotel_de_ville) }
+      let(:tour_eiffel) { FactoryGirl.create(:place, :tour_eiffel) }
+      let(:louvre) { FactoryGirl.create(:place, :louvre) }
+
+      before do
+        user.places += [hotel_de_ville, tour_eiffel, louvre]
+      end
+
+      it 'returns the Places in the same neighborhood' do
+        expect(subject.places_around).to match_array([hotel_de_ville])
+      end
+
+      it 'returns the Places in the same town' do
+        expect(subject.places_around(MapboxHelper::TOWN_LEVEL_ZOOM)).
+          to match_array([hotel_de_ville, tour_eiffel, louvre])
+      end
+
+      it 'returns the Places in the same country' do
+        expect(subject.places_around(MapboxHelper::COUNTRY_LEVEL_ZOOM)).
+          to match_array([hotel_de_ville, tour_eiffel, louvre])
+      end
+
+      it 'returns the Places in world' do
+        expect(subject.places_around(MapboxHelper::WORLD_LEVEL_ZOOM)).
+          to match_array(Place.all - [subject])
+      end
     end
   end
 

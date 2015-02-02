@@ -27,6 +27,7 @@
 class Place < ActiveRecord::Base
   extend FriendlyId
   extend PlacesHelper
+  include MapboxHelper
 
   ##############################################################################
   #                                                                            #
@@ -108,6 +109,17 @@ class Place < ActiveRecord::Base
     end
   rescue ActiveRecord::RecordInvalid
     return nil
+  end
+
+  # Public: Gets the Places in the same zoom level radius as self.
+  # TODO: Might be better to also return self.
+  #
+  # zoom_level - The zoom level to search the place in.
+  #              (default: 16, Neighborhood)
+  #
+  # Returns an Araay of Places.
+  def places_around(zoom_level = MapboxHelper::NEIGHBORHOOD_LEVEL_ZOOM)
+    Place.within(zoom_to_radius(zoom_level, lat), origin: self) - [self]
   end
 
   private
