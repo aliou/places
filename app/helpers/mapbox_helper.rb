@@ -1,5 +1,12 @@
 # Public: Methods to help dealing with MapBox values.
 module MapboxHelper
+
+  # Zoom levels.
+  WORLD_LEVEL_ZOOM        = 0
+  COUNTRY_LEVEL_ZOOM      = 9
+  TOWN_LEVEL_ZOOM         = 13
+  NEIGHBORHOOD_LEVEL_ZOOM = 16
+
   # The earth equatorial circumference in kms.
   EARTH_CIRCUMFERENCE = 40_075.017
 
