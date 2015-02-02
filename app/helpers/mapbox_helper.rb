@@ -1,6 +1,5 @@
 # Public: Methods to help dealing with MapBox values.
 module MapboxHelper
-
   # Zoom levels.
   WORLD_LEVEL_ZOOM        = 0
   COUNTRY_LEVEL_ZOOM      = 9

@@ -4,14 +4,10 @@ PlaceMap.addRegions({
   container: '#map-wrapper'
 });
 
+// TODO: Find a better way to save the objects in PlaceMap, so we can access
+// them later. (Ex. access the router somewhere else)
 PlaceMap.addInitializer(function(options) {
-  var router = new PlaceMap.Router();
-
-  var view = new PlaceMap.Views.MapView({
-    collection: new PlaceMap.Models.PlacesCollection()
-  });
-
-  PlaceMap.container.show(view);
+  PlaceMap.router = new PlaceMap.Router();
 });
 
 PlaceMap.on('start', function(options) {
