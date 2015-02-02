@@ -76,7 +76,7 @@ class Place < ActiveRecord::Base
   # user  - The user to attribute the Place to.
   #
   # Returns a Place or nil.
-  def self.from_foursquare(venue, user = current_user)
+  def self.from_foursquare(venue, user)
     venue_id = venue['id'].starts_with?('v') ? venue['id'][1..-1] : venue['id']
 
     Place.where(foursquare_venue_id: venue_id).first ||
@@ -89,7 +89,7 @@ class Place < ActiveRecord::Base
   # user  - The user to attribute the Place to.
   #
   # Returns a Place or nil.
-  def self.create_from_foursquare(venue, user = current_user)
+  def self.create_from_foursquare(venue, user)
     venue_data = venue['venue']
     create! do |place|
       place.user = user
