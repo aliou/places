@@ -19,7 +19,8 @@ PlaceMap.module('Views', function(Module, App, Backbone, Marionette, $, _) {
       L.mapbox.accessToken = "<%= ENV['MAPBOX_PUBLIC_TOKEN'] %>";
 
       _.bindAll(this, 'locateUser', 'setUserLocation',
-                'showCollection', 'updateCollection');
+                'showCollection', 'updateCollection',
+                'featureClick');
     },
 
     onRender: function() {
@@ -51,7 +52,9 @@ PlaceMap.module('Views', function(Module, App, Backbone, Marionette, $, _) {
 
     showCollection: function(collection, response, options) {
       this.collection.forEach(function(place) {
-        place.toFeatureLayer().addTo(this.map);
+        var layer = place.toFeatureLayer();
+        layer.on('click', this.featureClick);
+        layer.addTo(this.map);
       }, this)
     },
 
@@ -77,6 +80,11 @@ PlaceMap.module('Views', function(Module, App, Backbone, Marionette, $, _) {
         }
       }).addTo(this.map)
       this.updateCollection(event);
+    },
+
+    featureClick: function(event) {
+      var place = this.collection.get(event.layer.feature.properties.place_id);
+      PlaceMap.router.navigate(place.url(), { trigger: true });
     },
 
   });
