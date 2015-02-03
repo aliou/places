@@ -4,12 +4,15 @@ PlaceMap.Router = Backbone.Router.extend({
     'places/:place_id': 'show'
   },
 
-  index: function() {
-    var view = new PlaceMap.Views.MapView({
+  initialize: function() {
+    this.view = new PlaceMap.Views.MapView({
       collection: new PlaceMap.Models.PlacesCollection()
     });
+    _.bindAll(this, 'index', 'show');
+  },
 
-    PlaceMap.container.show(view);
+  index: function() {
+    PlaceMap.container.show(this.view);
   },
 
   // TODO: Fetch model and the places around it.
