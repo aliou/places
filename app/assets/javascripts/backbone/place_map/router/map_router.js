@@ -1,6 +1,6 @@
 PlaceMap.Router = Backbone.Router.extend({
   routes: {
-    'places':           'index',
+    'places(/)':        'index',
     'places/:place_id': 'show'
   },
 
