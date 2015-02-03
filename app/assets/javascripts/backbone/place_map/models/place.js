@@ -1,6 +1,11 @@
 PlaceMap.module('Models', function(Module, App, Backbone, Marionette, $, _) {
 
   Module.Place = Backbone.Model.extend({
+
+    url: function() {
+      return this.collection.url + this.get('slug');
+    },
+
     toFeatureLayer: function() {
       return L.mapbox.featureLayer({
         type:       'Feature',
