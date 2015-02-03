@@ -14,8 +14,10 @@ PlaceMap.module('Models', function(Module, App, Backbone, Marionette, $, _) {
           coordinates: [ this.get('lng'), this.get('lat') ]
         },
         properties: {
-          title:           this.get('name'),
-          description:     this.get('address'),
+          title:         this.get('name'),
+          description:   this.get('address'),
+          place_id:      this.get('id'),
+          'marker-size': 'large',
         }
       })
     }
