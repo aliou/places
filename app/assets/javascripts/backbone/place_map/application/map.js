@@ -1,11 +1,11 @@
+// TODO: Namespace application.
 var PlaceMap = new Backbone.Marionette.Application();
 
 PlaceMap.addRegions({
   container: '#map-wrapper'
 });
 
-// TODO: Find a better way to save the objects in PlaceMap, so we can access
-// them later. (Ex. access the router somewhere else)
+// TODO: Create router in the namespace of inside the Backbone app.
 PlaceMap.addInitializer(function(options) {
   PlaceMap.router = new PlaceMap.Router();
 });

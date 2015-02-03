@@ -15,7 +15,6 @@ PlaceMap.Router = Backbone.Router.extend({
     PlaceMap.container.show(this.view);
   },
 
-  // TODO: Fetch model and the places around it.
   show: function(placeId) {
     console.log(placeId);
   },
