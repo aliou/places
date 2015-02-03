@@ -7,6 +7,7 @@
 
   #map {
     height: 600px;
+    width: 100%;
 
     .controls {
 
@@ -24,6 +25,10 @@
         color: $base-font-color;
         border-radius: 4px;
       }
+    }
+
+    &.small {
+      width: 33%;
     }
   }
 }
