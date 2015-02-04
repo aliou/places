@@ -16,7 +16,7 @@ PlaceMap.Router = Backbone.Router.extend({
     PlaceMap.container.show(PlaceMap.views.mapView);
   },
 
-  show: function(placeId) {
-    console.log(placeId);
+  show: function(placeSlug) {
+    var model = PlaceMap.views.mapView.collection.bySlug(placeSlug);
   },
 });
