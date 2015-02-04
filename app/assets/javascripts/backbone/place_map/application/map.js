@@ -7,6 +7,7 @@ PlaceMap.addRegions({
 
 // TODO: Create router in the namespace of inside the Backbone app.
 PlaceMap.addInitializer(function(options) {
+  PlaceMap.views  = {};
   PlaceMap.router = new PlaceMap.Router();
 });
 

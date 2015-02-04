@@ -5,14 +5,15 @@ PlaceMap.Router = Backbone.Router.extend({
   },
 
   initialize: function() {
-    this.view = new PlaceMap.Views.MapView({
+    PlaceMap.views.mapView = new PlaceMap.Views.MapView({
       collection: new PlaceMap.Models.PlacesCollection()
     });
+
     _.bindAll(this, 'index', 'show');
   },
 
   index: function() {
-    PlaceMap.container.show(this.view);
+    PlaceMap.container.show(PlaceMap.views.mapView);
   },
 
   show: function(placeId) {
