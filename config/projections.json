@@ -13,5 +13,8 @@
   },
   "app/assets/javascripts/backbone/place_map/views/*": {
     "command": "jview"
+  },
+  "app/assets/javascripts/backbone/place_map/templates/*.jst": {
+    "command": "jtemplate"
   }
 }
