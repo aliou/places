@@ -1,14 +1,14 @@
 {
-  "app/assets/javascripts/backbone/place_map/application/map.js": {
+  "app/assets/javascripts/backbone/place_map/app.coffee": {
     "command": "japplication"
   },
-  "app/assets/javascripts/backbone/place_map/router/map_router.js": {
+  "app/assets/javascripts/backbone/place_map/router/places.coffee": {
     "command": "jrouter"
   },
-  "app/assets/javascripts/backbone/place_map/models/*.js": {
+  "app/assets/javascripts/backbone/place_map/models/*.coffee": {
     "command": "jmodel"
   },
-  "app/assets/javascripts/backbone/place_map/models/*_collection.js": {
+  "app/assets/javascripts/backbone/place_map/models/*_collection.coffee": {
     "command": "jcollection"
   },
   "app/assets/javascripts/backbone/place_map/views/*": {
@@ -16,5 +16,8 @@
   },
   "app/assets/javascripts/backbone/place_map/templates/*.jst": {
     "command": "jtemplate"
+  },
+  "config/projections.json": {
+    "command": "projections"
   }
 }

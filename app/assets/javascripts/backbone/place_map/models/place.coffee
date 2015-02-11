@@ -10,15 +10,15 @@ class App.Models.Place extends Backbone.Model
 
   toFeatureLayer: =>
     return L.mapbox.featureLayer {
-      type:       'Feature',
+      type: 'Feature',
       geometry:   {
-        type:        'Point',
+        type: 'Point',
         coordinates: [ @get('lng'), @get('lat') ]
       },
       properties: {
-        title:         @get('name'),
-        description:   @get('address'),
-        placeId:       @get('id'),
+        title: @get('name'),
+        description: @get('address'),
+        placeId: @get('id'),
         'marker-size': 'large',
       }
     }

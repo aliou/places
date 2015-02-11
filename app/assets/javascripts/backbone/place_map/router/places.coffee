@@ -1,7 +1,7 @@
 class App.Router.Places extends Backbone.Router
 
   routes: {
-    '(/)':      'index',
+    '(/)': 'index',
     ':slug(/)': 'show'
   }
 
@@ -10,9 +10,9 @@ class App.Router.Places extends Backbone.Router
       collection: new App.Collections.Places
     }
 
-  index: =>
+  index: ->
     App.container.show(App.Cache.mapView)
 
-  show: (slug) =>
+  show: (slug) ->
     App.container.show(App.Cache.mapView)
     model = new App.Models.Place(slug)
