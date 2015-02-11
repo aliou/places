@@ -1,0 +1,69 @@
+class App.Views.MapView extends Backbone.Marionette.ItemView
+  el: '#map'
+  template: false
+
+  ui:
+    'locateMe': '#find-me',
+    'close':    '#close'
+
+  events:
+    'click @ui.locateMe': 'locateUser',
+    'click @ui.close': 'close'
+
+  initialize: (options) =>
+    @collection = options.collection
+    @config = center: [48.85, 2.35], zoom: 13
+
+    L.mapbox.accessToken = "<%= ENV['MAPBOX_PUBLIC_TOKEN'] %>"
+
+  onRender: (event) =>
+    @map = L.mapbox.map('map', 'examples.map-i86nkdio')
+      .setView(@config.center, @config.zoom)
+
+    @map.on('locationfound', @setUserLocation)
+    @map.on('locationerror', @updateCollection)
+    @map.on('moveend',       @updateCollection)
+
+    @locateUser()
+
+  updateCollection: (event) =>
+    @config =
+      center: [@map.getCenter().lat, @map.getCenter().lng],
+      zoom: @map.getZoom()
+
+    @collection.fetch({
+      data: $.param({ origin: @config.center, zoom: @config.zoom }),
+      success: @showCollection
+    })
+
+  showCollection: (collection, response, options) =>
+    @collection.forEach (place) =>
+      layer = place.toFeatureLayer()
+      layer.on 'click', @featureClick
+      layer.addTo @map
+
+  locateUser: =>
+    @map.locate() if navigator.geolocation
+
+  setUserLocation: (event) =>
+    @map.setView([event.latitude, event.longitude], 13)
+
+    L.mapbox.featureLayer({
+      type:       'Feature',
+      geometry:   {
+        type:        'Point',
+        coordinates: [event.longitude, event.latitude]
+      },
+      properties: {
+        'marker-color': '#BE9A6B',
+        'marker-symbol': 'star',
+      }
+    }).addTo(@map)
+    @updateCollection(event)
+
+  featureClick: (event) =>
+    place = @collection.get(event.layer.feature.properties.placeId)
+    App.Cache.router.navigate place.url()
+
+  close: (event) =>
+    App.Cache.router.navigate '/'

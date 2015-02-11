@@ -5,9 +5,3 @@
     .controls
       %a{ href: 'javascript:void(0)', id: 'find-me' }
         %span.icon-location
-
-- content_for :scripts do
-  :javascript
-      $(document).ready(function() {
-        PlaceMap.start()
-      });
