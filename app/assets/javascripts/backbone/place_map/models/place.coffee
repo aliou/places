@@ -27,7 +27,7 @@ class App.Models.Place extends Backbone.Model
 
     L.mapbox.featureLayer {
       type: 'Feature',
-      geometry:   {
+      geometry: {
         type: 'Point',
         coordinates: [ @get('lng'), @get('lat') ]
       },
