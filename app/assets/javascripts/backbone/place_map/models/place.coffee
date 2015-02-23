@@ -23,7 +23,9 @@ class App.Models.Place extends Backbone.Model
   #
   # Returns a Mapbox FeatureLayer object.
   toFeatureLayer: =>
-    return L.mapbox.featureLayer {
+    @fetch() if !@get('lng')?
+
+    L.mapbox.featureLayer {
       type: 'Feature',
       geometry:   {
         type: 'Point',
