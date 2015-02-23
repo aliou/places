@@ -1,12 +1,13 @@
 class App.Models.Place extends Backbone.Model
 
-  # urlRoot: '/places/'
-
   initialize: (slug) =>
     @set 'slug', slug if slug
 
+  urlRoot: =>
+    if @collection then '' else '/places/'
+
   url: =>
-    @get('slug')
+    @urlRoot() + @get('slug')
 
   toFeatureLayer: =>
     return L.mapbox.featureLayer {
