@@ -26,6 +26,13 @@ class App.Views.MapView extends Backbone.Marionette.ItemView
 
     @locateUser()
 
+  # Public: Event handler updating the collection.
+  # This handles every location related events, and allows us to update the
+  # collection with the new Place around the center of the map.
+  #
+  # event - The sent event to handle.
+  #
+  # Returns nothing.
   updateCollection: (event) =>
     @config =
       center: [@map.getCenter().lat, @map.getCenter().lng],
@@ -36,12 +43,19 @@ class App.Views.MapView extends Backbone.Marionette.ItemView
       success: @showCollection
     })
 
+  # Public: Shows the collection of Places on the map.
+  # Adds every Place on the map and register the click event.
+  #
+  # Returns nothing.
   showCollection: (collection, response, options) =>
     @collection.forEach (place) =>
       layer = place.toFeatureLayer()
       layer.on 'click', @featureClick
       layer.addTo @map
 
+  # Public: Locate the user.
+  #
+  # Returns nothing.
   locateUser: =>
     @map.locate() if navigator.geolocation
 
