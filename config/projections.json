@@ -6,10 +6,14 @@
     "command": "jrouter"
   },
   "app/assets/javascripts/backbone/place_map/models/*.coffee": {
-    "command": "jmodel"
+    "command": "jmodel",
+    "type": "source",
+    "alternate": "spec/javascripts/models/{}_spec.js.coffee"
   },
   "app/assets/javascripts/backbone/place_map/models/*_collection.coffee": {
-    "command": "jcollection"
+    "command": "jcollection",
+    "type": "source",
+    "alternate": "spec/javascripts/models/{}_collection_spec.js.coffee"
   },
   "app/assets/javascripts/backbone/place_map/views/*": {
     "command": "jview"
