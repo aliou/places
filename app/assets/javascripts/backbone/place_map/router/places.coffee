@@ -14,5 +14,5 @@ class App.Router.Places extends Backbone.Router
     App.mapWide.show(App.Cache.mapView)
 
   show: (slug) ->
-    App.container.show(App.Cache.mapView)
+    App.mapSmall.show(App.Cache.mapView)
     model = new App.Models.Place(slug)
