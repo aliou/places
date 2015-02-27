@@ -15,7 +15,7 @@
 })
 
 @App.addRegions {
-  container: '#map-wrapper'
+  mapWide: '#map-wrapper'
 }
 
 @App.addInitializer (options) =>
