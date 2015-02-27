@@ -4,8 +4,7 @@
 #= require ./models/places_collection
 #
 #= require_tree ./router
-#
-#= require ./views/map_view
+#= require_tree ./views
 
 @App = new Backbone.Marionette.Application({
   Cache: {}
