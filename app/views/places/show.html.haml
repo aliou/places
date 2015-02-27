@@ -1,1 +1,10 @@
-= render 'map'
+= render 'mapbox'
+
+#map-wrapper
+  #map.small
+    .controls
+      %a{ href: 'javascript:void(0)', id: 'close' }
+        %span.icon-cross
+
+#metadata-wrapper
+  #metadata
