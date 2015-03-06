@@ -71,7 +71,8 @@ PlaceMap.module('Views', function(Module, App, Backbone, Marionette, $, _) {
           coordinates: [event.longitude, event.latitude]
         },
         properties: {
-          'marker-color': '#BE9A6B',
+          title:           'Current Location',
+          'marker-color':  '#BE9A6B',
           'marker-symbol': 'star',
         }
       }).addTo(this.map)

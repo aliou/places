@@ -8,6 +8,7 @@ class PlaceSerializer < ActiveModel::Serializer
     {
       id:       object.category.id,
       name:     object.category.name,
+      slug:     object.category.slug,
       icon_url: object.category.icon_url
     }
   end

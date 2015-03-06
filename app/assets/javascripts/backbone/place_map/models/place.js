@@ -11,7 +11,6 @@ PlaceMap.module('Models', function(Module, App, Backbone, Marionette, $, _) {
         properties: {
           title:           this.get('name'),
           description:     this.get('address'),
-          'marker-size':   'large',
         }
       })
     }
