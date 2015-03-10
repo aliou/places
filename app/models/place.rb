@@ -16,6 +16,7 @@
 #  category_id          :integer
 #  slug                 :string
 #  foursquare_venue_url :string
+#  starred              :boolean          default("false")
 #
 # Indexes
 #
@@ -33,7 +34,7 @@ class Place < ActiveRecord::Base
   #                                                                            #
   ##############################################################################
 
-  store_accessor :metadata, :foursquare_data
+  store_accessor :metadata, :foursquare_data, :starred
 
   ##############################################################################
   # Associations                                                               #

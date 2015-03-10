@@ -121,4 +121,10 @@ RSpec.describe Place, type: :model do
       end
     end
   end
+
+  describe 'default' do
+    it 'is not starred by default' do
+      expect(subject.starred).to be_falsy
+    end
+  end
 end
