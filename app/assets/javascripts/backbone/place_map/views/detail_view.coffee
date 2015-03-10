@@ -15,3 +15,4 @@ class App.Views.DetailView extends Backbone.Marionette.ItemView
   #
   # Returns a Boolean.
   toggleStar: (event) =>
+    @model.toggleStarred()

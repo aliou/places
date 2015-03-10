@@ -18,6 +18,14 @@ class App.Models.Place extends Backbone.Model
   url: =>
     @urlRoot() + @get('slug')
 
+  # Public: Toggle star of the model
+  #
+  # Returns a Boolean>
+  toggleStarred: =>
+    @set 'starred', !@get('starred')
+
+    @get 'starred'
+
   # Public: Convert the current Place to a Mapbox FeatureLayer.
   # We fetch the full model before the convertion.
   #
