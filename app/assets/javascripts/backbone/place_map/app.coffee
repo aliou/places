@@ -15,9 +15,9 @@
 })
 
 @App.addRegions {
-  mapWide: '#map-wrapper',
-  mapSmall: '#map-wrapper',
-  meta: '#metadata-wrapper'
+  map:    '#map-wrapper',
+  detail: '#detail-wrapper',
+  meta:   '#metadata-wrapper'
 }
 
 @App.addInitializer (options) =>

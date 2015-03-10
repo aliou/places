@@ -6,13 +6,19 @@ class App.Router.Places extends Backbone.Router
   }
 
   initialize: ->
-    App.Cache.mapView = new App.Views.MapView {
-      collection: new App.Collections.Places
-    }
+    App.Cache.collection = new App.Collections.Places
 
   index: ->
-    App.mapWide.show(App.Cache.mapView)
+    mapView = new App.Views.MapView {
+      collection: App.Cache.collection
+    }
+    App.map.show(mapView)
 
   show: (slug) ->
-    App.mapSmall.show(App.Cache.mapView)
-    model = new App.Models.Place(slug)
+    place = new App.Models.Place(slug)
+
+    detailView   = new App.Views.DetailView(model: place)
+    metadataView = new App.Views.MetadataView(model: place)
+
+    App.detail.show(detailView)
+    App.meta.show(metadataView)

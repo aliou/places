@@ -11,7 +11,7 @@ class App.Views.MetadataView extends Backbone.Marionette.ItemView
   initialize: (options) =>
     @model = options.model
 
-  # Public:
+  # Public: Edit the current Place metadata.
   #
   # TODO: Open the edit modal.
   # Returns nothing.
