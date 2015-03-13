@@ -5,7 +5,7 @@ FactoryGirl.define do
     provider    'foursquare'
 
     factory :user_with_places do
-      ignore do
+      transient do
         places_count 5
       end
 
