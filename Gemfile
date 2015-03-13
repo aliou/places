@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.2.0'
+ruby '2.2.1'
 
 ###############################################################################
 # Default Stuff                                                               #
@@ -44,13 +44,11 @@ gem 'haml-rails'
 group :test, :development do
   gem 'dotenv-rails'
   gem 'byebug'
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
 end
 
 group :test do
-  gem 'rspec'
-  gem 'fivemat'
-  gem 'rspec-rails'
-  gem 'factory_girl_rails'
   gem 'webmock'
   gem 'vcr'
   gem 'faker'
