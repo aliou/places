@@ -11,11 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150310230822) do
+ActiveRecord::Schema.define(version: 20150312220422) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "hstore"
+
+  create_table "attachments", force: :cascade do |t|
+    t.string   "type"
+    t.string   "url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "place_id"
+  end
+
+  add_index "attachments", ["place_id"], name: "index_attachments_on_place_id", using: :btree
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -80,4 +90,5 @@ ActiveRecord::Schema.define(version: 20150310230822) do
     t.datetime "updated_at"
   end
 
+  add_foreign_key "attachments", "places"
 end
