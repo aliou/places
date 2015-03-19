@@ -3,10 +3,10 @@
 # Table name: users
 #
 #  id          :integer          not null, primary key
-#  name        :string(255)
-#  uid         :string(255)
-#  provider    :string(255)
-#  oauth_token :string(255)
+#  name        :string
+#  uid         :string
+#  provider    :string
+#  oauth_token :string
 #  created_at  :datetime
 #  updated_at  :datetime
 #

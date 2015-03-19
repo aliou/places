@@ -3,8 +3,8 @@
 # Table name: categories
 #
 #  id         :integer          not null, primary key
-#  name       :string(255)
-#  icon_url   :string(255)
+#  name       :string
+#  icon_url   :string
 #  created_at :datetime
 #  updated_at :datetime
 #  metadata   :hstore

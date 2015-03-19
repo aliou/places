@@ -18,8 +18,8 @@ ActiveRecord::Schema.define(version: 20150201155830) do
   enable_extension "hstore"
 
   create_table "categories", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.string   "icon_url",   limit: 255
+    t.string   "name"
+    t.string   "icon_url"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.hstore   "metadata"
@@ -42,15 +42,15 @@ ActiveRecord::Schema.define(version: 20150201155830) do
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 
   create_table "places", force: :cascade do |t|
-    t.string   "name",                 limit: 255
+    t.string   "name"
     t.float    "lat"
     t.float    "lng"
     t.text     "notes"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
-    t.string   "foursquare_venue_id",  limit: 255
-    t.string   "address",              limit: 255
+    t.string   "foursquare_venue_id"
+    t.string   "address"
     t.hstore   "metadata"
     t.integer  "category_id"
     t.string   "slug"
@@ -71,10 +71,10 @@ ActiveRecord::Schema.define(version: 20150201155830) do
   add_index "user_place_importers", ["user_id"], name: "index_user_place_importers_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "name",        limit: 255
-    t.string   "uid",         limit: 255
-    t.string   "provider",    limit: 255
-    t.string   "oauth_token", limit: 255
+    t.string   "name"
+    t.string   "uid"
+    t.string   "provider"
+    t.string   "oauth_token"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
