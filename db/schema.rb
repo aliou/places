@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 20150310230822) do
     t.integer  "category_id"
     t.string   "slug"
     t.string   "foursquare_venue_url"
-    t.boolean  "starred",                          default: false
+    t.boolean  "starred",              default: false
   end
 
   add_index "places", ["category_id"], name: "index_places_on_category_id", using: :btree
