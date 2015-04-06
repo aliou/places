@@ -8,7 +8,7 @@ class App.Views.DetailView extends Backbone.Marionette.ItemView
   events:
     'click @ui.star': 'toggleStar'
 
-  initialize: (option) =>
+  initialize: (options) =>
     @model = options.model
 
   # Public: Toggle the whether the Place is starred or not.
