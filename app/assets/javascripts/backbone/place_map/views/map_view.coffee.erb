@@ -75,4 +75,4 @@ class App.Views.MapView extends Backbone.Marionette.ItemView
 
   featureClick: (event) =>
     place = @collection.get(event.layer.feature.properties.placeId)
-    App.Cache.router.navigate place.url()
+    App.Cache.router.navigate place.url(), trigger: true
