@@ -4,11 +4,9 @@ class App.Views.MapView extends Backbone.Marionette.ItemView
 
   ui:
     'locateMe': '#find-me',
-    'close':    '#close'
 
   events:
     'click @ui.locateMe': 'locateUser',
-    'click @ui.close': 'close'
 
   initialize: (options) =>
     @collection = options.collection
@@ -78,6 +76,3 @@ class App.Views.MapView extends Backbone.Marionette.ItemView
   featureClick: (event) =>
     place = @collection.get(event.layer.feature.properties.placeId)
     App.Cache.router.navigate place.url()
-
-  close: (event) =>
-    App.Cache.router.navigate '/'
