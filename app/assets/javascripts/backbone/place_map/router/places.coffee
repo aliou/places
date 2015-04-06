@@ -15,6 +15,7 @@ class App.Router.Places extends Backbone.Router
     App.map.show(mapView)
 
   show: (slug) ->
+    App.map.$el.hide()
     place = new App.Models.Place(slug)
 
     detailView   = new App.Views.DetailView(model: place)
