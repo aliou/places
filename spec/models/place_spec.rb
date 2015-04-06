@@ -71,7 +71,7 @@ RSpec.describe Place, type: :model do
   end
 
   describe '#places_around' do
-    let(:user) { FactoryGirl.create(:user) }
+    let(:user) { FactoryGirl.build(:user) }
     subject    { FactoryGirl.build_stubbed(:place) }
 
     it "is empty when there's no Place around" do
@@ -79,11 +79,11 @@ RSpec.describe Place, type: :model do
     end
 
     context 'with different zoom levels' do
-      subject { FactoryGirl.create(:place, :notre_dame) }
+      subject { FactoryGirl.build(:place, :notre_dame) }
 
       let(:hotel_de_ville) { FactoryGirl.create(:place, :hotel_de_ville) }
-      let(:tour_eiffel) { FactoryGirl.create(:place, :tour_eiffel) }
-      let(:louvre) { FactoryGirl.create(:place, :louvre) }
+      let(:tour_eiffel)    { FactoryGirl.create(:place, :tour_eiffel) }
+      let(:louvre)         { FactoryGirl.create(:place, :louvre) }
 
       before do
         user.places += [hotel_de_ville, tour_eiffel, louvre]
