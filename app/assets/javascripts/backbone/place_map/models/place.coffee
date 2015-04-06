@@ -1,7 +1,9 @@
 class App.Models.Place extends Backbone.Model
 
   initialize: (slug) =>
-    @set 'slug', slug if slug
+    if slug
+      @set 'slug', slug
+      @fetch()
 
   # Public: The URL root of the place.
   # If the place is in a collection, this is already take care of.
