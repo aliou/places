@@ -1,12 +1,17 @@
 require 'rails_helper'
 
 RSpec.describe User do
-  it { should have_many :places }
-  it { should validate_presence_of :provider }
-  it { should validate_presence_of :oauth_token }
-  it { should validate_presence_of :uid }
-  it { should validate_uniqueness_of :uid }
-  it { should validate_inclusion_of(:uid).in_array(authorized_uids) }
+  context 'associations' do
+    it { should have_many :places }
+  end
+
+  context 'validations' do
+    it { should validate_presence_of :provider }
+    it { should validate_presence_of :oauth_token }
+    it { should validate_presence_of :uid }
+    it { should validate_uniqueness_of :uid }
+    it { should validate_inclusion_of(:uid).in_array(authorized_uids) }
+  end
 
   describe '.from_omniauth' do
     context "the user doesn't exist" do
