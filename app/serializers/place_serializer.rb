@@ -16,6 +16,7 @@
 #  category_id          :integer
 #  slug                 :string
 #  foursquare_venue_url :string
+#  starred              :boolean          default(FALSE)
 #
 # Indexes
 #

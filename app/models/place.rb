@@ -16,7 +16,7 @@
 #  category_id          :integer
 #  slug                 :string
 #  foursquare_venue_url :string
-#  starred              :boolean          default("false")
+#  starred              :boolean          default(FALSE)
 #
 # Indexes
 #
@@ -65,7 +65,7 @@ class Place < ActiveRecord::Base
   ##############################################################################
 
   acts_as_mappable lat_column_name: :lat,
-                   lng_column_name: :lng
+    lng_column_name: :lng
 
   friendly_id :name, use: [:slugged, :finders]
 
