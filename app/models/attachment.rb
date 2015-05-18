@@ -33,5 +33,6 @@ class Attachment < ActiveRecord::Base
   ######################################################################
 
   validates :url, presence: true
+  validates :url, uniqueness: { scope: :place_id }
 
 end
