@@ -1,8 +1,6 @@
-# Read about factories at https://github.com/thoughtbot/factory_girl
-
 FactoryGirl.define do
   factory :attachment do
-    type ""
-    url "MyString"
+    url  { Faker::Internet.url }
+    type { Attachment::ATTACHMENT_TYPES.sample }
   end
 end
