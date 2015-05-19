@@ -35,4 +35,15 @@ class Attachment < ActiveRecord::Base
   validates :url, presence: true
   validates :url, uniqueness: { scope: :place_id }
 
+  ######################################################################
+  # Methods                                                            #
+  ######################################################################
+
+  # Public: The thumbnail URL for the attachment.
+  #
+  # Raises Errors::NotImplementedError since this method must be implemented in
+  # the child classes.
+  def thumbnail_url
+    raise Errors::NotImplementedError
+  end
 end
