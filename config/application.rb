@@ -33,5 +33,8 @@ module Places
 
     # Settings
     FOURSQUARE_API_VERSION = '20140806'
+
+    # Autoload `lib` folder.
+    config.autoload_paths << Rails.root.join('lib')
   end
 end
