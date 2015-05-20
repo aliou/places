@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe HomeController do
+  it { should_not use_before_filter(:authenticate!) }
   it { should route(:get, '/').to(action: :index) }
 
   describe 'GET index' do

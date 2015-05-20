@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe ApplicationController do
+  it { should use_before_filter(:authenticate!) }
+
   describe 'authenticate!' do
     controller(ApplicationController) do
       def index

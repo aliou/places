@@ -95,6 +95,6 @@ class User::PlaceImporter < ActiveRecord::Base
   #
   # Returns a String.
   def foursquare_list
-    "#{user.uid}/todos"
+    "#{ user.uid }/todos"
   end
 end

@@ -6,8 +6,7 @@ class PlacesController < ApplicationController
     respond_to do |format|
       format.html
       format.json do
-        render json: filtered_places,
-          root: false, each_serializer: PlaceSerializer
+        render json: filtered_places, root: false
       end
     end
   end
@@ -25,16 +24,11 @@ class PlacesController < ApplicationController
   # GET /places/:id
   def show
     @place = Place.find params[:id]
-
-    respond_to do |format|
-      format.html
-      format.json { render json: @place, root: false }
-    end
   end
 
   # POST /places
   def create
-    @place = current_user.places.new place_params
+    @place = current_user.places.new(place_params)
 
     respond_to do |format|
       if @place.save
@@ -50,8 +44,9 @@ class PlacesController < ApplicationController
   # PATCH /places/:id
   def update
     @place = Place.find params[:id]
+
     respond_to do |format|
-      if @place.update_attributes place_params
+      if @place.update_attributes(place_params)
         format.html { redirect_to place_path(@place),
                       flash: { success: I18n.t('place.update.flash.success') } }
       else
