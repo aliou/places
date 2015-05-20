@@ -1,10 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe SessionsController do
-  it { should route(:get, '/auth/foursquare/callback').
-       to(action: :create, provider: 'foursquare') }
-  it { should route(:get, '/signout').to(action: :destroy) }
-  it { should route(:get, '/auth/failure').to(action: :failure) }
+  it { should_not use_before_filter(:authenticate!) }
+
+  context 'routes' do
+    it { should route(:get, '/auth/foursquare/callback').
+         to(action: :create, provider: 'foursquare') }
+    it { should route(:get, '/signout').to(action: :destroy) }
+    it { should route(:get, '/auth/failure').to(action: :failure) }
+  end
 
   describe 'GET /auth/foursquare/callback' do
     context 'with the wrong omniauth credentials' do

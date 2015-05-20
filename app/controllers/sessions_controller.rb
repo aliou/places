@@ -1,5 +1,4 @@
 class SessionsController < ApplicationController
-
   skip_before_filter :authenticate!
 
   # GET /auth/:provider/callback
