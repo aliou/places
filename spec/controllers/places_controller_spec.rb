@@ -30,11 +30,11 @@ RSpec.describe PlacesController do
 
     context 'with JSON format' do
       it 'seriazes the places' do
-        places = ActiveModel::ArraySerializer.
-          new(current_user.places, each_serializer: PlaceSerializer).to_json
+        places = current_user.places
         get :index, { format: :json }, user_id: current_user.id
 
-        expect(response.body).to eq(places)
+        response_ids = response_body.map { |p| p['id'] }
+        expect(response_ids).to match_array(places.map(&:id))
       end
     end
 
@@ -56,7 +56,7 @@ RSpec.describe PlacesController do
         get :index, { format: :json, origin: origin, zoom: 16 },
           user_id: current_user.id
 
-        response_ids = response_body.map { |p| p["id"] }
+        response_ids = response_body.map { |p| p['id'] }
         expect(response_ids).to match_array(@places.map(&:id))
       end
     end

@@ -14,7 +14,7 @@ RSpec.describe Attachment, type: :model do
     subject { FactoryGirl.create(:attachment) }
 
     it 'raises a not implemented error' do
-      expect{ subject.thumbnail_url }.
+      expect { subject.thumbnail_url }.
         to raise_error(Errors::NotImplementedError)
     end
   end
