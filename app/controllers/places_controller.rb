@@ -1,5 +1,6 @@
 class PlacesController < ApplicationController
   include MapboxHelper
+  before_action :set_place, only: [:show, :update, :destroy]
 
   # GET /places
   def index
@@ -9,21 +10,6 @@ class PlacesController < ApplicationController
         render json: filtered_places, root: false
       end
     end
-  end
-
-  # GET /places/new
-  def new
-    @place = current_user.places.new
-  end
-
-  # GET /places/:id/edit
-  def edit
-    @place = Place.find params[:id]
-  end
-
-  # GET /places/:id
-  def show
-    @place = Place.find params[:id]
   end
 
   # POST /places
@@ -57,7 +43,6 @@ class PlacesController < ApplicationController
 
   # DELETE /places/:id
   def destroy
-    @place = Place.find params[:id]
     @place.destroy
     respond_to do |format|
       format.html { redirect_to places_path,
@@ -76,6 +61,13 @@ class PlacesController < ApplicationController
   end
 
   private
+
+  # Private: Set the place
+  #
+  # @return a Place.
+  def set_place
+    @place = Place.find(params[:id])
+  end
 
   # Private: Permitted parameters for Place creation and update.
   #
