@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe User do
   context 'associations' do
-    it { should have_many :places }
+    it { should have_many(:places) }
+    it { should have_one(:place_importer).class_name('Place::Importer') }
   end
 
   context 'validations' do

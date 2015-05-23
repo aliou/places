@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: user_place_importers
+# Table name: place_importers
 #
 #  id               :integer          not null, primary key
 #  last_imported_at :datetime
@@ -10,19 +10,11 @@
 #
 # Indexes
 #
-#  index_user_place_importers_on_user_id  (user_id)
+#  index_place_importers_on_user_id  (user_id)
 #
 
-class User::PlaceImporter < ActiveRecord::Base
-  ##############################################################################
-  # Associations                                                               #
-  ##############################################################################
-
+class Place::Importer < ActiveRecord::Base
   belongs_to :user
-
-  ##############################################################################
-  # Instance Methods                                                           #
-  ##############################################################################
 
   # Public: Check if this is the first import perform by this object.
   #

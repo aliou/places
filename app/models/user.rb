@@ -12,16 +12,8 @@
 #
 
 class User < ActiveRecord::Base
-  ##############################################################################
-  # Associations                                                               #
-  ##############################################################################
-
   has_many :places
-  has_one :place_importer
-
-  ##############################################################################
-  # Validations                                                                #
-  ##############################################################################
+  has_one :place_importer, class_name: 'Place::Importer'
 
   validates :provider,    presence: true
   validates :oauth_token, presence: true
@@ -30,15 +22,7 @@ class User < ActiveRecord::Base
     in:      ENV.fetch('FOURSQUARE_USER_ID').split(','),
     message: 'Unauthorized user.' }
 
-  ##############################################################################
-  # Callbacks                                                                  #
-  ##############################################################################
-
   after_create :initial_places_import
-
-  ##############################################################################
-  # Class Methods                                                              #
-  ##############################################################################
 
   # Find or create a new User depending on omniauth data.
   #
