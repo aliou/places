@@ -1,6 +1,7 @@
 if ENV['CODECLIMATE_REPO_TOKEN']
   require 'codeclimate-test-reporter'
   CodeClimate::TestReporter.start
+  ENV['CI'] = 1
 end
 
 RSpec.configure do |config|
@@ -8,7 +9,7 @@ RSpec.configure do |config|
   if config.files_to_run.one?
     config.default_formatter = 'doc'
   else
-    config.profile_examples = 3
+    config.profile_examples = 3 unless ENV['CI']
   end
 
   config.order = :random

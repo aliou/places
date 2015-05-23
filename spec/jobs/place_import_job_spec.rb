@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe PlaceImportJob do
+RSpec.describe PlaceImportJob, slow: true do
   let(:auth) { stub_auth }
 
   it "imports the user's place after user creation" do

@@ -98,7 +98,7 @@ RSpec.describe User do
         end
       end
 
-      it 'imports all of the user places' do
+      it 'imports all of the user places', slow: true do
         expect { subject.import_places }.to change { Place.count }.by(144)
       end
     end

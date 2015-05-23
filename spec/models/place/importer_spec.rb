@@ -19,7 +19,7 @@ RSpec.describe Place::Importer, type: :model do
     end
   end
 
-  describe '#run' do
+  describe '#run', slow: true do
     context 'first import' do
       subject { user.create_place_importer }
 
