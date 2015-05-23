@@ -30,24 +30,12 @@ class Place < ActiveRecord::Base
   extend PlacesHelper
   include MapboxHelper
 
-  ##############################################################################
-  #                                                                            #
-  ##############################################################################
-
   store_accessor :metadata, :foursquare_data, :starred
-
-  ##############################################################################
-  # Associations                                                               #
-  ##############################################################################
 
   belongs_to :user
   belongs_to :category
 
   has_many :attachments, dependent: :destroy
-
-  ##############################################################################
-  # Validations                                                                #
-  ##############################################################################
 
   validates :name,                presence: true
   validates :lat,                 presence: true
@@ -56,24 +44,12 @@ class Place < ActiveRecord::Base
 
   validates :foursquare_venue_id, uniqueness: { scope: :user_id }
 
-  ##############################################################################
-  # Callbacks                                                                  #
-  ##############################################################################
-
   after_create :set_foursquare_venue_url
-
-  ##############################################################################
-  # Macros                                                                     #
-  ##############################################################################
 
   acts_as_mappable lat_column_name: :lat,
     lng_column_name: :lng
 
   friendly_id :name, use: [:slugged, :finders]
-
-  ##############################################################################
-  # Class Methods                                                              #
-  ##############################################################################
 
   # Public: Finds or creates a new Place from a Foursquare venue.
   #

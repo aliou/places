@@ -47,12 +47,12 @@ group :test, :development do
   gem 'byebug'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
+  gem 'faker'
 end
 
 group :test do
   gem 'webmock'
   gem 'vcr'
-  gem 'faker'
   gem 'shoulda-matchers', require: false
   gem 'codeclimate-test-reporter', require: nil
 end
