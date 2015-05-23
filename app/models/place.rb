@@ -30,7 +30,7 @@ class Place < ActiveRecord::Base
   extend PlacesHelper
   include MapboxHelper
 
-  store_accessor :metadata, :foursquare_data, :starred
+  store_accessor :metadata, :foursquare_data
 
   belongs_to :user
   belongs_to :category
