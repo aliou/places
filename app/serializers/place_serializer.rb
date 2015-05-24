@@ -32,6 +32,8 @@ class PlaceSerializer < ActiveModel::Serializer
   #
   # Returns a Hash.
   def category
+    return nil if object.category.nil?
+
     { id:       object.category.id,
       name:     object.category.name,
       slug:     object.category.slug,
