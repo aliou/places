@@ -99,17 +99,17 @@ RSpec.describe Place, type: :model do
       end
 
       it 'returns the Places in the same town' do
-        expect(subject.places_around(MapboxHelper::TOWN_LEVEL_ZOOM)).
+        expect(subject.places_around(MapHelper::TOWN_LEVEL_ZOOM)).
           to match_array([hotel_de_ville, tour_eiffel, louvre])
       end
 
       it 'returns the Places in the same country' do
-        expect(subject.places_around(MapboxHelper::COUNTRY_LEVEL_ZOOM)).
+        expect(subject.places_around(MapHelper::COUNTRY_LEVEL_ZOOM)).
           to match_array([hotel_de_ville, tour_eiffel, louvre])
       end
 
       it 'returns the Places in world' do
-        expect(subject.places_around(MapboxHelper::WORLD_LEVEL_ZOOM)).
+        expect(subject.places_around(MapHelper::WORLD_LEVEL_ZOOM)).
           to match_array(Place.all - [subject])
       end
     end

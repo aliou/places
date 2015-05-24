@@ -28,7 +28,7 @@
 class Place < ActiveRecord::Base
   extend FriendlyId
   extend PlacesHelper
-  include MapboxHelper
+  include MapHelper
 
   store_accessor :metadata, :foursquare_data
 
@@ -97,7 +97,7 @@ class Place < ActiveRecord::Base
   #              (default: 16, Neighborhood)
   #
   # Returns an Araay of Places.
-  def places_around(zoom_level = MapboxHelper::NEIGHBORHOOD_LEVEL_ZOOM)
+  def places_around(zoom_level = MapHelper::NEIGHBORHOOD_LEVEL_ZOOM)
     Place.within(zoom_to_radius(zoom_level, lat), origin: self) - [self]
   end
 

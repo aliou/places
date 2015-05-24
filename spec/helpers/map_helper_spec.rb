@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe MapboxHelper do
+describe MapHelper do
   describe '#zoom_to_radius' do
   end
 

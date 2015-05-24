@@ -41,7 +41,7 @@ RSpec.describe PlacesController do
       let!(:valid_params) do
         { format: :json,
           origin: [48.85, 2.34],
-          zoom:   MapboxHelper::TOWN_LEVEL_ZOOM }
+          zoom:   MapHelper::TOWN_LEVEL_ZOOM }
       end
       let(:notre_dame) do
         FactoryGirl.create(:place, :notre_dame, user: current_user)

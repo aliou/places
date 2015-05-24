@@ -1,5 +1,5 @@
 class PlacesController < ApplicationController
-  include MapboxHelper
+  include MapHelper
   before_action :set_place, only: [:show, :update, :destroy]
 
   respond_to :json
