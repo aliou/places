@@ -30,7 +30,7 @@ module MapboxHelper
   # Returns a Float.
   def zoom_to_radius(zoom_value, latitude, search_radius = SEARCH_RADIUS)
     search_radius * EARTH_CIRCUMFERENCE *
-      Math::cos(degress_to_radians(latitude)) / 2**(zoom_value + 8)
+      Math::cos(degrees_to_radians(latitude)) / 2**(zoom_value + 8)
   end
 
   # Public: Converts an angle in degrees to radians.
@@ -38,7 +38,7 @@ module MapboxHelper
   # angle - The angle to convert.
   #
   # Returns a Float.
-  def degress_to_radians(angle)
+  def degrees_to_radians(angle)
     angle * Math::PI / 180
   end
 end

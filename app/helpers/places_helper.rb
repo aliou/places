@@ -19,10 +19,6 @@ module PlacesHelper
   #
   # Returns a String, the venue_id without the prefix.
   def stripped_venue_id(venue_id, prefix = 'v')
-    if venue_id.starts_with?(prefix)
-      venue_id[prefix.length..-1]
-    else
-      venue_id
-    end
+    venue_id.starts_with?(prefix) ? venue_id[prefix.length..-1] : venue_id
   end
 end
