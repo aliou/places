@@ -27,8 +27,6 @@ gem 'sucker_punch'
 # CSS
 gem 'sass-rails'
 gem 'uglifier'
-gem 'bourbon'
-gem 'neat'
 
 # JS
 gem 'coffee-rails'
