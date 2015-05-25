@@ -30,6 +30,7 @@ gem 'uglifier'
 
 # JS
 gem 'coffee-rails'
+gem 'jquery-rails'
 gem 'active_model_serializers'
 gem 'js-routes'
 
