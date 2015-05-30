@@ -1,5 +1,6 @@
 GEM
   remote: https://rubygems.org/
+  remote: https://rails-assets.org/
   specs:
     actionmailer (4.2.1)
       actionpack (= 4.2.1)
@@ -284,6 +285,7 @@ DEPENDENCIES
   annotate
   better_errors
   binding_of_caller
+  bundler (>= 1.8.4)
   byebug
   capybara
   codeclimate-test-reporter

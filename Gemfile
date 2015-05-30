@@ -7,6 +7,7 @@ ruby '2.2.2'
 
 gem 'rails', '4.2.1'
 gem 'responders'
+gem 'bundler', '>= 1.8.4'
 
 # Database.
 gem 'pg'
@@ -33,6 +34,9 @@ gem 'coffee-rails'
 gem 'jquery-rails'
 gem 'active_model_serializers'
 gem 'js-routes'
+
+source 'https://rails-assets.org' do
+end
 
 # Views
 gem 'haml-rails'
