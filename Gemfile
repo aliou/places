@@ -54,6 +54,8 @@ group :test do
   gem 'vcr'
   gem 'shoulda-matchers', require: false
   gem 'codeclimate-test-reporter', require: nil
+  gem 'capybara'
+  gem 'rack_session_access'
 end
 
 group :development do
