@@ -104,11 +104,13 @@ RSpec.describe PlacesController do
     end
 
     context 'with invalid params' do
-      let(:invalid_params) { { place: { name: Faker::Name.name }, format: :json } }
+      let(:invalid_params) do
+        { place: { name: Faker::Name.name }, format: :json }
+      end
 
       it "doesn't create a new place" do
-        expect { post :create, invalid_params, valid_session }
-          .to_not change { Place.count }
+        expect { post :create, invalid_params, valid_session }.
+          to_not change { Place.count }
       end
 
       it 'assigns a newly created but unsaved place' do

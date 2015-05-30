@@ -13,4 +13,3 @@ feature 'the signin process' do
     expect(page.current_path).to eq(places_path)
   end
 end
-

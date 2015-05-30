@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
   # TODO: Redirect to te previous page, to the `places_path` otherwise.
   def create
     user = User.from_omniauth(auth_hash)
-    if user.nil? or (! user.persisted?)
+    if user.nil? or (!user.persisted?)
       return redirect_to auth_failure_path
     end
 
