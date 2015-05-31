@@ -8,10 +8,8 @@
     <%= csrf_meta_tags %>
     <%= yield :head %>
   </head>
-  <body>
-    <div class='container'>
-      <%= yield %>
-    </div>
+  <body class='bg-navy'>
+    <%= yield %>
 
     <%= javascript_include_tag 'application' %>
     <%= yield :scripts %>
