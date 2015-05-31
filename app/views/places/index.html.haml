@@ -1,7 +1,8 @@
 = render 'mapbox'
 
-#map-wrapper
-  #map
-    .controls
-      %a{ href: 'javascript:void(0)', id: 'find-me' }
-        %span.icon-location
+#map.absolute.top-0.bottom-0.full-width
+
+- content_for :scripts do
+  :javascript
+    L.mapbox.accessToken = "#{ENV['MAPBOX_PUBLIC_TOKEN']}";
+    var map = L.mapbox.map('map', 'mapbox.streets').setView([48.85, 2.35], 12);
