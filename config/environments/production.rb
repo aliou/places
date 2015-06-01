@@ -78,4 +78,8 @@ Rails.application.configure do
 
   # Enable lograge for better logs.
   config.lograge.enabled = true
+
+  # Setup react.
+  config.react.variant = :production
+  config.react.addons  = true
 end
