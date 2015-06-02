@@ -40,7 +40,9 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-basscss'
   gem 'rails-assets-animate.css'
   gem 'rails-assets-flux'
+  gem 'rails-assets-backbone'
 end
+
 gem 'react-rails'
 
 # Views

@@ -194,8 +194,11 @@ GEM
       railties (= 4.2.1)
       sprockets-rails
     rails-assets-animate.css (3.3.0)
+    rails-assets-backbone (1.2.0)
+      rails-assets-underscore (>= 1.7.0)
     rails-assets-basscss (6.1.6)
     rails-assets-flux (2.0.2)
+    rails-assets-underscore (1.8.3)
     rails-deprecated_sanitizer (1.0.3)
       activesupport (>= 4.2.0.alpha)
     rails-dom-testing (1.0.6)
@@ -327,6 +330,7 @@ DEPENDENCIES
   rack_session_access
   rails (= 4.2.1)
   rails-assets-animate.css!
+  rails-assets-backbone!
   rails-assets-basscss!
   rails-assets-flux!
   rails_12factor
