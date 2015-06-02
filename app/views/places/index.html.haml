@@ -4,3 +4,6 @@
   mapId: 'mapbox.streets',
   initialCenter: [48.85, 2.35],
   initialZoom: MapHelper::TOWN_LEVEL_ZOOM);
+
+- content_for :scripts do
+  = javascript_include_tag 'places'
