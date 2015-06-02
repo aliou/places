@@ -34,6 +34,7 @@ gem 'coffee-rails'
 gem 'jquery-rails'
 gem 'active_model_serializers'
 gem 'js-routes'
+gem 'sprockets-es6'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-basscss'
