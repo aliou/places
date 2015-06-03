@@ -46,14 +46,8 @@ RSpec.describe PlacesController do
       let(:notre_dame) do
         FactoryGirl.create(:place, :notre_dame, user: current_user)
       end
-      let(:hotel_de_ville) do
-        FactoryGirl.create(:place, :hotel_de_ville, user: current_user)
-      end
-      let(:tour_eiffel) do
-        FactoryGirl.create(:place, :tour_eiffel, user: current_user)
-      end
 
-      let!(:filtered_places) { [notre_dame, hotel_de_ville, tour_eiffel] }
+      let!(:filtered_places) { [notre_dame] }
 
       it 'assigns the filtered places' do
         get :index, valid_params, valid_session

@@ -36,5 +36,8 @@ module Places
 
     # Autoload `lib` folder.
     config.autoload_paths << Rails.root.join('lib')
+
+    # Autoload presenters.
+    config.autoload_paths << Rails.root.join('app', 'presenters')
   end
 end
