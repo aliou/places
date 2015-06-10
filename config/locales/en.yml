@@ -13,7 +13,8 @@ en:
       flash:
         error: An error occured. Please try again.
   home:
-    tagline: Plan your escape.
+    index:
+      tagline: Plan your escape.
   place:
     create:
       flash:
