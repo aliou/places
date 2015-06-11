@@ -3,8 +3,16 @@ var Map = React.createClass({
   propTypes: {
     accessToken:   React.PropTypes.string.isRequired,
     mapId:         React.PropTypes.string.isRequired,
-    initialCenter: React.PropTypes.array.isRequired,
+    initialCenter: React.PropTypes.array,
     initialZoom:   React.PropTypes.number
+  },
+
+  getDefaultProps: function getDefaultProps () {
+    // Zoom on the center of paris on a neighborhood level by default.
+    return {
+      initialCenter: [48.85, 2.35],
+      initialZoom: 16
+    };
   },
 
   componentDidMount: function componentDidMount () {

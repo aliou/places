@@ -1,0 +1,16 @@
+//= require react
+//= require react_ujs
+//= require flux
+//= require underscore
+//= require backbone
+//
+//= require components
+//= require_self
+
+React.render(
+  <Map accessToken="<%= ENV.fetch('MAPBOX_PUBLIC_TOKEN') %>"
+       mapId='mapbox.streets'
+       initialZoom={ <%= MapHelper::TOWN_LEVEL_ZOOM %> }
+   />,
+  document.getElementById('app')
+);

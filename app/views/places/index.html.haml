@@ -1,9 +1,6 @@
 = render 'mapbox'
 
-= react_component('Map', accessToken: ENV['MAPBOX_PUBLIC_TOKEN'],
-  mapId: 'mapbox.streets',
-  initialCenter: [48.85, 2.35],
-  initialZoom: MapHelper::TOWN_LEVEL_ZOOM);
+#app
 
 - content_for :scripts do
   = javascript_include_tag 'places'
