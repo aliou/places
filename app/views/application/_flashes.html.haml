@@ -1,8 +1,5 @@
-- flash.each do |name, message|
-  - if message.is_a?(String)
-    %div{ class: "alert alert-#{name} alert-dismissible" }
-      %a{ href: 'javascript:void(0)', class: 'alert-link',
-          data: { flash: { behavior: 'dismiss' } } }
-        %span
-          &times;
-      = message
+- flash.each do |type, message|
+  .bold.center.p2.mb2.rounded{ class: basscss_class_for_alert(type) }
+    %a{ href: 'javascript:void(0)', data: { flash: { behavior: 'dismiss' } } }
+      %span &times;
+    = message

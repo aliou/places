@@ -1,11 +1,6 @@
 = render 'mapbox'
 
-#map.absolute.top-0.bottom-0.full-width
+#app
 
 - content_for :scripts do
-  :javascript
-    L.mapbox.accessToken = "#{ENV['MAPBOX_PUBLIC_TOKEN']}";
-    var mapOptions = { zoomControl: false, attributionControl: false }
-    var map = L.mapbox.map('map', 'mapbox.streets', mapOptions).
-      setView([48.85, 2.35], 12);
-    var controls = new L.Control.Zoom({ position: 'bottomright' }).addTo(map);
+  = javascript_include_tag 'places'

@@ -34,11 +34,16 @@ gem 'coffee-rails'
 gem 'jquery-rails'
 gem 'active_model_serializers'
 gem 'js-routes'
+gem 'sprockets-es6'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-basscss'
   gem 'rails-assets-animate.css'
+  gem 'rails-assets-flux'
+  gem 'rails-assets-backbone'
 end
+
+gem 'react-rails'
 
 # Views
 gem 'haml-rails'
