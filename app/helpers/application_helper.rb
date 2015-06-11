@@ -5,11 +5,10 @@ module ApplicationHelper
   #
   # Returns a string.
   def basscss_class_for_alert(alert_type = 'notice')
-    {
-      success: 'bg-green white',
+    { success: 'bg-green white',
       error:   'bg-red white',
       alert:   'bg-yellow',
       notice:  'bg-blue white'
-    }[alert_type.to_sym]
+    }.fetch(alert_type.to_sym)
   end
 end
