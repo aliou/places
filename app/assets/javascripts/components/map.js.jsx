@@ -17,11 +17,10 @@ var Map = React.createClass({
 
   componentDidMount: function componentDidMount () {
     L.mapbox.accessToken = this.props.accessToken;
-    var options = { zoomControl: false, attributionControl: false };
+    var options = { attributionControl: false };
     var map = L.mapbox.map('map', this.props.mapId, options);
 
     map.setView(this.props.initialCenter, this.props.initialZoom);
-    new L.Control.Zoom({ position: 'bottomright' }).addTo(map);
   },
 
   render: function render () {
