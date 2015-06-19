@@ -26,12 +26,16 @@ var Map = React.createClass({
 
     map.setView(this.props.initialCenter, this.props.initialZoom);
     this.setState({ map: map });
-    this.state.places.on('all', this.forceUpdateCallback);
   },
 
   componentDidMount: function componentDidMount () {
+    this.state.places.on('all', this.forceUpdateCallback);
     if (!this.state.map) {
       this.createMap();
+    }
+
+    if (this.state.places.isEmpty()) {
+      MapActions.initialFetch()
     }
   },
 
