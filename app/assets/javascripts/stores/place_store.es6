@@ -14,5 +14,15 @@ class _PlaceStore extends Backbone.Collection {
 
     // this.model = Place;
     this.url = '/places';
+    this.dispatchToken = PlaceDispatcher.register(this.dispatchCallback);
   }
+
+  dispatchCallback(payload) {
+    switch(payload.actionType) {
+      case ActionTypes.INITIAL_FETCH:
+        this.fetch();
+        break;
+    }
+  }
+
 }
