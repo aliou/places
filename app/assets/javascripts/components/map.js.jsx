@@ -15,6 +15,10 @@ var Map = React.createClass({
     };
   },
 
+  getInitialState: function getInitialState () {
+    return { places: PlaceStore.models };
+  },
+
   componentDidMount: function componentDidMount () {
     L.mapbox.accessToken = this.props.accessToken;
     var options = { attributionControl: false };
