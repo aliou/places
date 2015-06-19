@@ -5,7 +5,10 @@
 //= require backbone
 //
 //= require_tree ./components
+//= require_tree ./stores
 //= require_self
+
+var placeStore = new PlaceStore();
 
 React.render(
   <Map accessToken="<%= ENV.fetch('MAPBOX_PUBLIC_TOKEN') %>"
