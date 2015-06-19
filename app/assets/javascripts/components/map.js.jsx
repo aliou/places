@@ -26,6 +26,7 @@ var Map = React.createClass({
 
     map.setView(this.props.initialCenter, this.props.initialZoom);
     this.setState({ map: map });
+    this.state.places.on('all', this.forceUpdateCallback);
   },
 
   componentDidMount: function componentDidMount () {
@@ -34,9 +35,17 @@ var Map = React.createClass({
     }
   },
 
+  componentWillUnmount: function componentWillUnmount () {
+    this.state.places.off('all', this.forceUpdateCallback);
+  },
+
   render: function render () {
     return (
       <div id='map' className='absolute top-0 bottom-0 full-width'></div>
     );
-  }
+  },
+
+  forceUpdateCallback: function forceUpdateCallback () {
+    this.forceUpdate();
+  },
 });
