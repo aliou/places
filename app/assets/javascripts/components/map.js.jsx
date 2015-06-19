@@ -16,7 +16,7 @@ var Map = React.createClass({
   },
 
   getInitialState: function getInitialState () {
-    return { places: PlaceStore.models };
+    return { places: PlaceStore };
   },
 
   componentDidMount: function componentDidMount () {
