@@ -44,8 +44,14 @@ var Map = React.createClass({
   },
 
   render: function render () {
+    var markers = this.state.places.map(function(place, index) {
+      return (<Marker map={ this.state.map } place={ place } key={ index } />);
+    }.bind(this));
+
     return (
-      <div id='map' className='absolute top-0 bottom-0 full-width'></div>
+      <div id='map' className='absolute top-0 bottom-0 full-width'>
+        { markers }
+      </div>
     );
   },
 
