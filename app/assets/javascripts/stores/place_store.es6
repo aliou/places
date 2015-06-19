@@ -8,7 +8,7 @@ class Place extends Backbone.Model {
   }
 }
 
-class PlaceStore extends Backbone.Collection {
+class _PlaceStore extends Backbone.Collection {
   constructor(options) {
     super(options);
 

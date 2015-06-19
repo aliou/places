@@ -8,7 +8,7 @@
 //= require_tree ./stores
 //= require_self
 
-var placeStore = new PlaceStore();
+const PlaceStore      = new _PlaceStore();
 
 React.render(
   <Map accessToken="<%= ENV.fetch('MAPBOX_PUBLIC_TOKEN') %>"
