@@ -19,12 +19,20 @@ var Map = React.createClass({
     return { places: PlaceStore, map: null };
   },
 
-  componentDidMount: function componentDidMount () {
+  createMap: function createMap () {
     L.mapbox.accessToken = this.props.accessToken;
     var options = { attributionControl: false };
     var map = L.mapbox.map('map', this.props.mapId, options);
 
     map.setView(this.props.initialCenter, this.props.initialZoom);
+    this.setState({ map: map });
+  },
+
+  componentDidMount: function componentDidMount () {
+
+    if (!this.state.map) {
+      this.createMap();
+    }
   },
 
   render: function render () {
