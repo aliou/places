@@ -6,10 +6,14 @@
 //
 //= require_tree ./components
 //= require_tree ./stores
+//= require_tree ./constants
 //= require_self
 
+// Create stuff we need for the app.
+const PlaceDispatcher = new Flux.Dispatcher();
 const PlaceStore      = new _PlaceStore();
 
+// Render the main component.
 React.render(
   <Map accessToken="<%= ENV.fetch('MAPBOX_PUBLIC_TOKEN') %>"
        mapId='mapbox.streets'
