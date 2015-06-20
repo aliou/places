@@ -13,6 +13,7 @@ class ApplicationController < ActionController::Base
   # Returns nothing.
   def authenticate!
     unless session[:user_id].present?
+      session[:redirect_to] = request.path
       redirect_to root_path,
         flash: { error: I18n.t('application.authenticate.error') }
     end
