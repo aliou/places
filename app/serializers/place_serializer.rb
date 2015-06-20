@@ -26,16 +26,5 @@
 #
 
 class PlaceSerializer < ActiveModel::Serializer
-  attributes :id, :slug, :name, :lat, :lng, :address, :category
-
-  # Public: Get a simplified version of the associated category.
-  #
-  # Returns a Hash.
-  def category
-    return nil if object.category.nil?
-    { id:       object.category.id,
-      name:     object.category.name,
-      slug:     object.category.slug,
-      icon_url: object.category.icon_url }
-  end
+  attributes :id, :slug, :name, :lat, :lng, :address
 end

@@ -52,10 +52,6 @@ class User < ActiveRecord::Base
     return nil
   end
 
-  ##############################################################################
-  # Instance Methods                                                           #
-  ##############################################################################
-
   # Public: Import places from 4SQ.
   #
   # Returns an array of Places.
