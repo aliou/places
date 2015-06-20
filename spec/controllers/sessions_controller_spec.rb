@@ -56,10 +56,26 @@ RSpec.describe SessionsController do
         expect(session[:user_id]).to_not be_nil
       end
 
-      it 'redirects to the Places index path' do
-        get :create, provider: 'foursquare'
+      context 'with a redirection_path' do
+        let(:place) { FactoryGirl.create(:place) }
+        let(:after_auth_path) { place_path(place) }
 
-        expect(response).to redirect_to(places_path)
+        before do
+          session[:redirect_to] = after_auth_path
+        end
+
+        it 'redirects to the path saved in the session' do
+          get :create, provider: 'foursquare'
+          expect(response).to redirect_to(after_auth_path)
+        end
+      end
+
+      context 'without a redirection path' do
+        it 'redirects to the Places index path' do
+          get :create, provider: 'foursquare'
+
+          expect(response).to redirect_to(places_path)
+        end
       end
     end
   end

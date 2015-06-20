@@ -2,16 +2,16 @@ class SessionsController < ApplicationController
   skip_before_filter :authenticate!
 
   # GET /auth/:provider/callback
-  # TODO: Redirect to te previous page, to the `places_path` otherwise.
   def create
     user = User.from_omniauth(auth_hash)
     if user.nil? or (!user.persisted?)
       return redirect_to auth_failure_path
     end
+    redirection_path = after_auth_path
 
     reset_session
     session[:user_id] = user.id
-    redirect_to places_path, flash:
+    redirect_to redirection_path, flash:
       { success: I18n.t('session.create.flash.success') }
   end
 
@@ -35,5 +35,12 @@ class SessionsController < ApplicationController
   # Returns: A Hash with the Foursquare authentification details.
   def auth_hash
     request.env['omniauth.auth']
+  end
+
+  # Private: The path to redirect the user to after authentification.
+  #
+  # Returns: A string the path.
+  def after_auth_path
+    session[:redirect_to].present? ? session[:redirect_to] : places_path
   end
 end
