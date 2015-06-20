@@ -35,7 +35,9 @@ var Map = React.createClass({
     }
 
     if (this.state.places.isEmpty()) {
-      MapActions.initialFetch()
+      MapActions.initialFetch({
+        location: this.props.initialCenter
+      });
     }
   },
 
