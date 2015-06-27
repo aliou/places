@@ -30,5 +30,4 @@ class _PlaceStore extends Backbone.Collection {
         break;
     }
   }
-
 }

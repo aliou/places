@@ -3,7 +3,7 @@ require 'rails_helper'
 feature 'the signin process' do
   scenario 'redirects to foursquare' do
     visit root_path
-    expect(page).to have_content 'Login with Foursquare'
+    expect(page).to have_content I18n.t('home.tagline')
   end
 
   scenario 'with a connected user' do

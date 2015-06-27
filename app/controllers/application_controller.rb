@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
 
   private
 
-  # Private: Make sure the user is connected.
+  # Private: Redirect to authentification page if not already auth'ed.
   #
   # Returns nothing.
   def authenticate!
