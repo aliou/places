@@ -13,6 +13,7 @@
 
 class User < ActiveRecord::Base
   has_many :places
+  has_many :identities
   has_one :place_importer, class_name: 'Place::Importer'
 
   validates :provider,    presence: true
