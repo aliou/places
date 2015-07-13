@@ -17,5 +17,7 @@
 #
 
 class Identity < ActiveRecord::Base
+  PROVIDERS = []
+
   belongs_to :user
 end

@@ -1,8 +1,7 @@
 FactoryGirl.define do
   factory :identity do
-    uid "MyString"
-provider "MyString"
-user nil
+    uid { Faker::Internet.password }
+    oauth_token { Faker::Internet.password }
+    provider { Identity::PROVIDERS.sample }
   end
-
 end
