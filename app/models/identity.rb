@@ -20,4 +20,9 @@ class Identity < ActiveRecord::Base
   PROVIDERS = []
 
   belongs_to :user, dependent: :destroy
+
+  validates :provider, presence: true
+  validates :oauth_token, presence: true
+  validates :uid, presence: true
+  validates :uid, uniqueness: { scope: :provider }
 end
