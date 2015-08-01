@@ -25,4 +25,26 @@ class Identity < ActiveRecord::Base
   validates :oauth_token, presence: true
   validates :uid, presence: true
   validates :uid, uniqueness: { scope: :provider }
+
+  # Create an Identity from its omniauth authentification details.
+  #
+  # auth - The omniauth authentification details.
+  #
+  # Returns a User or nil.
+  def self.create_from_auth(auth)
+    create!(provider: auth['provider'], uid: auth['uid'],
+           oauth_token: auth['credentials']['token'])
+  rescue ActiveRecord::RecordInvalid
+    return nil
+  end
+
+  # Find or create an Identity depending on the omniauth data.
+  #
+  # auth - The omniauth authentification details.
+  #
+  # Returns an Identity or nil
+  def self.from_auth(auth)
+    where(uid: auth['uid'], provider: auth['provider']).first ||
+      create_from_auth(auth)
+  end
 end
