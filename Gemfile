@@ -36,7 +36,7 @@ gem 'active_model_serializers'
 gem 'js-routes'
 
 source 'https://rails-assets.org' do
-  gem 'rails-assets-basscss'
+  gem 'rails-assets-basscss', '6.1.6'
   gem 'rails-assets-animate.css'
 end
 

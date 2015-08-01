@@ -311,7 +311,7 @@ DEPENDENCIES
   rack_session_access
   rails (= 4.2.3)
   rails-assets-animate.css!
-  rails-assets-basscss!
+  rails-assets-basscss (= 6.1.6)!
   rails_12factor
   responders
   rspec-rails
@@ -324,3 +324,6 @@ DEPENDENCIES
   unicorn
   vcr
   webmock
+
+BUNDLED WITH
+   1.10.5
