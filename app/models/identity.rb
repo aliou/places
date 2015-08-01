@@ -17,7 +17,7 @@
 #
 
 class Identity < ActiveRecord::Base
-  PROVIDERS = []
+  PROVIDERS = [:foursquare]
 
   belongs_to :user, dependent: :destroy
 
