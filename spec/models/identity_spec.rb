@@ -17,7 +17,7 @@ RSpec.describe Identity, type: :model do
       let(:auth) { stub_auth }
 
       it 'returns nil' do
-        identity = Identity.create_from_auth(auth)
+        _ = Identity.create_from_auth(auth)
         expect(Identity.create_from_auth(auth)).to eq(nil)
       end
     end
@@ -26,7 +26,7 @@ RSpec.describe Identity, type: :model do
       let(:auth) { stub_auth }
 
       it 'creates a new Identity' do
-        expect{ Identity.create_from_auth(auth) }.
+        expect { Identity.create_from_auth(auth) }.
           to change { Identity.count }.by(1)
       end
     end
@@ -46,7 +46,7 @@ RSpec.describe Identity, type: :model do
       let(:auth) { stub_auth }
 
       it 'creates a new Identity' do
-        expect{ Identity.from_auth(auth) }.
+        expect { Identity.from_auth(auth) }.
           to change { Identity.count }.by(1)
       end
     end
