@@ -47,4 +47,23 @@ class Identity < ActiveRecord::Base
     where(uid: auth['uid'], provider: auth['provider']).first ||
       create_from_auth(auth)
   end
+
+  # The provider client authed with this identity credentials.
+  #
+  # Returns a Provider client, eg. `Foursquare2::Client`, etc.
+  def client
+    client_method = provider + '_client'
+    return nil if !self.respond_to?(client_method, true)
+
+    self.send(client_method)
+  end
+
+  private
+
+  def foursquare_client
+    @client ||= Foursquare2::Client.new(
+      oauth_token: oauth_token,
+      api_version: Places::Application::FOURSQUARE_API_VERSION
+    )
+  end
 end

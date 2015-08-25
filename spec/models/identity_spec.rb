@@ -52,9 +52,20 @@ RSpec.describe Identity, type: :model do
     end
   end
 
-  def stub_auth
-    stub_oauth(provider: Identity::PROVIDERS.sample,
-               uid: Faker::Internet.password,
-               token: Faker::Internet.password)
+  describe '#client' do
+    let(:auth) { stub_auth(provider: 'foursquare') }
+    subject { Identity.from_auth(auth) }
+
+    it 'returns the provider client' do
+      expect(subject.client).to be_a(Foursquare2::Client)
+    end
+  end
+
+  def stub_auth(options = {})
+    stub_oauth(
+      uid:      Faker::Internet.password,
+      token:    Faker::Internet.password,
+      provider: options[:provider] || Identity::PROVIDERS.sample,
+    )
   end
 end
