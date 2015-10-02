@@ -9,6 +9,7 @@
 #  user_id     :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  primary     :boolean          default(FALSE)
 #
 # Indexes
 #
@@ -31,9 +32,9 @@ class Identity < ActiveRecord::Base
   # auth - The omniauth authentification details.
   #
   # Returns a User or nil.
-  def self.create_from_auth(auth)
+  def self.create_from_auth(auth, primary = false)
     create!(provider: auth['provider'], uid: auth['uid'],
-           oauth_token: auth['credentials']['token'])
+           oauth_token: auth['credentials']['token'], primary: primary)
   rescue ActiveRecord::RecordInvalid
     return nil
   end
