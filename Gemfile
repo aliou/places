@@ -13,7 +13,7 @@ gem 'bundler', '>= 1.8.4'
 gem 'pg'
 
 # Webserver
-gem 'unicorn'
+gem 'puma'
 
 # Logs
 gem 'lograge'
