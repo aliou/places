@@ -7,14 +7,6 @@ RSpec.describe User do
     it { should have_one(:place_importer).class_name('Place::Importer') }
   end
 
-  context 'validations' do
-    it { should validate_presence_of(:provider) }
-    it { should validate_presence_of(:oauth_token) }
-    it { should validate_presence_of(:uid) }
-    it { should validate_uniqueness_of(:uid) }
-    it { should validate_inclusion_of(:uid).in_array(authorized_uids) }
-  end
-
   describe '.from_omniauth' do
     context "the user doesn't exist" do
       let(:auth) { stub_auth(uid: ENV['FOURSQUARE_USER_ID']) }
@@ -27,6 +19,10 @@ RSpec.describe User do
         user = User.from_omniauth(auth)
 
         expect(user).to be_valid
+      end
+
+      it 'creates a new main identity attached to the user' do
+        expect { User.from_omniauth(auth) }.to change { Identity.count }.by(1)
       end
 
       it "imports the user's places in a job" do
@@ -53,16 +49,6 @@ RSpec.describe User do
   end
 
   describe '.create_from_omniauth' do
-    context 'with an unauthorized uid' do
-      let(:auth) { stub_auth(uid: Faker::Number.number(6)) }
-
-      it 'returns nil' do
-        user = User.create_from_omniauth(auth)
-
-        expect(user).to be_nil
-      end
-    end
-
     context 'with an already existing uid' do
       let(:auth) { stub_auth(uid: ENV['FOURSQUARE_USER_ID']) }
 
@@ -75,7 +61,6 @@ RSpec.describe User do
 
         expect(user).to be_nil
       end
-
     end
 
     context 'with an authorized uid' do
@@ -86,6 +71,25 @@ RSpec.describe User do
           to change { User.count }.by(1)
       end
 
+    end
+  end
+
+  describe '#main_identity' do
+    context 'when there is a primary identity' do
+      it 'returns the primary identity' do
+        auth = stub_auth(uid: ENV['FOURSQUARE_USER_ID'])
+        user = User.create_from_omniauth(auth)
+        identity = Identity.where(uid: ENV['FOURSQUARE_USER_ID']).first
+
+        expect(user.main_identity).to eq(identity)
+      end
+    end
+
+    context 'when there is not a primary identity' do
+      it 'returns nil' do
+        user = build_stubbed(:user)
+        expect(user.main_identity).to be_nil
+      end
     end
   end
 

@@ -11,71 +11,49 @@ RSpec.describe SessionsController do
   end
 
   describe 'GET /auth/foursquare/callback' do
-    context 'with the wrong omniauth credentials' do
-      before do
-        request.env['omniauth.auth'] = stub_oauth(
-          uid:   Faker::Number.number(6),
-          token: Faker::Internet.password
-        )
-      end
+    before do
+      request.env['omniauth.auth'] = stub_oauth(
+        uid:   ENV['FOURSQUARE_USER_ID'],
+        token: ENV['FOURSQUARE_USER_TOKEN']
+      )
+    end
 
-      it "doesn't save the user" do
-        expect { get :create, provider: 'foursquare' }.
-          to_not change { User.count }
-      end
-
-      it 'redirects to the auth failure path' do
-        get :create, provider: 'foursquare'
-
-        expect(response).to redirect_to(auth_failure_path)
+    around do |example|
+      VCR.use_cassette('foursquare_oauth_authentification') do
+        example.run
       end
     end
 
-    context 'with the right omniauth credentials' do
+    it 'creates a new user' do
+      expect { get :create, provider: 'foursquare' }.
+        to change { User.count }
+    end
+
+    it 'saves the user id in the session' do
+      get :create, provider: 'foursquare'
+
+      expect(session[:user_id]).to_not be_nil
+    end
+
+    context 'with a redirection_path' do
+      let(:place) { FactoryGirl.create(:place) }
+      let(:after_auth_path) { place_path(place) }
+
       before do
-        request.env['omniauth.auth'] = stub_oauth(
-          uid:   ENV['FOURSQUARE_USER_ID'],
-          token: ENV['FOURSQUARE_USER_TOKEN']
-        )
+        session[:redirect_to] = after_auth_path
       end
 
-      around do |example|
-        VCR.use_cassette('foursquare_oauth_authentification') do
-          example.run
-        end
+      it 'redirects to the path saved in the session' do
+        get :create, provider: 'foursquare'
+        expect(response).to redirect_to(after_auth_path)
       end
+    end
 
-      it 'creates a new user' do
-        expect { get :create, provider: 'foursquare' }.
-          to change { User.count }
-      end
-
-      it 'saves the user id in the session' do
+    context 'without a redirection path' do
+      it 'redirects to the Places index path' do
         get :create, provider: 'foursquare'
 
-        expect(session[:user_id]).to_not be_nil
-      end
-
-      context 'with a redirection_path' do
-        let(:place) { FactoryGirl.create(:place) }
-        let(:after_auth_path) { place_path(place) }
-
-        before do
-          session[:redirect_to] = after_auth_path
-        end
-
-        it 'redirects to the path saved in the session' do
-          get :create, provider: 'foursquare'
-          expect(response).to redirect_to(after_auth_path)
-        end
-      end
-
-      context 'without a redirection path' do
-        it 'redirects to the Places index path' do
-          get :create, provider: 'foursquare'
-
-          expect(response).to redirect_to(places_path)
-        end
+        expect(response).to redirect_to(places_path)
       end
     end
   end
