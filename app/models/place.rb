@@ -53,15 +53,18 @@ class Place < ActiveRecord::Base
 
   # Public: Finds or creates a new Place from a Foursquare venue.
   #
-  # venue - The Foursquare Venue to find or create as a Place.
-  # user  - The user to attribute the Place to.
+  # raw_venue - The Foursquare Venue to find or create as a Place.
+  # user      - The user to attribute the Place to.
   #
   # Returns a Place or nil.
-  def self.from_foursquare(venue, user)
+  def self.from_foursquare(raw_venue, user)
+    venue = raw_venue['venue']
+    return nil if venue.nil?
+
     venue_id = venue['id'].starts_with?('v') ? venue['id'][1..-1] : venue['id']
 
     Place.where(foursquare_venue_id: venue_id).first ||
-      Place.create_from_foursquare(venue, user)
+      Place.create_from_foursquare(raw_venue, user)
   end
 
   # Public: Creates a new Place from a Foursquare venue.
@@ -75,7 +78,7 @@ class Place < ActiveRecord::Base
     create! do |place|
       place.user = user
 
-      place.foursquare_venue_id = stripped_venue_id(venue['id'])
+      place.foursquare_venue_id = stripped_venue_id(venue_data['id'])
 
       place.name    = venue_data['name']
       place.lat     = venue_data['location']['lat']
