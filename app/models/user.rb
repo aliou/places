@@ -13,14 +13,8 @@
 
 class User < ActiveRecord::Base
   has_many :places
+  has_many :identities
   has_one :place_importer, class_name: 'Place::Importer'
-
-  validates :provider,    presence: true
-  validates :oauth_token, presence: true
-
-  validates :uid, presence: true, uniqueness: true, inclusion: {
-    in:      ENV.fetch('FOURSQUARE_USER_ID').split(','),
-    message: 'Unauthorized user.' }
 
   after_create :initial_places_import
 
@@ -30,7 +24,12 @@ class User < ActiveRecord::Base
   #
   # Returns a User or nil.
   def self.from_omniauth(auth)
-    User.where(uid: auth['uid']).first || User.create_from_omniauth(auth)
+    identity = Identity.where(uid: auth['uid'], provider: auth[:provider], primary: true).first
+    if identity.present?
+      user = identity.user
+    else
+      User.create_from_omniauth(auth)
+    end
   end
 
   # Create a user from its omniauth authentification details.
@@ -39,22 +38,36 @@ class User < ActiveRecord::Base
   #
   # Returns a User or nil.
   def self.create_from_omniauth(auth)
-    create! do |user|
-      user.provider     = auth['provider']
-      user.uid          = auth['uid']
-      user.oauth_token  = auth['credentials']['token']
-
-      if auth['info']
-        user.name       = auth['info']['name'] || ''
-      end
-    end
+    user = create!(name: (auth['info']['name'] || ''))
+    user.identities.create!(
+      primary: true,
+      provider: auth['provider'],
+      uid: auth['uid'],
+      oauth_token: auth['credentials']['token'],
+    )
+    # create! do |user|
+    #   user.provider     = auth['provider']
+    #   user.uid          = auth['uid']
+    #   user.oauth_token  = auth['credentials']['token']
+    #
+    #   if auth['info']
+    #     user.name       = auth['info']['name'] || ''
+    #   end
+    # end
+    return user
   rescue ActiveRecord::RecordInvalid
+    if user and user.persisted?
+      user.destroy!
+    end
     return nil
   end
 
-  ##############################################################################
-  # Instance Methods                                                           #
-  ##############################################################################
+  # Get the user's primary identity.
+  #
+  # Returns an Identity or nil.
+  def main_identity
+    identities.where(primary: true).first
+  end
 
   # Public: Import places from 4SQ.
   #

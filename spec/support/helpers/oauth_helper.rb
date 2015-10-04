@@ -1,7 +1,11 @@
 module OauthHelper
   def stub_oauth(options = {})
+    if options[:provider].nil?
+      options[:provider] = :foursquare
+    end
+
     OmniAuth.config.add_mock(
-      :foursquare,
+      options[:provider],
       uid: options[:uid],
       credentials: {
         token: options[:token]
