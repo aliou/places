@@ -94,7 +94,6 @@ class Place < ActiveRecord::Base
   end
 
   # Public: Gets the Places in the same zoom level radius as self.
-  # TODO: Might be better to also return self.
   #
   # zoom_level - The zoom level to search the place in.
   #              (default: 16, Neighborhood)
