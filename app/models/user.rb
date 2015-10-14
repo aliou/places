@@ -37,16 +37,17 @@ class User < ActiveRecord::Base
   #
   # Returns a User or nil.
   def self.create_from_omniauth(auth)
-    user = create! do |user|
-      user.provider     = auth['provider']
-      user.uid          = auth['uid']
-      user.oauth_token  = auth['credentials']['token']
+    user = create! do |u|
+      u.provider     = auth['provider']
+      u.uid          = auth['uid']
+      u.oauth_token  = auth['credentials']['token']
 
       if auth['info']
-        user.name       = auth['info']['name'] || ''
+        u.name       = auth['info']['name'] || ''
       end
     end
     PlaceImportJob.perform_later(user)
+
     return user
   rescue ActiveRecord::RecordInvalid
     return nil
