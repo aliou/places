@@ -26,8 +26,6 @@ class Category < ActiveRecord::Base
 
   validates :name, presence: true
 
-  before_create :set_icon_url
-
   friendly_id :name, use: [:slugged, :finders]
 
   # Public: Finds or creates a new Category from a Foursquare category.
@@ -46,15 +44,12 @@ class Category < ActiveRecord::Base
   #
   # Returns a Category or nil.
   def self.create_from_foursquare(category)
-    Category.create!(name: category['name'], foursquare_data: category.to_json)
+    icon_data = category['icon']
+    icon_url = icon_data['prefix'] + Category::ICON_TYPE + icon_data['suffix']
+
+    Category.create!(name: category['name'], foursquare_data: category.to_json,
+                     icon_url: icon_url)
   rescue ActiveRecord::RecordInvalid
     return nil
-  end
-
-  private
-
-  def set_icon_url
-    data = JSON.parse(self.foursquare_data)['icon']
-    self.icon_url = data['prefix'] + Category::ICON_TYPE + data['suffix']
   end
 end
