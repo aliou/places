@@ -1,3 +1,4 @@
+# TODO: Rename this job.
 class PlaceCreationJob < ActiveJob::Base
   queue_as :default
 
