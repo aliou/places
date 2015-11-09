@@ -1,3 +1,7 @@
+AllCops:
+  Exclude:
+    - 'db/**/*'
+
 Style/AndOr:
   Description: 'Use &&/|| instead of and/or.'
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#no-and-or-or'
