@@ -1,2 +1,2 @@
-# Use sucker_punch for jobs.
-Rails.application.config.active_job.queue_adapter = :sucker_punch
+# Use delayed_jobs for jobs.
+Rails.application.config.active_job.queue_adapter = :delayed_jobs

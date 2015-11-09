@@ -19,7 +19,7 @@ gem 'puma'
 gem 'lograge'
 
 # Async processes
-gem 'sucker_punch'
+gem 'delayed_job_active_record'
 
 ###############################################################################
 # Assets, Views & Routes                                                      #
