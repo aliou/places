@@ -44,8 +44,6 @@ class Place < ActiveRecord::Base
 
   validates :foursquare_venue_id, uniqueness: { scope: :user_id }
 
-  after_create :set_foursquare_venue_url
-
   acts_as_mappable lat_column_name: :lat,
     lng_column_name: :lng
 
@@ -69,13 +67,13 @@ class Place < ActiveRecord::Base
 
   # Public: Creates a new Place from a Foursquare venue.
   #
-  # venue - The Foursquare Venue to find or create as a Place.
-  # user  - The user to attribute the Place to.
+  # raw_venue - The Foursquare Venue to find or create as a Place.
+  # user      - The user to attribute the Place to.
   #
   # Returns a Place or nil.
-  def self.create_from_foursquare(venue, user)
-    venue_data = venue['venue']
-    create! do |place|
+  def self.create_from_foursquare(raw_venue, user)
+    venue_data = raw_venue['venue']
+    venue = create! do |place|
       place.user = user
 
       place.foursquare_venue_id = stripped_venue_id(venue_data['id'])
@@ -86,16 +84,18 @@ class Place < ActiveRecord::Base
       place.address =
         venue_data['location'].fetch('formattedAddress', []).join(', ')
 
-      place.category = venue_primary_category(venue)
+      place.category = venue_primary_category(raw_venue)
 
-      place.foursquare_data = venue.to_json
+      place.foursquare_data = raw_venue.to_json
     end
+    PlaceCreationJob.perform_later(venue)
+
+    return venue
   rescue ActiveRecord::RecordInvalid
     return nil
   end
 
   # Public: Gets the Places in the same zoom level radius as self.
-  # TODO: Might be better to also return self.
   #
   # zoom_level - The zoom level to search the place in.
   #              (default: 16, Neighborhood)
@@ -103,14 +103,5 @@ class Place < ActiveRecord::Base
   # Returns an Araay of Places.
   def places_around(zoom_level = MapHelper::NEIGHBORHOOD_LEVEL_ZOOM)
     Place.within(zoom_to_radius(zoom_level, lat), origin: self) - [self]
-  end
-
-  private
-
-  # Private: Set the Foursquare URL
-  #
-  # Returns nothing
-  def set_foursquare_venue_url
-    PlaceCreationJob.perform_later(self)
   end
 end

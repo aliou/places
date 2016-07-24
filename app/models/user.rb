@@ -22,8 +22,6 @@ class User < ActiveRecord::Base
     in:      ENV.fetch('FOURSQUARE_USER_ID').split(','),
     message: 'Unauthorized user.' }
 
-  after_create :initial_places_import
-
   # Find or create a new User depending on omniauth data.
   #
   # auth - The omniauth authentification details.
@@ -39,15 +37,18 @@ class User < ActiveRecord::Base
   #
   # Returns a User or nil.
   def self.create_from_omniauth(auth)
-    create! do |user|
-      user.provider     = auth['provider']
-      user.uid          = auth['uid']
-      user.oauth_token  = auth['credentials']['token']
+    user = create! do |u|
+      u.provider     = auth['provider']
+      u.uid          = auth['uid']
+      u.oauth_token  = auth['credentials']['token']
 
       if auth['info']
-        user.name       = auth['info']['name'] || ''
+        u.name       = auth['info']['name'] || ''
       end
     end
+    PlaceImportJob.perform_later(user)
+
+    return user
   rescue ActiveRecord::RecordInvalid
     return nil
   end
@@ -63,14 +64,5 @@ class User < ActiveRecord::Base
     create_place_importer if place_importer.nil?
 
     place_importer.run
-  end
-
-  private
-
-  # Private: Run a job to import the places from Foursquare
-  #
-  # Returns: Nothing.
-  def initial_places_import
-    PlaceImportJob.perform_later(self)
   end
 end

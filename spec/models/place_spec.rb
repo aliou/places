@@ -73,6 +73,11 @@ RSpec.describe Place, type: :model do
 
       expect(place.foursquare_venue_id).to_not start_with('v')
     end
+    it 'creates a job after the place creation' do
+      Place.from_foursquare(foursquare_venue, user)
+
+      expect(ActiveJob::Base.queue_adapter.enqueued_jobs).to_not be_empty
+    end
   end
 
   describe '#places_around' do
@@ -112,24 +117,6 @@ RSpec.describe Place, type: :model do
         expect(subject.places_around(MapHelper::WORLD_LEVEL_ZOOM)).
           to match_array(Place.all - [subject])
       end
-    end
-  end
-
-  describe 'callbacks' do
-    describe '#set_foursquare_url' do
-      let(:foursquare_venue_url) { foursquare_venue['shortUrl'] }
-
-      it 'creates a job after the place creation' do
-        Place.from_foursquare(foursquare_venue, user)
-
-        expect(ActiveJob::Base.queue_adapter.enqueued_jobs).to_not be_empty
-      end
-    end
-  end
-
-  describe 'default' do
-    it 'is not starred by default' do
-      expect(subject.starred).to be_falsy
     end
   end
 end

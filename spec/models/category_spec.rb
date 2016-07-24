@@ -56,6 +56,11 @@ RSpec.describe Category do
 
         expect(category).to be_valid
       end
+
+      it 'sets the icon_url' do
+        category = Category.create_from_foursquare(foursquare_category)
+        expect(category.icon_url).to_not be_nil
+      end
     end
   end
 end
