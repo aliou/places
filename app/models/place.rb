@@ -83,7 +83,8 @@ class Place < ActiveRecord::Base
       place.name    = venue_data['name']
       place.lat     = venue_data['location']['lat']
       place.lng     = venue_data['location']['lng']
-      place.address = venue_data['location']['formattedAddress'].join(', ')
+      place.address =
+        venue_data['location'].fetch('formattedAddress', []).join(', ')
 
       place.category = venue_primary_category(venue)
 
